@@ -1,0 +1,114 @@
+package br.com.api.mgdexpress.MGD.EXPRESS.site.pageService;
+
+import br.com.api.mgdexpress.MGD.EXPRESS.model.historico.Historico;
+import br.com.api.mgdexpress.MGD.EXPRESS.repository.HistoricoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class ListarHistorico {
+    @Autowired
+    private HistoricoRepository historicoRepository;
+    public static String historocos(String email) {
+
+        return """
+                <!DOCTYPE html>
+                <html lang="pt-br">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Histórico</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            margin: 0;
+                            padding: 0;
+                            background-color: #f4f4f4;
+                        }
+                               
+                        nav {
+                            background-color: #333;
+                            color: white;
+                            padding: 10px;
+                            text-align: center;
+                        }
+                               
+                        ul {
+                            list-style-type: none;
+                            padding: 20px;
+                            margin: 0;
+                            display: flex;
+                            flex-direction: column;
+                               
+                        }
+                               
+                        li {
+                            background-color: #fff;
+                            border-radius: 8px;
+                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                            margin: 10px;
+                            padding: 20px;
+                            box-sizing: border-box;
+                               
+                            justify-content: space-between;
+                            align-items: center;
+                        }
+                               
+                        button {
+                            background-color: #4caf50;
+                            color: white;
+                            padding: 8px;
+                            border: none;
+                            border-radius: 4px;
+                            cursor: pointer;
+                        }
+                    </style>
+                </head>
+                <body>
+                               
+                <nav>
+                    <h2>Histórico</h2>
+                </nav>
+                               
+                <ul id="historico-list"></ul>
+                               
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                               
+                    fetch('http://localhost:8080/historico/gerente/""" +email+
+                """
+                ')
+                        .then(response => response.json())
+                        .then(data => {
+                       \s
+                          data.forEach(item =>{
+                          console.log(item.id);
+                               
+                          const li = document.createElement('li');
+                            li.innerHTML = `
+                               
+                                <p>Data de Entrega: ${item.dataEntrega}</p>
+                                <p>Motoboy: ${item.motoboyNome}</p>
+                                <p>Estabelecimento: ${item.nomeStabelecimento}</p>
+                                <p>Valor: R$ ${item.valor.toFixed(2)}</p>
+                                <a href="http://localhost:8080/site/gerente/historico/detalhes/${item.id}"><button>Detalhes</button></a>
+                            `;
+                            historicoList.appendChild(li);
+                          });
+                        })
+                        .catch(error => {
+                          // trate erros de requisição
+                        });
+                       \s
+                        const historicoList = document.getElementById('historico-list');
+                    });
+                </script>
+                               
+                </body>
+                </html>
+                """;
+    }
+}
