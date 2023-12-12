@@ -21,6 +21,10 @@ public class Motoboy {
     private String nome;
     private String telefone;
     private String email;
+    private String cpf;
+    private String grauDeParentescoContatoEmergencia;
+    private String telefoneEmergencia;
+    private String chavePix;
     @Embedded
     private Localizacao localizacao;
     @OneToOne
@@ -28,11 +32,15 @@ public class Motoboy {
     private Boolean disponivel;
     private Boolean ativo;
 
-    public Motoboy(DadosMotoboy dadosMotoboy) {
+    public Motoboy(DadosMotoboyMaster dadosMotoboy) {
         this.nome = dadosMotoboy.nome();
         this.telefone = dadosMotoboy.telefone();
         this.email = dadosMotoboy.email();
         this.disponivel = true;
         this.ativo = true;
+        this.cpf = dadosMotoboy.cpf();
+        this.grauDeParentescoContatoEmergencia = dadosMotoboy.grauParentescoContatoEmergencia();
+        this.telefoneEmergencia = dadosMotoboy.telefoneEmergencia();
+        this.chavePix = dadosMotoboy.chavepix();
     }
 }

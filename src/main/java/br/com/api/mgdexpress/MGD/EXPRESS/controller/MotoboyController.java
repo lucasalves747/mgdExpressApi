@@ -1,18 +1,18 @@
 package br.com.api.mgdexpress.MGD.EXPRESS.controller;
 
 import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.DadosLocalizacaoMotoboy;
-import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.DadosMotoboy;
+import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.DadosMotoboyMaster;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.DadosMotoboyList;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.Motoboy;
+import br.com.api.mgdexpress.MGD.EXPRESS.model.users.User;
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.MotoboyRepository;
+import br.com.api.mgdexpress.MGD.EXPRESS.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("motoboy")
@@ -20,11 +20,16 @@ public class MotoboyController {
 
     @Autowired
     private MotoboyRepository motoboyRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping
-    private ResponseEntity cadastrar(@RequestBody DadosMotoboy dadosMotoboy){
+    private ResponseEntity cadastrar(@RequestBody DadosMotoboyMaster dadosMotoboy){
+        var bcrypt = new BCryptPasswordEncoder();
+        var senha = bcrypt.encode(dadosMotoboy.senha());
+        userRepository.save(new User(null,dadosMotoboy.email(),senha));
         var motoboy =motoboyRepository.save(new Motoboy(dadosMotoboy));
-        return ResponseEntity.ok(motoboy);
+        return ResponseEntity.ok().build();
     }
 
 

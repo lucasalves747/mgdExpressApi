@@ -1,8 +1,5 @@
 package br.com.api.mgdexpress.MGD.EXPRESS.model.pedido;
 
-import br.com.api.mgdexpress.MGD.EXPRESS.model.gerente.DadosGerente;
-import br.com.api.mgdexpress.MGD.EXPRESS.model.gerente.Gerente;
-import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.DadosMotoboy;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
