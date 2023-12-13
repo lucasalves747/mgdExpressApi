@@ -11,10 +11,12 @@ public record DadosGerente(
         @Email @NotBlank
         String email,
         @NotBlank
+        String senha,
+        @NotBlank
         String nomeEstabelecimento,
         @NotBlank
         String localEstabelecimento) {
     public DadosGerente(Gerente gerente) {
-        this(gerente.getNome(), gerente.getTelefone(), gerente.getEmail(), gerente.getNomeEstebelecimento(), gerente.getLocalEstabelecimento());
+        this(gerente.getNome(), gerente.getTelefone(), gerente.getEmail(), gerente.getSenha(),gerente.getNomeEstebelecimento(), gerente.getLocalEstabelecimento());
     }
 }

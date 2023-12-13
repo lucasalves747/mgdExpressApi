@@ -32,7 +32,7 @@ public class Motoboy {
     private Boolean disponivel;
     private Boolean ativo;
 
-    public Motoboy(DadosMotoboyMaster dadosMotoboy) {
+    public Motoboy(DadosMotoboyCadastro dadosMotoboy) {
         this.nome = dadosMotoboy.nome();
         this.telefone = dadosMotoboy.telefone();
         this.email = dadosMotoboy.email();

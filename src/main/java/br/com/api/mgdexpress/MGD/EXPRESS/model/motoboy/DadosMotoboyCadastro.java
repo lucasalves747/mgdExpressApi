@@ -2,7 +2,7 @@ package br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy;
 
 import jakarta.validation.constraints.NotBlank;
 
-public record DadosMotoboyMaster(
+public record DadosMotoboyCadastro(
         Long id,
         @NotBlank
         String nome,
@@ -20,7 +20,7 @@ public record DadosMotoboyMaster(
         String telefoneEmergencia,
         @NotBlank
         String chavepix) {
-    public DadosMotoboyMaster(Motoboy motoboy) {
+    public DadosMotoboyCadastro(Motoboy motoboy) {
         this(motoboy.getId(), motoboy.getNome(), motoboy.getTelefone(),
                 motoboy.getEmail(), null,motoboy.getCpf(),motoboy.getGrauDeParentescoContatoEmergencia(), motoboy.getTelefoneEmergencia(), motoboy.getChavePix());
     }
