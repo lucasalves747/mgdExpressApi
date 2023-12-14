@@ -30,21 +30,7 @@ public class MotoboyController {
     private MotoboyRepository motoboyRepository;
 
 
-    @PostMapping
-    private ResponseEntity cadastrar(@RequestBody DadosMotoboyCadastro dadosMotoboy){
 
-        var user = useRepository.findByUsername(dadosMotoboy.email());
-
-        if(user != null){
-            throw new Error("usuario ja existe");
-        }
-
-        var bcrypt = new BCryptPasswordEncoder();
-        var senha = bcrypt.encode(dadosMotoboy.senha());
-        useRepository.save(new User(null, dadosMotoboy.email(), senha,"ROLE_USER_MOTOBOY"));
-        motoboyRepository.save(new Motoboy(dadosMotoboy));
-        return ResponseEntity.ok().build();
-    }
 
 
 
