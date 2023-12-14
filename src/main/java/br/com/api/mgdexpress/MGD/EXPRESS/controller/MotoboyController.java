@@ -7,6 +7,7 @@ import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.Motoboy;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.users.User;
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.MotoboyRepository;
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.UserRepository;
+import io.swagger.v3.oas.models.headers.Header;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -44,7 +45,7 @@ public class MotoboyController {
     }
 
 
-
+/*
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
     @GetMapping
     public ResponseEntity ListarMotoboys(@PageableDefault(size = 10) Pageable page){
@@ -72,10 +73,11 @@ public class MotoboyController {
 
     @PreAuthorize("hasRole('ROLE_USER_MOTOBOY')")
     @PostMapping("/localizacao")
-    public ResponseEntity UpLocalizacao(@RequestBody DadosLocalizacaoMotoboy dados){
+    public ResponseEntity UpLocalizacao(@RequestBody DadosLocalizacaoMotoboy dados, @RequestHeader String header){
+
         var motoboy = motoboyRepository.getReferenceById(dados.id());
         motoboy.setLocalizacao(dados.localizacao());
         motoboyRepository.save(motoboy);
         return ResponseEntity.ok().build();
-    }
+    }*/
 }
