@@ -15,13 +15,13 @@ public record DadosMotoboyCadastro(
         @NotBlank
         String cpf,
         @NotBlank
-        String grauParentescoContatoEmergencia,
+        String nomeParente,
         @NotBlank
         String telefoneEmergencia,
         @NotBlank
         String chavepix) {
     public DadosMotoboyCadastro(Motoboy motoboy) {
         this(motoboy.getId(), motoboy.getNome(), motoboy.getTelefone(),
-                motoboy.getEmail(), null,motoboy.getCpf(),motoboy.getGrauDeParentescoContatoEmergencia(), motoboy.getTelefoneEmergencia(), motoboy.getChavePix());
+                motoboy.getEmail(), null,motoboy.getCpf(),motoboy.getNomeParente(), motoboy.getTelefoneEmergencia(), motoboy.getChavePix());
     }
 }

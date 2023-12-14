@@ -30,10 +30,6 @@ public class MotoboyController {
     private MotoboyRepository motoboyRepository;
 
 
-
-
-
-
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
     @GetMapping
     public ResponseEntity ListarMotoboys(@PageableDefault(size = 10) Pageable page){

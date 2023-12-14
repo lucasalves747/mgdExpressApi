@@ -22,7 +22,7 @@ public class Motoboy {
     private String telefone;
     private String email;
     private String cpf;
-    private String grauDeParentescoContatoEmergencia;
+    private String nomeParente;
     private String telefoneEmergencia;
     private String chavePix;
     @Embedded
@@ -39,7 +39,7 @@ public class Motoboy {
         this.disponivel = true;
         this.ativo = true;
         this.cpf = dadosMotoboy.cpf();
-        this.grauDeParentescoContatoEmergencia = dadosMotoboy.grauParentescoContatoEmergencia();
+        this.nomeParente = dadosMotoboy.nomeParente();
         this.telefoneEmergencia = dadosMotoboy.telefoneEmergencia();
         this.chavePix = dadosMotoboy.chavepix();
     }
