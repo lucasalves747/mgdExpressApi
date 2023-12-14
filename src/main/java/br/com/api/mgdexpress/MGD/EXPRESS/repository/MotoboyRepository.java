@@ -21,4 +21,5 @@ public interface MotoboyRepository extends JpaRepository<Motoboy,Long> {
     Page<Motoboy> findAllAtivosEmEntregaByGerente(Pageable page, Long id);
 
 
+    Motoboy findByEmail(String username);
 }

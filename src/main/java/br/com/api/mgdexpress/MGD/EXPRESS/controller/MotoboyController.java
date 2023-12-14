@@ -7,6 +7,7 @@ import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.Motoboy;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.users.User;
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.MotoboyRepository;
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.UserRepository;
+import br.com.api.mgdexpress.MGD.EXPRESS.services.TokenService;
 import io.swagger.v3.oas.models.headers.Header;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +21,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("motoboy")
 
 public class MotoboyController {
-
+    @Autowired
+    private TokenService tokenService;
     @Autowired
     private UserRepository useRepository;
 
@@ -45,7 +47,7 @@ public class MotoboyController {
     }
 
 
-/*
+
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
     @GetMapping
     public ResponseEntity ListarMotoboys(@PageableDefault(size = 10) Pageable page){
@@ -73,11 +75,16 @@ public class MotoboyController {
 
     @PreAuthorize("hasRole('ROLE_USER_MOTOBOY')")
     @PostMapping("/localizacao")
-    public ResponseEntity UpLocalizacao(@RequestBody DadosLocalizacaoMotoboy dados, @RequestHeader String header){
+    public ResponseEntity UpLocalizacao(@RequestBody DadosLocalizacaoMotoboy dados,@RequestHeader("Authorization") String header){
 
-        var motoboy = motoboyRepository.getReferenceById(dados.id());
+        var token = header.replace("Bearer ","");
+        var subject = tokenService.getSubject(token);
+
+        var user = useRepository.findByUsername(subject);
+
+        var motoboy = motoboyRepository.findByEmail(user.getUsername());
         motoboy.setLocalizacao(dados.localizacao());
         motoboyRepository.save(motoboy);
         return ResponseEntity.ok().build();
-    }*/
+    }
 }
