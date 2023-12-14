@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.*;
 public class MotoboyController {
 
     @Autowired
-    private MotoboyRepository motoboyRepository;
-    @Autowired
     private UserRepository useRepository;
+
+    @Autowired
+    private MotoboyRepository motoboyRepository;
+
 
     @PostMapping
     private ResponseEntity cadastrar(@RequestBody DadosMotoboyCadastro dadosMotoboy){
@@ -68,12 +70,12 @@ public class MotoboyController {
     }
 
 
-    /*@PreAuthorize("hasRole('ROLE_USER_MOTOBOY')")
+    @PreAuthorize("hasRole('ROLE_USER_MOTOBOY')")
     @PostMapping("/localizacao")
     public ResponseEntity UpLocalizacao(@RequestBody DadosLocalizacaoMotoboy dados){
         var motoboy = motoboyRepository.getReferenceById(dados.id());
         motoboy.setLocalizacao(dados.localizacao());
         motoboyRepository.save(motoboy);
         return ResponseEntity.ok().build();
-    }*/
+    }
 }
