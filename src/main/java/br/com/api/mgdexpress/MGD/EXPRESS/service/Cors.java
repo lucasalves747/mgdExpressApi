@@ -26,7 +26,7 @@ public class Cors {
 
     @Bean
     public OpenAPI customOpenAPI() {
-        return new OpenAPI().addServersItem(new Server().url("Sua nova URL"))
+        return new OpenAPI().addServersItem(new Server().url("https://mgdexpressapi-production.up.railway.app/swagger-ui/index.html"))
                 .addServersItem(new Server().url("http://localhost:8080"));
     }
 
