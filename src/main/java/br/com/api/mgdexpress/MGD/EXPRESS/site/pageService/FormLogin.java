@@ -84,7 +84,7 @@ public class FormLogin {
                               // Enviar os dados para a URL usando AJAX
                               $.ajax({
                                 type: "POST",
-                                url: "http://localhost:8080/login",
+                                url: "https://mgdexpressapi-production.up.railway.app/login",
                                 data: jsonData,
                                 contentType: "application/json",
                                 success: function(response) {

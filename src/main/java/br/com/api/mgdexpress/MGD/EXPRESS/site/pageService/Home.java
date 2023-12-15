@@ -2,7 +2,7 @@ package br.com.api.mgdexpress.MGD.EXPRESS.site.pageService;
 
 public class Home {
 
-    public static String home(){
+    public static String home(String url){
         return """
                 <!DOCTYPE html>
                         <html lang="pt-br">
@@ -52,10 +52,14 @@ public class Home {
                         <nav>
                             <h2>MGD EXPRESS</h2>
                             <div>
-                                <a href="http://localhost:8080/site/gerente/criar">Novo Pedido</a>
-                                <a href="http://localhost:8080/site/gerente/meusPedidos/134lucas@gmail.com">Meus Pedidos</a>
-                                <a href="#">Em Andamento</a>
-                                <a href="http://localhost:8080/site/gerente/historico/134lucas@gmail.com">Histórico</a>
+                                <a href='"""+url+"""
+                                site/gerente/criar'>Novo Pedido</a>
+                                <a href='"""+url+"""
+                                /site/gerente/meusPedidos/134lucas@gmail.com'>Meus Pedidos</a>
+                                <a href='"""+url+"""
+                                ' >Em Andamento</a>
+                                <a href='"""+url+ """
+                            site/gerente/historico/134lucas@gmail.com'>Histórico</a>
                             </div>
                         </nav>
                         

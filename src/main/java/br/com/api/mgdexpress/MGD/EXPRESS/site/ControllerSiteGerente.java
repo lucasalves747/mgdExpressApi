@@ -17,6 +17,8 @@ import java.util.List;
 @RequestMapping("/site/gerente")
 public class ControllerSiteGerente {
 
+    private String url = "https://mgdexpressapi-production.up.railway.app/login";
+
     @Autowired
     private HistoricoRepository historicoRepository;
 
@@ -25,7 +27,7 @@ public class ControllerSiteGerente {
 
     @GetMapping
     public String home(){
-        return Home.home();
+        return Home.home(url);
     }
 
     @GetMapping("/criar")
