@@ -32,6 +32,12 @@ public class AuthController {
         tokenService.gerarToken(usuario);
         return "estou a funcionar";
     }
+    @PostMapping
+    public String test(@RequestBody Login login){
+
+
+        return "estou a funcionar "+login.username()+" \n"+login.password();
+    }
 
     @GetMapping
     public String login(){
