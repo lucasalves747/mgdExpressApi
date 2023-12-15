@@ -31,7 +31,7 @@ public class Configurations {
 
         return http.csrf(cf -> cf.disable()).sessionManagement(sm ->sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
-                    req.requestMatchers("/pedidos/pendente/**","/login","/login/**").permitAll();
+                    req.requestMatchers("/login","/login/**").permitAll();
                     req.requestMatchers("/crear/motoboy").permitAll();
                     req.requestMatchers("/v3/api-docs/**","/swagger-ui/**","/swagger-ui.html").permitAll();
                     req.anyRequest().authenticated();
