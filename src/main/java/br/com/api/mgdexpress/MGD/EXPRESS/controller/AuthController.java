@@ -29,7 +29,8 @@ public class AuthController {
 
         var usuario = (User) authenticate.getPrincipal();
 
-        return tokenService.gerarToken(usuario);
+        tokenService.gerarToken(usuario);
+        return "estou a funcionar";
     }
 
     @GetMapping
