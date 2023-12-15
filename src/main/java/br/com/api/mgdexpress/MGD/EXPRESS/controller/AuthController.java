@@ -29,14 +29,10 @@ public class AuthController {
 
         var usuario = (User) authenticate.getPrincipal();
 
-        tokenService.gerarToken(usuario);
-        return "estou a funcionar";
-    }
-    @PostMapping("/test")
-    public String test(@RequestBody Login login){
 
-        return "estou a funcionar "+login.username()+" \n"+login.password();
+        return tokenService.gerarToken(usuario);
     }
+
 
     @GetMapping
     public String login(){
