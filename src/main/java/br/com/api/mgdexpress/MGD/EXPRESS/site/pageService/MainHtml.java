@@ -32,7 +32,7 @@ public class MainHtml {
                         })
                             .then(response => response.json())
                             .then(data => {
-                                console.log(data);
+                                console.log(data.page);
                                 $('#content-container').html(data.page);
                                 
                             })
