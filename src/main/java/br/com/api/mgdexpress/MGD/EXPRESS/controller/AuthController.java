@@ -4,6 +4,7 @@ import br.com.api.mgdexpress.MGD.EXPRESS.model.users.Login;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.users.User;
 import br.com.api.mgdexpress.MGD.EXPRESS.services.TokenService;
 import br.com.api.mgdexpress.MGD.EXPRESS.site.pageService.FormLogin;
+import br.com.api.mgdexpress.MGD.EXPRESS.site.pageService.HtmlPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,8 +36,9 @@ public class AuthController {
 
 
     @GetMapping
-    public String login(){
-        return FormLogin.page();
+    public ResponseEntity login(){
+
+        return ResponseEntity.ok(new HtmlPage(FormLogin.page()));
     }
 
 }

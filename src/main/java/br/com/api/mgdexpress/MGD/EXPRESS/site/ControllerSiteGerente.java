@@ -37,6 +37,7 @@ public class ControllerSiteGerente {
 
     @GetMapping("/home")
     public String home(){
+
         return Home.home(url);
     }
 
