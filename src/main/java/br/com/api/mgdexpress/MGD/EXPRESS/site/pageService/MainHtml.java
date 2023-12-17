@@ -92,7 +92,7 @@ public class MainHtml {
                                
                     function enviarPedido() {
                         var formData = new FormData(document.getElementById('pedidoForm'));
-                        var urlpedido = `${url}/pedidos`;
+                        var urlpedido = `${url}pedidos`;
                                
                         fetch(urlpedido, {
                             method: 'POST',
