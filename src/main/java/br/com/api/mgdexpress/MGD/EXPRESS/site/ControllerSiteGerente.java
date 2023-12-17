@@ -2,13 +2,12 @@ package br.com.api.mgdexpress.MGD.EXPRESS.site;
 
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.HistoricoRepository;
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.PedidoRepository;
+import br.com.api.mgdexpress.MGD.EXPRESS.services.TokenService;
 import br.com.api.mgdexpress.MGD.EXPRESS.site.pageService.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/site/gerente")
@@ -21,44 +20,55 @@ public class ControllerSiteGerente {
 
     @Autowired
     private PedidoRepository pedidoRepository;
+    @Autowired
+    private TokenService tokenService;
 
     @GetMapping
     public String mainHtml(){
         return MainHtml.html();
     }
 
+    @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
     @GetMapping("/sucesso")
     public ResponseEntity<HtmlPage> sucesso(){
         return ResponseEntity.ok(new HtmlPage(Sucesso.sucesso()));
     }
-
+    @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
     @GetMapping("/home")
     public ResponseEntity<HtmlPage> home(){
         return ResponseEntity.ok(new HtmlPage(Home.home(url)));
     }
 
+    @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
     @GetMapping("/criar")
     public ResponseEntity<HtmlPage> formulario(){
 
         return ResponseEntity.ok(new HtmlPage(Formulario.formulario()));
     }
-
-    @GetMapping("/meusPedidos/{email}")
-    public ResponseEntity<HtmlPage> listarMeusPedidos(@PathVariable String email){
+    @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
+    @GetMapping("/meusPedidos/")
+    public ResponseEntity<HtmlPage> listarMeusPedidos(){
         return  ResponseEntity.ok(new HtmlPage(ListarMeusPedidos.listar()));
     }
 
-    @GetMapping("/historico/{email}")
-    public ResponseEntity<HtmlPage> listaHistoricos(@PathVariable String email){
-        return ResponseEntity.ok(new HtmlPage(ListarHistorico.historocos(email)));
+    @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
+    @GetMapping("/historico/")
+    public ResponseEntity<HtmlPage> listaHistoricos(@RequestHeader("Authorization") String header){
+        var token = header.replace("Bearer ","");
+        var subject = tokenService.getSubject(token);
+
+
+        return ResponseEntity.ok(new HtmlPage(ListarHistorico.historocos(subject)));
     }
 
+    @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
     @GetMapping("historico/detalhes/{id}")
     public ResponseEntity<HtmlPage> detalharHistorico(@PathVariable Long id){
        var historico = historicoRepository.getReferenceById(id);
         return ResponseEntity.ok(new HtmlPage(Detalhehistorico.detalhar(historico)));
     }
 
+    @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
     @GetMapping("pedido/detalhes/{id}")
     public ResponseEntity<HtmlPage> detalharPedido(@PathVariable Long id){
         var pedido = pedidoRepository.getReferenceById(id);

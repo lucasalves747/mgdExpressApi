@@ -127,8 +127,8 @@ public class MainHtml {
                         })
                             .then(response => response.json())
                             .then(data => {
-                                console.log(data.content);
-                                data.content.forEach(cardData => {
+                                console.log(data);
+                                data.forEach(cardData => {
                                
                                     const card = document.createElement('div');
                                     card.className = 'card';
