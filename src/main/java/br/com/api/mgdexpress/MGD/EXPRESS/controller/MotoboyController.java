@@ -34,7 +34,7 @@ public class MotoboyController {
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
     @GetMapping
     public ResponseEntity ListarMotoboys(@PageableDefault(size = 10) Pageable page){
-        return ResponseEntity.ok(motoboyRepository.findAllAtivos(page).map(DadosMotoboyList::new));
+        return ResponseEntity.ok(motoboyRepository.findAll(page).map(DadosMotoboyList::new));
     }
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
@@ -50,9 +50,13 @@ public class MotoboyController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
-    @GetMapping("/EmEntregas/gerente/{id}")
-    public ResponseEntity ListarMotoboysEmEntregasByGerente(@PageableDefault(size = 10) Pageable page, @PathVariable Long id){
-        return ResponseEntity.ok(motoboyRepository.findAllAtivosEmEntregaByGerente(page,id).map(DadosMotoboyList::new));
+    @GetMapping("/EmEntregas/gerente")
+    public ResponseEntity ListarMotoboysEmEntregasByGerente(@PageableDefault(size = 10) Pageable page,@RequestHeader("Authorization") String header){
+
+        var token = header.replace("Bearer ","");
+        var subject = tokenService.getSubject(token);
+
+        return ResponseEntity.ok(motoboyRepository.findAllAtivosEmEntregaByGerente(page,subject).map(DadosMotoboyList::new));
     }
 
 

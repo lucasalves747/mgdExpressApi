@@ -69,7 +69,7 @@ public class PedidoController {
     @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
     @GetMapping("/pendente/gerente")
     public ResponseEntity<List<DadosPedidoPage>> listar(@RequestHeader("Authorization") String header){
-        System.out.println("Entrei no pedido pendente gerente ");
+        System.out.println("Entrei no pedido pendente gerente");
         var token = header.replace("Bearer ","");
         var subject = tokenService.getSubject(token);
 

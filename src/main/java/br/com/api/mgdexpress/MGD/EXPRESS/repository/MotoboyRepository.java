@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface MotoboyRepository extends JpaRepository<Motoboy,Long> {
 
-    Page<Motoboy> findAllAtivos(Pageable page);
 
     @Query("select m from Motoboy m where m.ativo = true and  m.disponivel = false")
     Page<Motoboy> findAllAtivosEmEntrega(Pageable page);
@@ -17,8 +16,8 @@ public interface MotoboyRepository extends JpaRepository<Motoboy,Long> {
     @Query("select m from Motoboy m where m.ativo = true and  m.disponivel = true")
     Page<Motoboy> findAlldisponiveisAtivos(Pageable page);
 
-    @Query("select m from Motoboy m where m.id in(select p.motoboy.id from Pedido p where p.status = ANDAMENTO and p.gerente.id =:id)")
-    Page<Motoboy> findAllAtivosEmEntregaByGerente(Pageable page, Long id);
+    @Query("select m from Motoboy m where m.id in(select p.motoboy.id from Pedido p where p.status = ANDAMENTO and p.gerente.email =:email)")
+    Page<Motoboy> findAllAtivosEmEntregaByGerente(Pageable page,String email);
 
 
     Motoboy findByEmail(String username);
