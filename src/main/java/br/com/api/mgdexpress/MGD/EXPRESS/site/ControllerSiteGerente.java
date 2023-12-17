@@ -39,7 +39,8 @@ public class ControllerSiteGerente {
 
     @GetMapping("/criar")
     public ResponseEntity<HtmlPage> formulario(){
-        return ResponseEntity.ok(new HtmlPage(Formulario.formulario();
+
+        return ResponseEntity.ok(new HtmlPage(Formulario.formulario()));
     }
 
     @GetMapping("/meusPedidos/{email}")
