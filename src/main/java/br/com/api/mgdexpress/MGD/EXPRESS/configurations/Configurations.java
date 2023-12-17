@@ -33,6 +33,7 @@ public class Configurations {
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers("/login","/login/**").permitAll();
                     req.requestMatchers("/crear/motoboy").permitAll();
+                    req.requestMatchers(HttpMethod.GET,"controller-site-gerente/");
                     req.requestMatchers("/v3/api-docs/**","/swagger-ui/**","/swagger-ui.html").permitAll();
                     req.anyRequest().authenticated();
                 }).addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class).build();
