@@ -25,7 +25,6 @@ public class MainHtml {
                                
                     if (token == null) {
                         fetch('https://mgdexpressapi-production.up.railway.app/login', {
-                            
                             method: 'GET',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -33,8 +32,9 @@ public class MainHtml {
                         })
                             .then(response => response.json())
                             .then(data => {
-                                $('#content-container').html(data);
                                 console.log(data);
+                                $('#content-container').html(data);
+                                
                             })
                             .catch(error => console.error('Erro:', error));
                     }
