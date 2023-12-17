@@ -25,6 +25,7 @@ public class MainHtml {
                                
                     if (token == null) {
                         fetch('https://mgdexpressapi-production.up.railway.app/login', {
+                            console.log('logando')
                             method: 'GET',
                             headers: {
                                 'Content-Type': 'application/json'
