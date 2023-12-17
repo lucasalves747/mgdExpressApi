@@ -3,11 +3,9 @@ package br.com.api.mgdexpress.MGD.EXPRESS.controller;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.historico.Historico;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.pedido.*;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.records.DadosIdPedidoIdMotoboy;
-import br.com.api.mgdexpress.MGD.EXPRESS.repository.GerenteRepository;
-import br.com.api.mgdexpress.MGD.EXPRESS.repository.HistoricoRepository;
-import br.com.api.mgdexpress.MGD.EXPRESS.repository.MotoboyRepository;
-import br.com.api.mgdexpress.MGD.EXPRESS.repository.PedidoRepository;
+import br.com.api.mgdexpress.MGD.EXPRESS.repository.*;
 import br.com.api.mgdexpress.MGD.EXPRESS.services.RegrasService;
+import br.com.api.mgdexpress.MGD.EXPRESS.services.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +16,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("pedidos")
@@ -31,6 +31,10 @@ public class PedidoController {
     private HistoricoRepository historicoRepository;
     @Autowired
     private GerenteRepository gerenteRepository;
+    @Autowired
+    private TokenService tokenService;
+    @Autowired
+    private UserRepository userRepository;
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
     @PostMapping
@@ -55,15 +59,26 @@ public class PedidoController {
         pedido.setStatus(Status.ANDAMENTO);
         pedido.setMotoboy(motoboy);
         motoboy.setDisponivel(false);
+
         pedidoRepository.save(pedido);
         motoboyRepository.save(motoboy);
+
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/pendente/{email}")
-    public ResponseEntity<Page<DadosPedidoPage>> listar(@PageableDefault(size = 10)Pageable page,@PathVariable String email){
-        return ResponseEntity.ok(pedidoRepository.findAllWhereStatusINICIAR(page,email).map(DadosPedidoPage::new));
+    @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
+    @GetMapping("/pendente/gerente")
+    public ResponseEntity<List<DadosPedidoPage>> listar(@RequestHeader("Authorization") String header){
+        var token = header.replace("Bearer ","");
+        var subject = tokenService.getSubject(token);
 
+        return ResponseEntity.ok(pedidoRepository.findAllWhereStatusINICIARByLogin(subject).stream().map(DadosPedidoPage::new).toList());
+
+    }
+
+    @GetMapping("/pendente")
+    public ResponseEntity<List<DadosPedidoPage>> listarPedidodsByMotoboy(){
+        return ResponseEntity.ok(pedidoRepository.findAllWhereStatusINICIAR().stream().map(DadosPedidoPage::new).toList());
     }
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")

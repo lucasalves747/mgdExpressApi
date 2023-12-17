@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 
 public interface MotoboyRepository extends JpaRepository<Motoboy,Long> {
-    @Query("select m from Motoboy m where m.ativo = true")
+
     Page<Motoboy> findAllAtivos(Pageable page);
 
     @Query("select m from Motoboy m where m.ativo = true and  m.disponivel = false")

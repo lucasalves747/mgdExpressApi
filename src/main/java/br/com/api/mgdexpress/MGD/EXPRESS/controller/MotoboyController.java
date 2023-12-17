@@ -15,6 +15,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -62,9 +63,7 @@ public class MotoboyController {
         var token = header.replace("Bearer ","");
         var subject = tokenService.getSubject(token);
 
-        var user = useRepository.findByUsername(subject);
-
-        var motoboy = motoboyRepository.findByEmail(user.getUsername());
+        var motoboy = motoboyRepository.findByEmail(subject);
         motoboy.setLocalizacao(dados.localizacao());
         motoboyRepository.save(motoboy);
         return ResponseEntity.ok().build();

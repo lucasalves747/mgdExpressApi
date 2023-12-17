@@ -22,8 +22,6 @@ public class AuthController {
     @PostMapping
     public String login(@RequestBody Login login){
 
-        System.out.println("entrou no controller");
-
         var usernamePasswordAuthenticationToken =
                 new UsernamePasswordAuthenticationToken(login.username(),login.password());
         var authenticate =

@@ -42,7 +42,6 @@ public class GerenteController {
         userRepository.save(new User(null, dadosGerente.getEmail(), senha,"ROLE_USER_GERENTE"));
         gerenteRepository.save(new Gerente(dadosGerente));
 
-        gerenteRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
 
