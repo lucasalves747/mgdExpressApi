@@ -69,6 +69,7 @@ public class PedidoController {
     @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
     @GetMapping("/pendente/gerente")
     public ResponseEntity<List<DadosPedidoPage>> listar(@RequestHeader("Authorization") String header){
+        System.out.println("Entrei no pedido pendente gerente ");
         var token = header.replace("Bearer ","");
         var subject = tokenService.getSubject(token);
 
@@ -78,12 +79,14 @@ public class PedidoController {
 
     @GetMapping("/pendente")
     public ResponseEntity<List<DadosPedidoPage>> listarPedidodsByMotoboy(){
+        System.out.println("Entrei no pendente");
         return ResponseEntity.ok(pedidoRepository.findAllWhereStatusINICIAR().stream().map(DadosPedidoPage::new).toList());
     }
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
     @GetMapping("/EmAndamento")
     public ResponseEntity<Page<DadosPedidoPageEmandamento>> listarPedidosEmAndamento(@PageableDefault(size = 10)Pageable page){
+        System.out.println("Entrei no AAndamento");
         return ResponseEntity.ok(pedidoRepository.findAllWhereStatusANDAMENTO(page).map(DadosPedidoPageEmandamento::new));
 
     }
@@ -91,6 +94,7 @@ public class PedidoController {
 
     @GetMapping("/{id}")
     public ResponseEntity detalherPedido(@PathVariable Long id){
+        System.out.println("Entrei no detar pedido id");
         var pedido = pedidoRepository.getReferenceByIdAndNotinHistorico(id);
         if(pedido != null) {
             if (pedido.getMotoboy() != null) {
@@ -103,6 +107,7 @@ public class PedidoController {
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity finalizarpedido(@PathVariable Long id){
+        System.out.println("Entrei no finalizar pedido");
         var pedido = pedidoRepository.getReferenceById(id);
         var motoboy = motoboyRepository.getReferenceById(pedido.getMotoboy().getId());
         pedidoRepository.save(pedido);
