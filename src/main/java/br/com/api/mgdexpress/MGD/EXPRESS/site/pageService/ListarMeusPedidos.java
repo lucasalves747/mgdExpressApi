@@ -4,147 +4,99 @@ public class ListarMeusPedidos {
 
     public static String listar(){
         return """
-                <!DOCTYPE html>
-                       <html lang="pt-br">
-                       <head>
-                           <meta charset="UTF-8">
-                           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                           <title>Meus Pedidos</title>
-                           <style>
-                               body {
-                                   font-family: Arial, sans-serif;
-                                   margin: 0;
-                                   padding: 0;
-                                   background-color: #f4f4f4;
-                               }
-                       
-                               nav {
-                                   background-color: #333;
-                                   color: white;
-                                   padding: 10px;
-                                   text-align: center;
-                                   display: flex;
-                                   align-items: center;
-                               }
-                       
-                               .card {
-                                   border: 1px solid #ccc;
-                                   border-radius: 8px;
-                                   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                                   margin: 10px;
-                                   width: 300px;
-                                   float: left;
-                                   background-color: #fff;
-                               }
-                       
-                               .card img {
-                                   width: 100%;
-                                   height: 150px;
-                                   object-fit: cover;
-                                   border-top-left-radius: 8px;
-                                   border-top-right-radius: 8px;
-                               }
-                       
-                               .card-content {
-                                   padding: 10px;
-                                   text-align: left;
-                               }
-                               .titulo{
-                                   text-align: center;
-                               }
-                       
-                               button {
-                                   background-color: #4caf50;
-                                   color: #fff;
-                                   padding: 8px;
-                                   border: none;
-                                   border-radius: 4px;
-                                   cursor: pointer;
-                                   width: 100%;
-                               }
-                       
-                               button:hover {
-                                   background-color: #45a049;
-                               }
-                       
-                               @media (max-width: 768px) {
-                                   .card {
-                                       width: calc(50% - 20px);
-                                   }
-                               }
-                       
-                               nav a {
-                                   color: white;
-                                   text-decoration: none;
-                                   margin-left: 15px;
-                               }
-                       
-                               .backLink{
-                                   font-size : 160%;
-                               }
-                               h2{margin-left: 40%;}
-                           </style>
-                       </head>
-                       <body>
-                       
-                       <nav>
-                       
-                           <div>
-                               <a class="backLink" href="#" onclick="history.back()">←</a>
-                       
-                           </div>
-                           <h2>Meus Pedidos</h2>
-                       </nav>
-                       
-                       <div id="card-container">
-                           <!-- Cards serão adicionados dinamicamente com JavaScript -->
-                       </div>
-                       
-                       <script>
-                           document.addEventListener('DOMContentLoaded', function () {
-                               const cardContainer = document.getElementById('card-container');
-                       
-                       
-                           fetch('http://localhost:8080/pedidos/pendente/134lucas@gmail.com')
-                               .then(response => response.json())
-                               .then(data => {
-                                   console.log(data.content);
-                                 data.content.forEach(cardData =>{
-                       
-                                   const card = document.createElement('div');
-                                   card.className = 'card';
-                       
-                                   const cardContent = document.createElement('div');
-                                   cardContent.className = 'card-content';
-                       
-                                   const cardDetails = `
-                                       <p class="titulo"><strong>${cardData.nomePedido}</p></strong>
-                                       <p><strong>Valor:</strong> ${cardData.valor}</p>
-                                       <p><strong>Local de Destino:</strong> ${cardData.localDestino}</p>
-                                       <a href="http://localhost:8080/site/gerente/pedido/detalhes/${cardData.id}"><button>Detalhes</button></a>
-                                   `;
-                       
-                                   cardContent.innerHTML = cardDetails;
-                       
-                       
-                                   card.appendChild(cardContent);
-                                   cardContainer.appendChild(card);
-                                 });
-                               })
-                               .catch(error => {
-                                 // trate erros de requisição
-                               });
-                       
-                       
-                       
-                       
-                       
-                       
-                           });
-                       </script>
-                       
-                       </body>
-                       </html>
-                       """;
+                               
+                <head>
+                    <title>Meus Pedidos</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            margin: 0;
+                            padding: 0;
+                            background-color: #f4f4f4;
+                        }
+                                       
+                        nav {
+                            background-color: #333;
+                            color: white;
+                            padding: 10px;
+                            text-align: center;
+                            display: flex;
+                            align-items: center;
+                        }
+                                       
+                        .card {
+                            border: 1px solid #ccc;
+                            border-radius: 8px;
+                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                            margin: 10px;
+                            width: 300px;
+                            float: left;
+                            background-color: #fff;
+                        }
+                                       
+                        .card img {
+                            width: 100%;
+                            height: 150px;
+                            object-fit: cover;
+                            border-top-left-radius: 8px;
+                            border-top-right-radius: 8px;
+                        }
+                                       
+                        .card-content {
+                            padding: 10px;
+                            text-align: left;
+                        }
+                        .titulo{
+                            text-align: center;
+                        }
+                                       
+                        button {
+                            background-color: #4caf50;
+                            color: #fff;
+                            padding: 8px;
+                            border: none;
+                            border-radius: 4px;
+                            cursor: pointer;
+                            width: 100%;
+                        }
+                                       
+                        button:hover {
+                            background-color: #45a049;
+                        }
+                                       
+                        @media (max-width: 768px) {
+                            .card {
+                                width: calc(50% - 20px);
+                            }
+                        }
+                                       
+                        nav a {
+                            color: white;
+                            text-decoration: none;
+                            margin-left: 15px;
+                        }
+                                       
+                        .backLink{
+                            font-size : 160%;
+                        }
+                        h2{margin-left: 40%;}
+                    </style>
+                </head>
+                                       
+                                       
+                <nav>
+                                       
+                    <div>
+                        <a class="backLink" href="#" onclick="history.back()">←</a>
+                                       
+                    </div>
+                    <h2>Meus Pedidos</h2>
+                </nav>
+                                       
+                <div id="card-container">
+                    <!-- Cards serão adicionados dinamicamente com JavaScript -->
+                </div>
+                                       
+                """;
     }
 }

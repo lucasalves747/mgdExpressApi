@@ -4,83 +4,75 @@ public class Home {
 
     public static String home(String url){
         return """
-                <!DOCTYPE html>
-                        <html lang="pt-br">
-                        <head>
-                            <meta charset="UTF-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                            <title>MGD EXPRESS</title>
-                            <style>
-                                body {
-                                    margin: 0;
-                                    padding: 0;
-                                    font-family: Arial, sans-serif;
-                                }
-                        
-                                nav {
-                                    background-color: #333;
-                                    color: white;
-                                    padding: 10px;
-                                    display: flex;
-                                    justify-content: space-between;
-                                    align-items: center;
-                                }
-                        
-                                nav h2 {
-                                    margin: 0;
-                                }
-                        
-                                nav a {
-                                    color: white;
-                                    text-decoration: none;
-                                    margin-left: 15px;
-                                }
-                        
-                                main {
-                                    text-align: center;
-                                    padding: 20px;
-                                }
-                        
-                                #map {
-                                    width: 100%;
-                                    height: 600px ; /* Ajuste a altura conforme necessário */
-                                }
-                            </style>
-                        </head>
-                        <body>
-                        
-                        <nav>
-                            <h2>MGD EXPRESS</h2>
-                            <div>
-                                <a href='"""+url+"""
-                                site/gerente/criar'>Novo Pedido</a>
-                                <a href='"""+url+"""
-                                /site/gerente/meusPedidos/134lucas@gmail.com'>Meus Pedidos</a>
-                                <a href='"""+url+"""
-                                ' >Em Andamento</a>
-                                <a href='"""+url+ """
-                            site/gerente/historico/134lucas@gmail.com'>Histórico</a>
-                            </div>
-                        </nav>
-                        
-                        <main>
-                            <div id="map"></div>
-                        </main>
-                        
-                        <script>
-                            // Substitua 'SUA_CHAVE_DO_MAPA_AQUI' pela sua chave de API do mapa
-                            function initMap() {
-                                var mapOptions = {
-                                    center: { lat: -23.5505, lng: -46.6333 }, // Coordenadas de São Paulo, por exemplo
-                                    zoom: 12
-                                };
-                                var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-                            }
-                        </script>
-                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsTWHMwA_agU_-o35U_3b606930nBrsY8&callback=initMap" async defer></script>
-                        
-                        </body>
-                        </html>
+                         
+                <head>
+                    <title>MGD EXPRESS</title>
+                    <style>
+                        body {
+                            margin: 0;
+                            padding: 0;
+                            font-family: Arial, sans-serif;
+                        }
+                                       
+                        nav {
+                            background-color: #333;
+                            color: white;
+                            padding: 10px;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                        }
+                                       
+                        nav h2 {
+                            margin: 0;
+                        }
+                                       
+                        nav a {
+                            color: white;
+                            text-decoration: none;
+                            margin-left: 15px;
+                        }
+                                       
+                        main {
+                            text-align: center;
+                            padding: 20px;
+                        }
+                                       
+                        #map {
+                            width: 100%;
+                            height: 600px ; /* Ajuste a altura conforme necessário */
+                        }
+                    </style>
+                </head>
+                                       
+                                       
+                <nav>
+                    <h2>MGD EXPRESS</h2>
+                    <div>
+                        <a onclick="carregarPagina('site/gerente/criar')" >Novo Pedido</a>
+                        <a onclick="listarPedidos ()">Meus Pedidos</a>
+                        <a onclick="carregarPagina('')">Em Andamento</a>
+                        <a onclick="">Histórico</a>
+                    </div>
+                </nav>
+                                       
+                <main>
+                    <div id="map"></div>
+                </main>
+                                       
+                <script>
+                    // Substitua 'SUA_CHAVE_DO_MAPA_AQUI' pela sua chave de API do mapa
+                    function initMap() {
+                        var mapOptions = {
+                            center: { lat: -23.5505, lng: -46.6333 }, // Coordenadas de São Paulo, por exemplo
+                            zoom: 12
+                        };
+                        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+                    }
+                </script>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsTWHMwA_agU_-o35U_3b606930nBrsY8&callback=initMap" async defer></script>
+                                       
+                                       
                         """;
     }
 }

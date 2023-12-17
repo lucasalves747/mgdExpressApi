@@ -1,8 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Histórico</title>
     <style>
         body {
@@ -50,43 +47,10 @@
         }
     </style>
 </head>
-<body>
+
 
 <nav>
     <h2>Histórico</h2>
 </nav>
 
 <ul id="historico-list"></ul>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-
-    fetch('http://localhost:8080/historico/gerente/134lucas@gmail.com')
-        .then(response => response.json())
-        .then(data => {
-
-          data.forEach(item =>{
-          console.log(item.id);
-
-          const li = document.createElement('li');
-            li.innerHTML = `
-
-                <p>Data de Entrega: ${item.dataEntrega}</p>
-                <p>Motoboy: ${item.motoboyNome}</p>
-                <p>Estabelecimento: ${item.nomeStabelecimento}</p>
-                <p>Valor: R$ ${item.valor.toFixed(2)}</p>
-                <a href="http://localhost:8080/site/gerente/historico/detalhes/${item.id}"><button>Detalhes</button></a>
-            `;
-            historicoList.appendChild(li);
-          });
-        })
-        .catch(error => {
-          // trate erros de requisição
-        });
-
-        const historicoList = document.getElementById('historico-list');
-    });
-</script>
-
-</body>
-</html>

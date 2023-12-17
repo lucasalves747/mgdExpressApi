@@ -26,6 +26,16 @@ public class ControllerSiteGerente {
     private PedidoRepository pedidoRepository;
 
     @GetMapping
+    public String mainHtml(){
+        return MainHtml.html();
+    }
+
+    @GetMapping("/sucesso")
+    public String sucesso(){
+        return Sucesso.sucesso();
+    }
+
+    @GetMapping("/home")
     public String home(){
         return Home.home(url);
     }

@@ -1,8 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
@@ -59,39 +56,3 @@
         <button type="button" onclick="login()">Login</button>
     </form>
 </div>
-
-<script>
-    function login() {
-      // Obter os valores dos campos de entrada
-      var username = document.getElementById("username").value;
-      var password = document.getElementById("password").value;
-
-      // Criar um objeto com os dados do formulário
-      var formData = {
-        username: username,
-        password: password
-      };
-
-      // Converter o objeto em uma string JSON
-      var jsonData = JSON.stringify(formData);
-
-      // Enviar os dados para a URL usando AJAX
-      $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/login",
-        data: jsonData,
-        contentType: "application/json",
-        success: function(response) {
-          console.log(response);
-          // Lógica adicional para lidar com a resposta do servidor
-        },
-        error: function(error) {
-          console.error("Erro na requisição AJAX:", error);
-          // Lógica adicional para lidar com erros
-        }
-      });
-    }
-</script>
-
-</body>
-</html>

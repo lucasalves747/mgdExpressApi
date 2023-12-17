@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MGD EXPRESS</title>
     <style>
         body {
@@ -41,15 +37,15 @@
         }
     </style>
 </head>
-<body>
+
 
 <nav>
     <h2>MGD EXPRESS</h2>
     <div>
-        <a href="http://localhost:8080/site/gerente/criar">Novo Pedido</a>
-        <a href="#">Meus Pedidos</a>
-        <a href="#">Em Andamento</a>
-        <a href="#">Histórico</a>
+        <a onclick="carregarPagina('site/gerente/criar')" >Novo Pedido</a>
+        <a onclick="listarPedidos ()">Meus Pedidos</a>
+        <a onclick="carregarPagina('')">Em Andamento</a>
+        <a onclick="">Histórico</a>
     </div>
 </nav>
 
@@ -69,5 +65,3 @@
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsTWHMwA_agU_-o35U_3b606930nBrsY8&callback=initMap" async defer></script>
 
-</body>
-</html>

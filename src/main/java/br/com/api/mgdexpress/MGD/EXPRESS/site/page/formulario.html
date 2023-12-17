@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário de Pedido</title>
     <style>
         body {
@@ -30,7 +26,8 @@
             margin-bottom: 8px;
         }
 
-        input, select {
+        input,
+        select {
             width: 100%;
             padding: 8px;
             margin-bottom: 16px;
@@ -54,26 +51,26 @@
         }
     </style>
 </head>
-<body>
 
-<form action="http://localhost:8080/pedidos" method="post">
+
+<form id="pedidoForm">
     <label for="nomeEstabelecimento">Nome do Estabelecimento:</label>
-    <input type="text" id="nomeEstabelecimento" name="nomeEstabelecimento" required/>
+    <input type="text" id="nomeEstabelecimento" name="nomeEstabelecimento" required />
 
     <label for="localOrigem">Local de Origem:</label>
-    <input type="text" id="localOrigem" name="localOrigem" required/>
+    <input type="text" id="localOrigem" name="localOrigem" required />
 
     <label for="localDestino">Local de Destino:</label>
-    <input type="text" id="localDestino" name="localDestino" required/>
+    <input type="text" id="localDestino" name="localDestino" required />
 
     <label for="valor">Valor:</label>
-    <input type="number" id="valor" name="valor" required/>
+    <input type="number" id="valor" name="valor" required />
 
     <label for="observacao">Observação:</label>
     <textarea id="observacao" name="observacao"></textarea>
 
     <label for="itensDoPedido">Itens do Pedido:</label>
-    <input type="text" id="itensDoPedido" name="itensDoPedido" required/>
+    <input type="text" id="itensDoPedido" name="itensDoPedido" required />
 
     <label for="status">Status:</label>
     <select id="status" name="status">
@@ -88,8 +85,5 @@
     <label for="gerenteId">ID do Gerente:</label>
     <input type="text" id="gerenteId" name="gerenteId" required>
 
-    <button type="submit">Criar</button>
+    <button type="button" onclick="enviarPedido()">Criar</button>
 </form>
-
-</body>
-</html>
