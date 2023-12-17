@@ -36,7 +36,7 @@ public class MainHtml {
                                 $('#content-container').html(data);
                                 
                             })
-                            .catch(error => console.error('Erro:', error));
+                            .catch(error => console.log('erro');
                     }
                                
                     function login() {
