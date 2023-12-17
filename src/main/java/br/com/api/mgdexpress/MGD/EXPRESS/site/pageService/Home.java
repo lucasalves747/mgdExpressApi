@@ -49,11 +49,11 @@ public class Home {
                 <nav>
                     <h2>MGD EXPRESS</h2>
                     <div>
-                        <a onclick="carregarPagina('"""+url+"""
-                        site/gerente/criar')" >Novo Pedido</a>
-                        <a onclick="listarPedidos ()">Meus Pedidos</a>
-                        <a onclick="carregarPagina('')">Em Andamento</a>
-                        <a onclick="listarHistorico()">Histórico</a>
+                        <button onclick="carregarPagina('"""+url+"""
+                        site/gerente/criar')" >Novo Pedido</button>
+                        <button onclick="listarPedidos ()">Meus Pedidos</button>
+                        <button onclick="carregarPagina('')">Em Andamento</button>
+                        <button onclick="listarHistorico()">Histórico</button>
                     </div>
                 </nav>
                                        
