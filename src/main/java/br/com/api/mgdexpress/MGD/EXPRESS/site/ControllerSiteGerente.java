@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RestController
 @RequestMapping("/site/gerente")
 public class ControllerSiteGerente {
@@ -31,40 +28,39 @@ public class ControllerSiteGerente {
     }
 
     @GetMapping("/sucesso")
-    public String sucesso(){
-        return Sucesso.sucesso();
+    public ResponseEntity<HtmlPage> sucesso(){
+        return ResponseEntity.ok(new HtmlPage(Sucesso.sucesso()));
     }
 
     @GetMapping("/home")
-    public String home(){
-
-        return Home.home(url);
+    public ResponseEntity<HtmlPage> home(){
+        return ResponseEntity.ok(new HtmlPage(Home.home(url)));
     }
 
     @GetMapping("/criar")
-    public String formulario(){
-        return Formulario.formulario();
+    public ResponseEntity<HtmlPage> formulario(){
+        return ResponseEntity.ok(new HtmlPage(Formulario.formulario();
     }
 
     @GetMapping("/meusPedidos/{email}")
-    public String listarMeusPedidos(@PathVariable String email){
-        return ListarMeusPedidos.listar();
+    public ResponseEntity<HtmlPage> listarMeusPedidos(@PathVariable String email){
+        return  ResponseEntity.ok(new HtmlPage(ListarMeusPedidos.listar()));
     }
 
     @GetMapping("/historico/{email}")
-    public String listaHistoricos(@PathVariable String email){
-        return ListarHistorico.historocos(email);
+    public ResponseEntity<HtmlPage> listaHistoricos(@PathVariable String email){
+        return ResponseEntity.ok(new HtmlPage(ListarHistorico.historocos(email)));
     }
 
     @GetMapping("historico/detalhes/{id}")
-    public String detalharHistorico(@PathVariable Long id){
+    public ResponseEntity<HtmlPage> detalharHistorico(@PathVariable Long id){
        var historico = historicoRepository.getReferenceById(id);
-        return Detalhehistorico.detalhar(historico);
+        return ResponseEntity.ok(new HtmlPage(Detalhehistorico.detalhar(historico)));
     }
 
     @GetMapping("pedido/detalhes/{id}")
-    public String detalharPedido(@PathVariable Long id){
+    public ResponseEntity<HtmlPage> detalharPedido(@PathVariable Long id){
         var pedido = pedidoRepository.getReferenceById(id);
-        return DetalhePedido.detalhar(pedido);
+        return ResponseEntity.ok(new HtmlPage(DetalhePedido.detalhar(pedido)));
     }
 }
