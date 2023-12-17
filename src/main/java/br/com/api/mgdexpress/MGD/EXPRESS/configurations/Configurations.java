@@ -33,8 +33,9 @@ public class Configurations {
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers("/login","/login/**").permitAll();
                     req.requestMatchers("/crear/motoboy").permitAll();
-                    req.requestMatchers(HttpMethod.GET,"/site/gerente").permitAll();
+                    req.requestMatchers(HttpMethod.GET,"/site/gerente/cadastro/pendente","/site/gerente","/site/gerente/solicitacao/cadastro").permitAll();
                     req.requestMatchers("/v3/api-docs/**","/swagger-ui/**","/swagger-ui.html").permitAll();
+                    req.requestMatchers(HttpMethod.POST,"/gerente/temporario").permitAll();
                     req.anyRequest().authenticated();
                 }).addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class).build();
     }

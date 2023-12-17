@@ -33,6 +33,14 @@ public class ControllerSiteGerente {
     public ResponseEntity<HtmlPage> sucesso(){
         return ResponseEntity.ok(new HtmlPage(Sucesso.sucesso()));
     }
+
+
+    @GetMapping("/cadastro/pendente")
+    public ResponseEntity<HtmlPage> pendente(){
+        return ResponseEntity.ok(new HtmlPage(CadastroGerentePendente.page()));
+    }
+
+
     @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
     @GetMapping("/home")
     public ResponseEntity<HtmlPage> home(){
@@ -73,5 +81,10 @@ public class ControllerSiteGerente {
     public ResponseEntity<HtmlPage> detalharPedido(@PathVariable Long id){
         var pedido = pedidoRepository.getReferenceById(id);
         return ResponseEntity.ok(new HtmlPage(DetalhePedido.detalhar(pedido)));
+    }
+
+    @GetMapping("solicitacao/cadastro")
+    public String FormularioSolicitacaoCadastro(){
+        return FormularioSolicitacaoCadastroGerente.html();
     }
 }
