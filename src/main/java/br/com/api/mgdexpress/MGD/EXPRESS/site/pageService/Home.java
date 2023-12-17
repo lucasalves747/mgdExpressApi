@@ -42,6 +42,21 @@ public class Home {
                             width: 100%;
                             height: 600px ; /* Ajuste a altura conforme necessário */
                         }
+                        
+                        nav button {
+                                        background-color: #4CAF50;
+                                        color: white;
+                                        padding: 10px 20px;
+                                        border: none;
+                                        border-radius: 5px;
+                                        cursor: pointer;
+                                        font-size: 16px;
+                                        margin-left: 15px;
+                                        }
+                        
+                                        nav button:hover {
+                                        background-color: #45a049;
+                                        }
                     </style>
                 </head>
                                        
@@ -49,8 +64,7 @@ public class Home {
                 <nav>
                     <h2>MGD EXPRESS</h2>
                     <div>
-                        <button onclick="carregarPagina('"""+url+"""
-                        site/gerente/criar')" >Novo Pedido</button>
+                        <button onclick="carregarPagina('https://mgdexpressapi-production.up.railway.app/site/gerente/criar')" >Novo Pedido</button>
                         <button onclick="listarPedidos ()">Meus Pedidos</button>
                         <button onclick="carregarPagina('')">Em Andamento</button>
                         <button onclick="listarHistorico()">Histórico</button>
@@ -77,3 +91,5 @@ public class Home {
                         """;
     }
 }
+
+
