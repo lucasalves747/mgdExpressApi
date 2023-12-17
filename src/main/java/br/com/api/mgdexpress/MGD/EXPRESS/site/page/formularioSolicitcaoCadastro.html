@@ -65,7 +65,7 @@
         <label for="localEstabelecimento">Local do Estabelecimento:</label>
         <input type="text" id="localEstabelecimento" name="localEstabelecimento" required>
 
-        <button type="button" onclick="enviarRegistro()">Registrar</button>
+        <button type="button" onclick="enviarFormulario()">Registrar</button>
     </form>
 </div>
 <script>
@@ -73,9 +73,12 @@
         var formulario = document.getElementById('registroForm');
         var formData = new FormData(formulario);
 
-        fetch('sua_url_aqui', {
+        fetch('https://mgdexpressapi-production.up.railway.app/gerente/temporario', {
             method: 'POST',
             body: formData
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
         .then(response => {
             if (!response.ok) {
@@ -86,6 +89,7 @@
         .then(data => {
             // Manipular a resposta aqui, se necessário
             console.log(data);
+            window.location.href = 'https://mgdexpressapi-production.up.railway.app/site/gerente/cadastro/pendente'
         })
         .catch(error => {
             console.error('Erro na solicitação fetch:', error);

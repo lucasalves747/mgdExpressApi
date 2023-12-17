@@ -71,7 +71,7 @@ public class FormularioSolicitacaoCadastroGerente {
                         <label for="localEstabelecimento">Local do Estabelecimento:</label>
                         <input type="text" id="localEstabelecimento" name="localEstabelecimento" required>
                                 
-                        <button type="button" onclick="enviarRegistro()">Registrar</button>
+                        <button type="button" onclick="enviarFormulario()">Registrar</button>
                     </form>
                 </div>
                 <script>
