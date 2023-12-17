@@ -20,7 +20,7 @@ public class MainHtml {
                                
                 <script>
                                
-                    var url = "https://mgdexpressapi-production.up.railway.app//site/gerente/";
+                    var url = "https://mgdexpressapi-production.up.railway.app/site/gerente/";
                     var token;
                                
                     if (token == null) {
