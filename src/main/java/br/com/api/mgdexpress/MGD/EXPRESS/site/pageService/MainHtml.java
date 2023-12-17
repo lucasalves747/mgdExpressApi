@@ -34,7 +34,6 @@ public class MainHtml {
                         })
                             .then(response => response.json())
                             .then(data => {
-                                console.log(data.page);
                                 $('#content-container').html(data.page);
                                 
                             })
@@ -75,6 +74,7 @@ public class MainHtml {
                     }
                                
                     function carregarPagina(url) {
+                    console.log(url)
                         fetch(url, {
                             method: 'GET',
                             headers: {
@@ -84,8 +84,7 @@ public class MainHtml {
                         })
                             .then(response => response.json())
                             .then(data => {
-                                $('#content-container').html(data);
-                                console.log(data);
+                                $('#content-container').html(data.page);
                             })
                             .catch(error => console.error('Erro:', error));
                     }
