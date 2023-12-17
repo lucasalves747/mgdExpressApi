@@ -50,6 +50,7 @@ public class Formulario {
                             border-radius: 4px;
                             cursor: pointer;
                             width: 100%;
+                            margin-top: 10%;
                         }
                                 
                         button:hover {
@@ -60,11 +61,6 @@ public class Formulario {
                                 
                                 
                 <form id="pedidoForm">
-                    <label for="nomeEstabelecimento">Nome do Estabelecimento:</label>
-                    <input type="text" id="nomeEstabelecimento" name="nomeEstabelecimento" required />
-                                
-                    <label for="localOrigem">Local de Origem:</label>
-                    <input type="text" id="localOrigem" name="localOrigem" required />
                                 
                     <label for="localDestino">Local de Destino:</label>
                     <input type="text" id="localDestino" name="localDestino" required />
@@ -73,23 +69,10 @@ public class Formulario {
                     <input type="number" id="valor" name="valor" required />
                                 
                     <label for="observacao">Observação:</label>
-                    <textarea id="observacao" name="observacao"></textarea>
+                    <textarea id="observacao" name="observacao" rows="8" cols="50"></textarea>
                                 
                     <label for="itensDoPedido">Itens do Pedido:</label>
-                    <input type="text" id="itensDoPedido" name="itensDoPedido" required />
-                                
-                    <label for="status">Status:</label>
-                    <select id="status" name="status">
-                        <option value="pendente">Pendente</option>
-                        <option value="em_andamento">Em Andamento</option>
-                        <option value="concluido">Concluído</option>
-                    </select>
-                                
-                    <label for="dataCriacao">Data de Criação:</label>
-                    <input type="date" id="dataCriacao" name="dataCriacao" required>
-                                
-                    <label for="gerenteId">ID do Gerente:</label>
-                    <input type="text" id="gerenteId" name="gerenteId" required>
+                    <textarea id="itensDoPedido" name="itensDoPedido" placeholder="Digite seu texto aqui..." rows="8" cols="50"></textarea>
                                 
                     <button type="button" onclick="enviarPedido()">Criar</button>
                 </form>

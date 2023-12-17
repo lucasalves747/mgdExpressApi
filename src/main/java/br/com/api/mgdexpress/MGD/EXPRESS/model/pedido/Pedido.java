@@ -39,9 +39,9 @@ public class Pedido {
 
     public Pedido(DadosPedido dadosPedido, Gerente gerente) {
 
-        this.nomeEstabelecimento = dadosPedido.nomeEstabelecimento();
+        this.nomeEstabelecimento = gerente.getNomeEstebelecimento();
         this.nomePedido = dadosPedido.nomePedido();
-        this.localOrigem = dadosPedido.localOrigem();
+        this.localOrigem = gerente.getLocalEstabelecimento();
         this.LocalDestino = dadosPedido.localDestino();
         this.valor = dadosPedido.valor();
         this.observacao = dadosPedido.observacao();

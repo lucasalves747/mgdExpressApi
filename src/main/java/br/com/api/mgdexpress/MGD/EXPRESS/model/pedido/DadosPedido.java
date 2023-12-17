@@ -11,10 +11,7 @@ public record DadosPedido(
         Long id,
         @NotBlank
         String nomePedido,
-        @NotBlank
-        String nomeEstabelecimento,
-        @NotBlank
-        String localOrigem,
+
         @NotBlank
         String localDestino,
         @NotNull
@@ -22,12 +19,8 @@ public record DadosPedido(
 
         String observacao,
         @NotBlank
-        String itensDoPedido,
-        Status status,
-        LocalDate dataCriacao,
-        @NotNull @Valid
-        Long GerenteId) {
+        String itensDoPedido) {
         public DadosPedido(Pedido pedido) {
-                this(pedido.getId(),pedido.getNomePedido(), pedido.getNomeEstabelecimento(), pedido.getLocalOrigem(), pedido.getLocalDestino(),pedido.getValor(), pedido.getObservacao(), pedido.getItensDoPedido(), pedido.getStatus(),pedido.getDataCriacao(),pedido.getGerente().getId());
+                this(pedido.getId(),pedido.getNomePedido(), pedido.getLocalDestino(),pedido.getValor(), pedido.getObservacao(), pedido.getItensDoPedido());
         }
 }

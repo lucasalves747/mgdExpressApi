@@ -106,7 +106,7 @@ public class MainHtml {
                             .then(data => {
                                 // Manipular a resposta aqui
                                 carregarPagina(`${url}sucesso`)
-                                console.log(data);
+                                
                             })
                             .catch(error => console.error('Erro:', error));
                     }

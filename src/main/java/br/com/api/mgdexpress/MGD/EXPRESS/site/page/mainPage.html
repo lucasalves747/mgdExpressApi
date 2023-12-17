@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
 </head>
 
 <body>
@@ -15,7 +17,7 @@
 
 <script>
 
-    var url = "https://mgdexpressapi-production.up.railway.app/site/gerente";
+    var url = "https://mgdexpressapi-production.up.railway.app/site/gerente/";
     var token;
 
     if (token == null) {
@@ -27,10 +29,10 @@
         })
             .then(response => response.json())
             .then(data => {
-                $('#content-container').html(data);
-                console.log(data);
+                $('#content-container').html(data.page);
+
             })
-            .catch(error => console.error('Erro:', error));
+            .catch(error => console.log(error));
     }
 
     function login() {
@@ -67,6 +69,7 @@
     }
 
     function carregarPagina(url) {
+    console.log(url)
         fetch(url, {
             method: 'GET',
             headers: {
@@ -76,8 +79,7 @@
         })
             .then(response => response.json())
             .then(data => {
-                $('#content-container').html(data);
-                console.log(data);
+                $('#content-container').html(data.page);
             })
             .catch(error => console.error('Erro:', error));
     }

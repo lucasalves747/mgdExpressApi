@@ -35,6 +35,21 @@
             width: 100%;
             height: 600px ; /* Ajuste a altura conforme necessário */
         }
+
+        nav button {
+                        background-color: #4CAF50;
+                        color: white;
+                        padding: 10px 20px;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        font-size: 16px;
+                        margin-left: 15px;
+                        }
+
+                        nav button:hover {
+                        background-color: #45a049;
+                        }
     </style>
 </head>
 
@@ -42,10 +57,10 @@
 <nav>
     <h2>MGD EXPRESS</h2>
     <div>
-        <a onclick="carregarPagina('site/gerente/criar')" >Novo Pedido</a>
-        <a onclick="listarPedidos ()">Meus Pedidos</a>
-        <a onclick="carregarPagina('')">Em Andamento</a>
-        <a onclick="listarHistorico()">Histórico</a>
+        <button onclick="carregarPagina('https://mgdexpressapi-production.up.railway.app/site/gerente/criar')" >Novo Pedido</button>
+        <button onclick="listarPedidos ()">Meus Pedidos</button>
+        <button onclick="carregarPagina('')">Em Andamento</button>
+        <button onclick="listarHistorico()">Histórico</button>
     </div>
 </nav>
 
@@ -64,4 +79,5 @@
     }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsTWHMwA_agU_-o35U_3b606930nBrsY8&callback=initMap" async defer></script>
-
+                                       
+                     

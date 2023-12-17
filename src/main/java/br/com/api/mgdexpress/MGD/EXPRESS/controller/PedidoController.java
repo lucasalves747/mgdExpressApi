@@ -39,9 +39,12 @@ public class PedidoController {
     @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
     @PostMapping
     @Transactional
-    public ResponseEntity criar(@Valid @RequestBody DadosPedido dadosPedido, UriComponentsBuilder uriComponentsBuilder){
+    public ResponseEntity criar(@Valid @RequestBody DadosPedido dadosPedido, UriComponentsBuilder uriComponentsBuilder,@RequestHeader("Authorization") String header){
+        var token = header.replace("Bearer ","");
+        var subject = tokenService.getSubject(token);
 
-        var gerente = gerenteRepository.getReferenceById(dadosPedido.GerenteId());
+        var gerente = gerenteRepository.findByEmail(subject);
+
         var pedido = pedidoRepository.save(new Pedido(dadosPedido,gerente));
 
         var uri = uriComponentsBuilder.path("/pedidos/{id}").buildAndExpand("id",pedido.getId()).toUri();
@@ -100,7 +103,7 @@ public class PedidoController {
             if (pedido.getMotoboy() != null) {
                 return ResponseEntity.ok(new DadosPedidoCompleto(pedido));
             }
-            return ResponseEntity.ok(new DadosPedido(pedido));
+            return ResponseEntity.ok(new DadosPedidoCompletoSemMotoboy(pedido));
         }else return ResponseEntity.notFound().build();
     }
 
