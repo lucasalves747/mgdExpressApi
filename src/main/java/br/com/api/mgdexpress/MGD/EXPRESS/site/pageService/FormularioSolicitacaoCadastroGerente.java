@@ -90,15 +90,9 @@ public class FormularioSolicitacaoCadastroGerente {
                                    if (!response.ok) {
                                        throw new Error('Erro na solicitação');
                                    }
-                                   return response.json();
+                                  window.location.href = 'https://mgdexpressapi-production.up.railway.app/site/gerente/cadastro/pendente'
+                               
                                })
-                               .then(data => {
-                                   // Manipular a resposta aqui, se necessário
-                                   window.location.href = 'https://mgdexpressapi-production.up.railway.app/site/gerente/cadastro/pendente'
-                               })
-                               .catch(error => {
-                                   console.log(error);
-                               });
                            }
                        </script>
                        
