@@ -33,9 +33,6 @@ public class GerenteTemporarioController {
             return ResponseEntity.status(422).body("usuario ja cadastrado");
         }
 
-        var bcrypt = new BCryptPasswordEncoder();
-        var senha = bcrypt.encode(dadosGerente.senha());
-        userRepository.save(new User(null,dadosGerente.email(),senha,"ROLE_USER_GERENTE"));
         gerenteRepository.save(new GerenteTemporario(dadosGerente));
         return ResponseEntity.ok().build();
     }
