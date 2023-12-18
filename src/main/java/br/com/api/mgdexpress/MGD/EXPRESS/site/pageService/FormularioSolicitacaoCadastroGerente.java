@@ -79,7 +79,7 @@ public class FormularioSolicitacaoCadastroGerente {
                                var formulario = document.getElementById('registroForm');
                                var formData = new FormData(formulario);
                        
-                               fetch('https://mgdexpressapi-production.up.railway.app/gerente/temporario', {
+                               fetch('https://mgdexpressapi-production.up.railway.app/gerente-temporario', {
                                    method: 'POST',
                                    body: formData,
                                    headers: {
