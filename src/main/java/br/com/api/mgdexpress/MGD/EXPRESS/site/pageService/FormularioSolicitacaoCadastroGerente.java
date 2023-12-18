@@ -94,7 +94,6 @@ public class FormularioSolicitacaoCadastroGerente {
                                })
                                .then(data => {
                                    // Manipular a resposta aqui, se necessário
-                                   console.log(data);
                                    window.location.href = 'https://mgdexpressapi-production.up.railway.app/site/gerente/cadastro/pendente'
                                })
                                .catch(error => {
