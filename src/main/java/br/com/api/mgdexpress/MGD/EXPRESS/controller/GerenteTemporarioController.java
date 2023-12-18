@@ -30,7 +30,7 @@ public class GerenteTemporarioController {
         var user = userRepository.findByUsername(dadosGerente.email());
 
         if(user != null){
-            ResponseEntity.status(422).body("usuario ja cadastrado");
+            ResponseEntity.badRequest().body("usuario ja cadastrado");
         }
 
         var bcrypt = new BCryptPasswordEncoder();
