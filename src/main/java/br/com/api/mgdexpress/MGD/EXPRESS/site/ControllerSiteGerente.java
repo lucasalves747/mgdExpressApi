@@ -36,8 +36,8 @@ public class ControllerSiteGerente {
 
 
     @GetMapping("/cadastro/pendente")
-    public ResponseEntity<HtmlPage> pendente(){
-        return ResponseEntity.ok(new HtmlPage(CadastroGerentePendente.page()));
+    public String pendente(){
+        return CadastroGerentePendente.page();
     }
 
 
