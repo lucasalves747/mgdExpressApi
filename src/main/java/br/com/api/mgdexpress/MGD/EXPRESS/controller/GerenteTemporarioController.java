@@ -37,7 +37,7 @@ public class GerenteTemporarioController {
         var senha = bcrypt.encode(dadosGerente.senha());
         userRepository.save(new User(null,dadosGerente.email(),senha,"ROLE_USER_GERENTE"));
         gerenteRepository.save(new GerenteTemporario(dadosGerente));
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("criado");
     }
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
