@@ -98,7 +98,7 @@ public class FormularioSolicitacaoCadastroGerente {
                                    window.location.href = 'https://mgdexpressapi-production.up.railway.app/site/gerente/cadastro/pendente'
                                })
                                .catch(error => {
-                                   console.error('Erro na solicitação fetch:', error);
+                                   console.log(error);
                                });
                            }
                        </script>
