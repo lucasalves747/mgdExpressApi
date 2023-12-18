@@ -30,14 +30,14 @@ public class GerenteTemporarioController {
         var user = userRepository.findByUsername(dadosGerente.email());
 
         if(user != null){
-            return ResponseEntity.badRequest().body("usuario ja cadastrado");
+            return ResponseEntity.status(422).body("usuario ja cadastrado");
         }
 
         var bcrypt = new BCryptPasswordEncoder();
         var senha = bcrypt.encode(dadosGerente.senha());
         userRepository.save(new User(null,dadosGerente.email(),senha,"ROLE_USER_GERENTE"));
         gerenteRepository.save(new GerenteTemporario(dadosGerente));
-        return ResponseEntity.ok("criado");
+        return ResponseEntity.ok().build();
     }
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
