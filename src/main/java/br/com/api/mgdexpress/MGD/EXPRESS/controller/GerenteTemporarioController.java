@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/gerente/temporario")
+@RequestMapping("/gerente-temporario")
 public class GerenteTemporarioController {
 
     @Autowired
