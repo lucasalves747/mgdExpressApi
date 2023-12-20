@@ -113,7 +113,7 @@ public class PedidoController {
         System.out.println("Entrei no finalizar pedido");
         var pedido = pedidoRepository.getReferenceById(id);
         var motoboy = motoboyRepository.getReferenceById(pedido.getMotoboy().getId());
-        pedidoRepository.save(pedido);
+        pedidoRepository.deleteById(pedido.getId());
         historicoRepository.save(new Historico(pedido));
         motoboy.setDisponivel(true);
         return ResponseEntity.noContent().build();

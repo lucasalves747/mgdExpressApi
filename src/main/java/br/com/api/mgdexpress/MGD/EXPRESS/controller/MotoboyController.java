@@ -38,16 +38,11 @@ public class MotoboyController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
-    @GetMapping("/EmEntregas")
+    @GetMapping("/EmEntregas&Disponivel")
     public ResponseEntity ListarMotoboysEmEntregas(@PageableDefault(size = 10) Pageable page){
-        return ResponseEntity.ok(motoboyRepository.findAllAtivosEmEntrega(page).map(DadosMotoboyList::new));
+        return ResponseEntity.ok(motoboyRepository.findAllAtivos().stream().map(DadosMotoboyList::new));
     }
 
-    @PreAuthorize("hasRole('ROLE_USER_MASTER')")
-    @GetMapping("/disponiveis")
-    public ResponseEntity ListarMotoboysDisponiveis(@PageableDefault(size = 10) Pageable page){
-        return ResponseEntity.ok(motoboyRepository.findAlldisponiveisAtivos(page).map(DadosMotoboyList::new));
-    }
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
     @GetMapping("/EmEntregas/gerente")
@@ -68,6 +63,7 @@ public class MotoboyController {
         var subject = tokenService.getSubject(token);
 
         var motoboy = motoboyRepository.findByEmail(subject);
+        motoboy.setAtivo(true);
         motoboy.setLocalizacao(dados.localizacao());
         motoboyRepository.save(motoboy);
         return ResponseEntity.ok().build();
