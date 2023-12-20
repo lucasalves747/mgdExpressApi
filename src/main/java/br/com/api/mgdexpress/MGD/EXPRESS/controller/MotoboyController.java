@@ -39,7 +39,7 @@ public class MotoboyController {
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
     @GetMapping("/EmEntregas&Disponivel")
-    public ResponseEntity ListarMotoboysEmEntregas(@PageableDefault(size = 10) Pageable page){
+    public ResponseEntity ListarMotoboysEmEntregas(){
         return ResponseEntity.ok(motoboyRepository.findAllAtivos().stream().map(DadosMotoboyList::new));
     }
 
