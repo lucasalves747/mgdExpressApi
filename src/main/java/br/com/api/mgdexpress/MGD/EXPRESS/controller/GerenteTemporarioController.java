@@ -44,4 +44,11 @@ public class GerenteTemporarioController {
         return ResponseEntity.ok(gerentesTemporarios);
     }
 
+    @PreAuthorize("hasRole('ROLE_USER_MASTER')")
+    @GetMapping("/{id}")
+    public ResponseEntity GerenteTemporarioDetalhes(@PathVariable Long id){
+        var gerenteTemporario = gerenteRepository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosGerente(gerenteTemporario));
+    }
+
 }
