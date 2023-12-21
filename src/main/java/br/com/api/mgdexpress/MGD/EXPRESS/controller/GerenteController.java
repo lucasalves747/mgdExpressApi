@@ -39,6 +39,7 @@ public class GerenteController {
         var senha = bcrypt.encode(dadosGerente.getSenha());
         userRepository.save(new User(null, dadosGerente.getEmail(), senha,"ROLE_USER_GERENTE"));
         gerenteRepository.save(new Gerente(dadosGerente));
+        gerenteTemporarioRepository.deleteById(id);
 
         try {
             emailService.enviarEmailSimples(dadosGerente.getEmail(), "Cadastro MGD EXPRESS","""
