@@ -3,6 +3,7 @@ package br.com.api.mgdexpress.MGD.EXPRESS.controller;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.historico.DadosHistoricoLista;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.historico.DadosHistorico;
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.HistoricoRepository;
+import br.com.api.mgdexpress.MGD.EXPRESS.services.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +21,9 @@ public class HistoricoController {
     @Autowired
     private HistoricoRepository historicoRepository;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PreAuthorize("hasRole('ROLE_USER_MOTOBOY') OR hasRole('ROLE_USER_MASTER')")
     @GetMapping("/motoboy/{idMotoboy}")
     public ResponseEntity buscarPeloIdMotoboy(@PageableDefault(size = 10) Pageable page,@PathVariable Long idMotoboy){
@@ -35,9 +39,14 @@ public class HistoricoController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
-    @GetMapping("/gerente/{email}")
-    public ResponseEntity buscarPeloEmailGerente(@PageableDefault(size = 10) Pageable page,@PathVariable String email){
-        var historico = historicoRepository.BuscarPorEmailGerente(email).stream().map(DadosHistoricoLista::new);
+    @GetMapping("/gerente")
+    public ResponseEntity buscarPeloEmailGerente(@PageableDefault(size = 10) Pageable page,@RequestHeader("Authorization") String header){
+        var token = header.replace("Bearer ","");
+
+        var subject = tokenService.getSubject(token);
+
+
+        var historico = historicoRepository.BuscarPorEmailGerente(subject).stream().map(DadosHistoricoLista::new);
         return ResponseEntity.ok(historico);
     }
 

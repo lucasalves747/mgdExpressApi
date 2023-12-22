@@ -114,7 +114,7 @@ public class MainHtml {
                         const cardContainer = document.getElementById('card-container');
                                
                                
-                        fetch(`${url}pedidos/pendente/`, {
+                        fetch(`https://mgdexpressapi-production.up.railway.app/pedidos/pendente`, {
                             method: 'GET',
                             headers: {
                                 'Authorization': `Bearer ${token}`,
@@ -159,7 +159,7 @@ public class MainHtml {
                                
                         carregarPagina(`${url}historico`)
                                
-                        fetch(`${url}historico/gerente`,{
+                        fetch(`https://mgdexpressapi-production.up.railway.app/historico/gerente`,{
                             method: 'GET',
                             headers: {
                                 'Authorization': `Bearer ${token}`,
