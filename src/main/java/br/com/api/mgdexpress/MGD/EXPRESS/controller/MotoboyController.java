@@ -63,7 +63,7 @@ public class MotoboyController {
         var id = tokenService.getId(token);
         var nome = tokenService.getNome(token);
 
-        if(listaLocalizacao.size() == 0){
+        if(listaLocalizacao == null){
             listaLocalizacao = new ArrayList<DadosMotoboyList>(motoboyRepository.encontrarMaiorId().intValue());
         }
 
