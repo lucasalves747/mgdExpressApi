@@ -78,22 +78,18 @@ public class MotoboyController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER_MOTOBOY')")
-    @GetMapping ("/setIndisponivel")
-    public  void setIndisponivel(@RequestHeader("Authorization") String header){
+    @GetMapping ("/setStatus")
+    public  void setStatus(@RequestHeader("Authorization") String header){
         var token = header.replace("Bearer ","");
         var id = tokenService.getId(token);
 
-        var dados = listaLocalizacao.get(id.intValue());
-        listaLocalizacao.set(id.intValue(), new DadosMotoboyList(id,dados.nome(),dados.localizacao(),false));
-    }
-
-    @PreAuthorize("hasRole('ROLE_USER_MOTOBOY')")
-    @GetMapping("/setDisponivel")
-    public  void setDisponivel(@RequestHeader("Authorization") String header){
-        var token = header.replace("Bearer ","");
-        var id = tokenService.getId(token);
 
         var dados = listaLocalizacao.get(id.intValue());
-        listaLocalizacao.set(id.intValue(), new DadosMotoboyList(id,dados.nome(),dados.localizacao(),true));
+        if(dados.disponivel()) {
+            listaLocalizacao.set(id.intValue(), new DadosMotoboyList(id, dados.nome(), dados.localizacao(), false));
+        }else{
+            listaLocalizacao.set(id.intValue(), new DadosMotoboyList(id,dados.nome(),dados.localizacao(),true));
+
+        }
     }
 }
