@@ -125,7 +125,8 @@ public class MainHtml {
                             .then(data => {
                                 console.log(data);
                                 data.forEach(cardData => {
-                               
+                                    console.log(cardData.nomePedido);
+                                    console.log(cardData);
                                     const card = document.createElement('div');
                                     card.className = 'card';
                                
