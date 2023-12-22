@@ -61,6 +61,10 @@ public class Formulario {
                                 
                                 
                 <form id="pedidoForm">
+                
+                    <label for="nomePedido">Nome Do Pedido:</label>
+                    <input type="text" id="nomePedido" name="nomePedido" required />
+                     
                                 
                     <label for="localDestino">Local de Destino:</label>
                     <input type="text" id="localDestino" name="localDestino" required />
