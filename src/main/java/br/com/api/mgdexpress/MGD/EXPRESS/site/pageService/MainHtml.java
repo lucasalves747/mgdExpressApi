@@ -109,12 +109,12 @@ public class MainHtml {
                                
                                
                     function listarPedidos() {
-                        carregarPagina(`${url}/site/gerente/meusPedidos`)
+                        carregarPagina(`${url}meusPedidos`)
                                
                         const cardContainer = document.getElementById('card-container');
                                
                                
-                        fetch(`${url}/pedidos/pendente/`, {
+                        fetch(`${url}pedidos/pendente/`, {
                             method: 'GET',
                             headers: {
                                 'Authorization': `Bearer ${token}`,
@@ -157,9 +157,9 @@ public class MainHtml {
                                
                     function listarHistorico() {
                                
-                        carregarPagina(`${url}site/gerente/historico`)
+                        carregarPagina(`${url}historico`)
                                
-                        fetch(`${url}/historico/gerente`,{
+                        fetch(`${url}historico/gerente`,{
                             method: 'GET',
                             headers: {
                                 'Authorization': `Bearer ${token}`,
