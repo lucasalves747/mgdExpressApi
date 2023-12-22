@@ -68,7 +68,7 @@ public class MotoboyController {
 
         if(Objects.isNull(listaLocalizacao)){
 
-            listaLocalizacao = new ArrayList<DadosMotoboyList>(Collections.nCopies(motoboyRepository.encontrarMaiorId().intValue(), null));
+            listaLocalizacao = new ArrayList<DadosMotoboyList>(Collections.nCopies(motoboyRepository.encontrarMaiorId().intValue()+1, null));
         }
 
 
