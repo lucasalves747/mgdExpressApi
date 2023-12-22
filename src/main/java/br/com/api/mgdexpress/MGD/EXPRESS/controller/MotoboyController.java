@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("motoboy")
@@ -64,11 +65,14 @@ public class MotoboyController {
         var nome = tokenService.getNome(token);
 
 
+        if(Objects.isNull(listaLocalizacao)){
+            listaLocalizacao = new ArrayList<DadosMotoboyList>(20);
+            System.out.println("*********************************************************"+motoboyRepository.encontrarMaiorId()+"************************************************");
+        }
 
 
         if(listaLocalizacao.isEmpty()){
 
-            listaLocalizacao = new ArrayList<DadosMotoboyList>(motoboyRepository.encontrarMaiorId().intValue()+1);
 
             motoboyRepository.findAllAtivos().forEach(motoboy -> {
                 var d = new DadosMotoboyList(motoboy);
