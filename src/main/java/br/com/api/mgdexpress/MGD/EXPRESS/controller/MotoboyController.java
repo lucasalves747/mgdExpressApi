@@ -13,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -66,12 +67,14 @@ public class MotoboyController {
 
 
         if(Objects.isNull(listaLocalizacao)){
-            listaLocalizacao = new ArrayList<DadosMotoboyList>(20);
-            System.out.println("*********************************************************"+motoboyRepository.encontrarMaiorId()+"************************************************");
+
+            listaLocalizacao = new ArrayList<DadosMotoboyList>(Collections.nCopies(motoboyRepository.encontrarMaiorId().intValue(), null));
         }
 
 
         if(listaLocalizacao.isEmpty()){
+
+            System.out.println("****************************************ENTREI************************************************");
 
 
             motoboyRepository.findAllAtivos().forEach(motoboy -> {
