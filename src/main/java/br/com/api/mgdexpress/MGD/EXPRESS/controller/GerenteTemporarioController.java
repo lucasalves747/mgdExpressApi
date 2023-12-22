@@ -50,5 +50,11 @@ public class GerenteTemporarioController {
         var gerenteTemporario = gerenteRepository.getReferenceById(id);
         return ResponseEntity.ok(new DadosGerente(gerenteTemporario));
     }
+    @PreAuthorize("hasRole('ROLE_USER_MASTER')")
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletar(@PathVariable Long id){
+        gerenteRepository.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
 
 }

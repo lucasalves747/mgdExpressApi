@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 public record DadosGerente(
+        Long id,
         @NotBlank
         String nome,
         @NotBlank
@@ -18,10 +19,10 @@ public record DadosGerente(
         @NotBlank
         String localEstabelecimento) {
     public DadosGerente(Gerente gerente) {
-        this(gerente.getNome(), gerente.getTelefone(), gerente.getEmail(), gerente.getSenha(),gerente.getNomeEstebelecimento(), gerente.getLocalEstabelecimento());
+        this(gerente.getId(),gerente.getNome(), gerente.getTelefone(), gerente.getEmail(), gerente.getSenha(),gerente.getNomeEstebelecimento(), gerente.getLocalEstabelecimento());
     }
 
     public DadosGerente(GerenteTemporario gerenteTemporario) {
-        this(gerenteTemporario.getNome(),gerenteTemporario.getTelefone(),gerenteTemporario.getEmail(),null,gerenteTemporario.getNomeEstebelecimento(),gerenteTemporario.getLocalEstabelecimento());
+        this(gerenteTemporario.getId(),gerenteTemporario.getNome(),gerenteTemporario.getTelefone(),gerenteTemporario.getEmail(),null,gerenteTemporario.getNomeEstebelecimento(),gerenteTemporario.getLocalEstabelecimento());
     }
 }
