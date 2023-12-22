@@ -27,7 +27,7 @@ public class MotoboyController {
     @Autowired
     private MotoboyRepository motoboyRepository;
 
-    List<DadosMotoboyList> listaLocalizacao = new ArrayList<DadosMotoboyList>();
+    List<DadosMotoboyList> listaLocalizacao;
 
 
 
@@ -63,12 +63,18 @@ public class MotoboyController {
         var id = tokenService.getId(token);
         var nome = tokenService.getNome(token);
 
+        if(listaLocalizacao.size() == 0){
+            listaLocalizacao = new ArrayList<DadosMotoboyList>(motoboyRepository.encontrarMaiorId().intValue());
+        }
+
         if(listaLocalizacao.isEmpty()){
+
             motoboyRepository.findAllAtivos().forEach(motoboy -> {
                 var d = new DadosMotoboyList(motoboy);
                 listaLocalizacao.add(motoboy.getId().intValue(),d);
             });
             return ResponseEntity.ok().build();
+
         }
 
         var dadosMotoboyList = listaLocalizacao.get(id.intValue());
