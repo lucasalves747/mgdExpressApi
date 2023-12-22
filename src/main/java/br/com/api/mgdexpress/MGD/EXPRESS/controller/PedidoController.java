@@ -116,6 +116,7 @@ public class PedidoController {
         pedidoRepository.deleteById(pedido.getId());
         historicoRepository.save(new Historico(pedido));
         motoboy.setDisponivel(true);
+
         return ResponseEntity.noContent().build();
     }
 

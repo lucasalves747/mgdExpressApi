@@ -56,8 +56,8 @@ public class MotoboyController {
 
 
     @PreAuthorize("hasRole('ROLE_USER_MOTOBOY')")
-    @PostMapping("/localizacao/{disponivel}")
-    public ResponseEntity UpLocalizacao(@PathVariable int disponivel,@RequestBody DadosLocalizacaoMotoboy dados,@RequestHeader("Authorization") String header){
+    @PostMapping("/localizacao")
+    public ResponseEntity UpLocalizacao(@RequestBody DadosLocalizacaoMotoboy dados,@RequestHeader("Authorization") String header){
 
         var token = header.replace("Bearer ","");
         var id = tokenService.getId(token);
@@ -71,8 +71,23 @@ public class MotoboyController {
             return ResponseEntity.ok().build();
         }
 
-        listaLocalizacao.set(id.intValue(),new DadosMotoboyList(id,nome,dados.localizacao(),(disponivel==1)));
+        var dadosMotoboyList = listaLocalizacao.get(id.intValue());
+        listaLocalizacao.set(id.intValue(),new DadosMotoboyList(id,nome,dados.localizacao(),dadosMotoboyList.disponivel()));
 
         return ResponseEntity.ok().build();
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER_MOTOBOY')")
+    @PostMapping("/setIndisponivel")
+    public  void setIndisponivel(Long id){
+        var dados = listaLocalizacao.get(id.intValue());
+        listaLocalizacao.set(id.intValue(), new DadosMotoboyList(id,dados.nome(),dados.localizacao(),false));
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER_MOTOBOY')")
+    @PostMapping("/setDisponivel")
+    public  void setDisponivel(Long id){
+        var dados = listaLocalizacao.get(id.intValue());
+        listaLocalizacao.set(id.intValue(), new DadosMotoboyList(id,dados.nome(),dados.localizacao(),true));
     }
 }
