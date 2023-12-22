@@ -102,12 +102,8 @@ public class MainHtml {
                             },
                             body: JSON.stringify(Object.fromEntries(formData))
                         })
-                            .then(response => response.json())
-                            .then(data => {
-                                // Manipular a resposta aqui
-                                carregarPagina(`${url}sucesso`)
-                                
-                            })
+                            .then(response => carregarPagina(`${url}sucesso`))
+                           
                             .catch(error => console.error('Erro:', error));
                     }
                                
