@@ -1,22 +1,19 @@
 package br.com.api.mgdexpress.MGD.EXPRESS.controller;
 
 import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.DadosLocalizacaoMotoboy;
-import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.DadosMotoboyCadastro;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.DadosMotoboyList;
-import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.Motoboy;
-import br.com.api.mgdexpress.MGD.EXPRESS.model.users.User;
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.MotoboyRepository;
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.UserRepository;
 import br.com.api.mgdexpress.MGD.EXPRESS.services.TokenService;
-import io.swagger.v3.oas.models.headers.Header;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("motoboy")
@@ -30,6 +27,9 @@ public class MotoboyController {
     @Autowired
     private MotoboyRepository motoboyRepository;
 
+    List<DadosMotoboyList> listaLocalizacao = new ArrayList<DadosMotoboyList>();
+
+
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
     @GetMapping
@@ -39,8 +39,8 @@ public class MotoboyController {
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
     @GetMapping("/EmEntregas&Disponivel")
-    public ResponseEntity ListarMotoboysEmEntregas(){
-        return ResponseEntity.ok(motoboyRepository.findAllAtivos().stream().map(DadosMotoboyList::new));
+    public ResponseEntity ListarMotoboysLocalizacao(){
+        return ResponseEntity.ok(listaLocalizacao);
     }
 
 
@@ -56,16 +56,23 @@ public class MotoboyController {
 
 
     @PreAuthorize("hasRole('ROLE_USER_MOTOBOY')")
-    @PostMapping("/localizacao")
-    public ResponseEntity UpLocalizacao(@RequestBody DadosLocalizacaoMotoboy dados,@RequestHeader("Authorization") String header){
+    @PostMapping("/localizacao/{disponivel}")
+    public ResponseEntity UpLocalizacao(@PathVariable int disponivel,@RequestBody DadosLocalizacaoMotoboy dados,@RequestHeader("Authorization") String header){
 
         var token = header.replace("Bearer ","");
-        var subject = tokenService.getSubject(token);
+        var id = tokenService.getId(token);
+        var nome = tokenService.getNome(token);
 
-        var motoboy = motoboyRepository.findByEmail(subject);
-        motoboy.setAtivo(true);
-        motoboy.setLocalizacao(dados.localizacao());
-        motoboyRepository.save(motoboy);
+        if(listaLocalizacao.isEmpty()){
+            motoboyRepository.findAllAtivos().forEach(motoboy -> {
+                var d = new DadosMotoboyList(motoboy);
+                listaLocalizacao.add(motoboy.getId().intValue(),d);
+            });
+            return ResponseEntity.ok().build();
+        }
+
+        listaLocalizacao.set(id.intValue(),new DadosMotoboyList(id,nome,dados.localizacao(),(disponivel==1)));
+
         return ResponseEntity.ok().build();
     }
 }

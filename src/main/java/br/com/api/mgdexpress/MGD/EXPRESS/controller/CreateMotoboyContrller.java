@@ -35,8 +35,9 @@ public class CreateMotoboyContrller {
         var bcrypt = new BCryptPasswordEncoder();
 
         var senha = bcrypt.encode(dadosMotoboy.senha());
-        useRepository.save(new User(null, dadosMotoboy.email(), senha,"ROLE_USER_MOTOBOY"));
-        motoboyRepository.save(new Motoboy(dadosMotoboy));
+        var motoboy = motoboyRepository.save(new Motoboy(dadosMotoboy));
+        useRepository.save(new User(null,motoboy.getId(), dadosMotoboy.nome(), dadosMotoboy.email(), senha,"ROLE_USER_MOTOBOY"));
+
         return ResponseEntity.ok().build();
     }
 }

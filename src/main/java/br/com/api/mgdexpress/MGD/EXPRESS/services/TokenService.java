@@ -11,7 +11,10 @@ public class TokenService {
         return JWT.create()
                 .withIssuer("motoboy")
                 .withSubject(user.getUsername())
-                .withClaim("id",user.getId()).sign(Algorithm.HMAC256("serceta"));
+                .withClaim("id",user.getId())
+                .withClaim("nome",user.getNome())
+                .withClaim("id_user",user.getId_user())
+                .sign(Algorithm.HMAC256("serceta"));
     }
 
     public String getSubject(String token) {
@@ -20,5 +23,21 @@ public class TokenService {
                 .withIssuer("motoboy")
                 .build()
                 .verify(token).getSubject();
+    }
+
+    public Long getId(String token) {
+
+        return JWT.require(Algorithm.HMAC256("serceta"))
+                .withIssuer("motoboy")
+                .build()
+                .verify(token).getClaim("id_user").asLong();
+    }
+
+    public String getNome(String token) {
+
+        return JWT.require(Algorithm.HMAC256("serceta"))
+                .withIssuer("motoboy")
+                .build()
+                .verify(token).getClaim("nome").asString();
     }
 }

@@ -37,8 +37,9 @@ public class GerenteController {
 
         var bcrypt = new BCryptPasswordEncoder();
         var senha = bcrypt.encode(dadosGerente.getSenha());
-        userRepository.save(new User(null, dadosGerente.getEmail(), senha,"ROLE_USER_GERENTE"));
-        gerenteRepository.save(new Gerente(dadosGerente));
+        var gerente = gerenteRepository.save(new Gerente(dadosGerente));
+        userRepository.save(new User(null,gerente.getId(), dadosGerente.getNome(), dadosGerente.getEmail(), senha,"ROLE_USER_GERENTE"));
+
         gerenteTemporarioRepository.deleteById(id);
 
         try {
