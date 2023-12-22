@@ -52,21 +52,34 @@ public class PedidoController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER_MOTOBOY')")
-    @PutMapping
+    @GetMapping("MudarEstadoPedido/{idPedido}")
     @Transactional
-    public ResponseEntity MudarStadoDoPedidoParaAndamento(@Valid @RequestBody DadosIdPedidoIdMotoboy dadosId){
-        var pedido = pedidoRepository.getReferenceById(dadosId.idPedido());
-        var motoboy = motoboyRepository.getReferenceById(dadosId.idMotoboy());
+    public ResponseEntity MudarStadoDoPedido(@PathVariable Long idPedido,@RequestHeader("Authorization") String header){
+        var token = header.replace("Bearer ","");
+        var id = tokenService.getId(token);
+
+        var pedido = pedidoRepository.getReferenceById(idPedido);
+        var motoboy = motoboyRepository.getReferenceById(id);
         var regras = new RegrasService();
-        regras.verificarSeMotoboyDisponivel(motoboy);
-        pedido.setStatus(Status.ANDAMENTO);
-        pedido.setMotoboy(motoboy);
-        motoboy.setDisponivel(false);
 
-        pedidoRepository.save(pedido);
-        motoboyRepository.save(motoboy);
+        if(pedido.getStatus() == Status.INICIAR) {
+            regras.verificarSeMotoboyDisponivel(motoboy);
+            pedido.setStatus(Status.ANDAMENTO);
+            pedido.setMotoboy(motoboy);
+            motoboy.setDisponivel(false);
+            pedidoRepository.save(pedido);
+            motoboyRepository.save(motoboy);
 
-        return ResponseEntity.ok().build();
+            return ResponseEntity.ok().build();
+        }
+        else{
+
+            historicoRepository.save(new Historico(pedido));
+            pedidoRepository.deleteById(pedido.getId());
+            motoboy.setDisponivel(true);
+            return ResponseEntity.noContent().build();
+        }
+
     }
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
@@ -106,21 +119,4 @@ public class PedidoController {
             return ResponseEntity.ok(new DadosPedidoCompletoSemMotoboy(pedido));
         }else return ResponseEntity.notFound().build();
     }
-
-    @DeleteMapping("/{id}")
-    @Transactional
-    public ResponseEntity finalizarpedido(@PathVariable Long id){
-        System.out.println("Entrei no finalizar pedido");
-        var pedido = pedidoRepository.getReferenceById(id);
-        var motoboy = motoboyRepository.getReferenceById(pedido.getMotoboy().getId());
-        pedidoRepository.deleteById(pedido.getId());
-        historicoRepository.save(new Historico(pedido));
-        motoboy.setDisponivel(true);
-
-        return ResponseEntity.noContent().build();
-    }
-
-
-
-
 }
