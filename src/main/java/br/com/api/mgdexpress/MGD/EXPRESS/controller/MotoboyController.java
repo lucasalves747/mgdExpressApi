@@ -69,20 +69,11 @@ public class MotoboyController {
         if(Objects.isNull(listaLocalizacao)){
 
             listaLocalizacao = new ArrayList<DadosMotoboyList>(Collections.nCopies(motoboyRepository.encontrarMaiorId().intValue()+1, null));
-        }
-
-
-        if(listaLocalizacao.isEmpty()){
-
-            System.out.println("****************************************ENTREI************************************************");
-
-
             motoboyRepository.findAllAtivos().forEach(motoboy -> {
                 var d = new DadosMotoboyList(motoboy);
-                listaLocalizacao.add(motoboy.getId().intValue(),d);
+                listaLocalizacao.set(motoboy.getId().intValue(),d);
             });
             return ResponseEntity.ok().build();
-
         }
 
         var dadosMotoboyList = listaLocalizacao.get(id.intValue());
