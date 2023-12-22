@@ -22,6 +22,6 @@ public interface MotoboyRepository extends JpaRepository<Motoboy,Long> {
 
     Motoboy findByEmail(String username);
 
-    @Query("SELECT MAX(e.id) FROM SuaEntidade e")
+    @Query("SELECT MAX(e.id) FROM Motoboy e")
     Long encontrarMaiorId();
 }
