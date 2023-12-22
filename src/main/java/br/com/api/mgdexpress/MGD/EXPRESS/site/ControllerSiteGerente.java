@@ -54,13 +54,13 @@ public class ControllerSiteGerente {
         return ResponseEntity.ok(new HtmlPage(Formulario.formulario()));
     }
     @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
-    @GetMapping("/meusPedidos/")
+    @GetMapping("/meusPedidos")
     public ResponseEntity<HtmlPage> listarMeusPedidos(){
         return  ResponseEntity.ok(new HtmlPage(ListarMeusPedidos.listar()));
     }
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
-    @GetMapping("/historico/")
+    @GetMapping("/historico")
     public ResponseEntity<HtmlPage> listaHistoricos(@RequestHeader("Authorization") String header){
         var token = header.replace("Bearer ","");
         var subject = tokenService.getSubject(token);
