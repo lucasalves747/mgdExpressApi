@@ -43,7 +43,7 @@ public class MotoboyController {
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
     @GetMapping("/EmEntregas&Disponivel")
-    public ResponseEntity<Stream<DadosCadastroListaSemColcheteNoJsom>> ListarMotoboysLocalizacao(){
+    public ResponseEntity ListarMotoboysLocalizacao(){
         return ResponseEntity.ok(listaLocalizacao.stream().map(DadosCadastroListaSemColcheteNoJsom::new));
     }
 
