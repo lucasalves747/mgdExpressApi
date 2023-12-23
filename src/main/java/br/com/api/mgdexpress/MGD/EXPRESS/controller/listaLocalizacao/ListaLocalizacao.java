@@ -31,7 +31,7 @@ public class ListaLocalizacao {
 
     @Getter
     private List<DadosMotoboyList> listaLocalizacao;
-    int i = 0;
+
     @PostConstruct
     private void initialize() {
         System.out.println("Entrou no init com null");
@@ -48,6 +48,8 @@ public class ListaLocalizacao {
         var dadosMotoboyList = listaLocalizacao.get(id.intValue());
         listaLocalizacao.set(id.intValue(), new DadosMotoboyList(id, nome, lista.localizacao(), dadosMotoboyList.disponivel()));
 
+        System.out.println(listaLocalizacao.get(id.intValue()).localizacao().getLatitude());
+        System.out.println(listaLocalizacao.get(id.intValue()).localizacao().getLongitude());
         listaLocalizacao.forEach(System.out::println);
     }
 
