@@ -34,7 +34,6 @@ public class ListaLocalizacao {
 
     @PostConstruct
     private void initialize() {
-        System.out.println("Entrou no init com null");
         listaLocalizacao = new ArrayList<>(Collections.nCopies(motoboyRepository.encontrarMaiorId().intValue() + 1, null));
         motoboyRepository.findAllAtivos().forEach(motoboy -> listaLocalizacao.set(motoboy.getId().intValue(),new DadosMotoboyList(motoboy)));
     }
@@ -50,7 +49,6 @@ public class ListaLocalizacao {
 
         System.out.println(listaLocalizacao.get(id.intValue()).localizacao().getLatitude());
         System.out.println(listaLocalizacao.get(id.intValue()).localizacao().getLongitude());
-        listaLocalizacao.forEach(System.out::println);
     }
 
     public void setStatus(Long id) {
