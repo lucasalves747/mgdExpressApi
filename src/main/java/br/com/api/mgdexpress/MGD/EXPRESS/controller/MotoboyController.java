@@ -51,7 +51,8 @@ public class MotoboyController {
                 lista.add(new DadosCadastroListaSemColcheteNoJsom(item));
             }
         });
-        lista.forEach(System.out::println);
+        lista.forEach(item-> System.out.println(item.localizacao().getLongitude()));
+        lista.forEach(item-> System.out.println(item.localizacao().getLatitude()));
         return ResponseEntity.ok(lista);
     }
 
