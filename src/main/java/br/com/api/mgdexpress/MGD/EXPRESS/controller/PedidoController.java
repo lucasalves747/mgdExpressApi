@@ -56,7 +56,7 @@ public class PedidoController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER_MOTOBOY')")
-    @GetMapping("MudarEstadoPedido/{idPedido}")
+    @GetMapping("/mudarEstadopedido/{idPedido}")
     @Transactional
     public ResponseEntity MudarStadoDoPedido(@PathVariable Long idPedido,@RequestHeader("Authorization") String header){
         var token = header.replace("Bearer ","");
