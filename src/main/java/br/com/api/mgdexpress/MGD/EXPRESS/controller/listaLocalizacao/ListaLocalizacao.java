@@ -31,7 +31,7 @@ public class ListaLocalizacao {
 
     @Getter
     private List<DadosMotoboyList> listaLocalizacao;
-
+    int i = 0;
     @PostConstruct
     private void initialize() {
         System.out.println("Entrou no init com null");
@@ -41,8 +41,8 @@ public class ListaLocalizacao {
 
     public void setListaLocalizacao(DadosLocalizacaoMotoboy lista, Long id, String nome) {
         System.out.println("Up interno");
-        if (Objects.isNull(listaLocalizacao)) {
-            initialize(); // Chame o método de inicialização se a lista for nula
+        if (listaLocalizacao.isEmpty()) {
+            initialize();
         }
 
         var dadosMotoboyList = listaLocalizacao.get(id.intValue());
