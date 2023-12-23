@@ -51,6 +51,7 @@ public class MotoboyController {
                 lista.add(new DadosCadastroListaSemColcheteNoJsom(item));
             }
         });
+        lista.forEach(System.out::println);
         return ResponseEntity.ok(lista);
     }
 
