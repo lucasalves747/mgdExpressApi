@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Component
-@Scope("application")
+
 public class ListaLocalizacao {
 
     @Autowired
