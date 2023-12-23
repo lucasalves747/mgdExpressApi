@@ -47,6 +47,8 @@ public class ListaLocalizacao {
 
         var dadosMotoboyList = listaLocalizacao.get(id.intValue());
         listaLocalizacao.set(id.intValue(), new DadosMotoboyList(id, nome, lista.localizacao(), dadosMotoboyList.disponivel()));
+
+        listaLocalizacao.forEach(System.out::println);
     }
 
     public void setStatus(Long id) {
