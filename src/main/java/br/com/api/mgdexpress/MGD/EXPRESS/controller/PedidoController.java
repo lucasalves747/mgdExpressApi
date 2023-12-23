@@ -1,5 +1,6 @@
 package br.com.api.mgdexpress.MGD.EXPRESS.controller;
 
+import br.com.api.mgdexpress.MGD.EXPRESS.controller.listaLocalizacao.ListaLocalizacao;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.historico.Historico;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.pedido.*;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.records.DadosIdPedidoIdMotoboy;
@@ -36,6 +37,9 @@ public class PedidoController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ListaLocalizacao listaLocalizacao;
+
     @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
     @PostMapping
     @Transactional
@@ -69,11 +73,12 @@ public class PedidoController {
             motoboy.setDisponivel(false);
             pedidoRepository.save(pedido);
             motoboyRepository.save(motoboy);
+            listaLocalizacao.setStatus(id);
 
             return ResponseEntity.ok().build();
         }
         else{
-
+            listaLocalizacao.setStatus(id);
             historicoRepository.save(new Historico(pedido));
             pedidoRepository.deleteById(pedido.getId());
             motoboy.setDisponivel(true);

@@ -1,5 +1,6 @@
 package br.com.api.mgdexpress.MGD.EXPRESS.controller;
 
+import br.com.api.mgdexpress.MGD.EXPRESS.controller.listaLocalizacao.ListaLocalizacao;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.DadosCadastroListaSemColcheteNoJsom;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.DadosLocalizacaoMotoboy;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.DadosMotoboyList;
@@ -31,9 +32,8 @@ public class MotoboyController {
     @Autowired
     private MotoboyRepository motoboyRepository;
 
-    List<DadosMotoboyList> listaLocalizacao;
-
-
+    @Autowired
+    private ListaLocalizacao listaLocalizacao;
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
     @GetMapping
@@ -45,7 +45,7 @@ public class MotoboyController {
     @GetMapping("/EmEntregas&Disponivel")
     public ResponseEntity ListarMotoboysLocalizacao(){
         System.out.println("entrou no listar Motoboy localizacao");
-        return ResponseEntity.ok(listaLocalizacao.stream().map(DadosCadastroListaSemColcheteNoJsom::new));
+        return ResponseEntity.ok(listaLocalizacao.getListaLocalizacao().stream().map(DadosCadastroListaSemColcheteNoJsom::new));
     }
 
 
@@ -68,39 +68,10 @@ public class MotoboyController {
         var id = tokenService.getId(token);
         var nome = tokenService.getNome(token);
 
-        System.out.println("entrou no Up localizacao");
-
-        if(Objects.isNull(listaLocalizacao)){
-            System.out.println("entrou no if do nulo");
-            listaLocalizacao = new ArrayList<DadosMotoboyList>(Collections.nCopies(motoboyRepository.encontrarMaiorId().intValue()+1, null));
-            motoboyRepository.findAllAtivos().forEach(motoboy -> {
-                var d = new DadosMotoboyList(motoboy);
-                listaLocalizacao.set(motoboy.getId().intValue(),d);
-            });
-            return ResponseEntity.ok().build();
-        }
-
-        System.out.println("nao entrou no if");
-
-        var dadosMotoboyList = listaLocalizacao.get(id.intValue());
-        listaLocalizacao.set(id.intValue(),new DadosMotoboyList(id,nome,dados.localizacao(),dadosMotoboyList.disponivel()));
-
+        listaLocalizacao.setListaLocalizacao(dados,id,nome);
         return ResponseEntity.ok().build();
     }
 
-    @PreAuthorize("hasRole('ROLE_USER_MOTOBOY')")
-    @GetMapping ("/setStatus")
-    public  void setStatus(@RequestHeader("Authorization") String header){
-        var token = header.replace("Bearer ","");
-        var id = tokenService.getId(token);
 
 
-        var dados = listaLocalizacao.get(id.intValue());
-        if(dados.disponivel()) {
-            listaLocalizacao.set(id.intValue(), new DadosMotoboyList(id, dados.nome(), dados.localizacao(), false));
-        }else{
-            listaLocalizacao.set(id.intValue(), new DadosMotoboyList(id,dados.nome(),dados.localizacao(),true));
-
-        }
-    }
 }
