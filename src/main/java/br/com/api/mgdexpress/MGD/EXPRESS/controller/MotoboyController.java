@@ -1,5 +1,6 @@
 package br.com.api.mgdexpress.MGD.EXPRESS.controller;
 
+import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.DadosCadastroListaSemColcheteNoJsom;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.DadosLocalizacaoMotoboy;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.DadosMotoboyList;
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.MotoboyRepository;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("motoboy")
@@ -41,8 +43,8 @@ public class MotoboyController {
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
     @GetMapping("/EmEntregas&Disponivel")
-    public ResponseEntity<List<DadosMotoboyList>> ListarMotoboysLocalizacao(){
-        return ResponseEntity.ok(listaLocalizacao);
+    public ResponseEntity<Stream<DadosCadastroListaSemColcheteNoJsom>> ListarMotoboysLocalizacao(){
+        return ResponseEntity.ok(listaLocalizacao.stream().map(DadosCadastroListaSemColcheteNoJsom::new));
     }
 
 
