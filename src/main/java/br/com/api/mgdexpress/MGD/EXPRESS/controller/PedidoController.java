@@ -59,6 +59,9 @@ public class PedidoController {
     @GetMapping("/mudarEstadopedido/{idPedido}")
     @Transactional
     public ResponseEntity MudarStadoDoPedido(@PathVariable Long idPedido,@RequestHeader("Authorization") String header){
+
+        System.out.println("Entrei no mudar estado do pedido");
+
         var token = header.replace("Bearer ","");
         var id = tokenService.getId(token);
 
@@ -75,6 +78,10 @@ public class PedidoController {
             motoboyRepository.save(motoboy);
             listaLocalizacao.setStatus(id);
 
+            pedidoRepository.save(pedido);
+            motoboyRepository.save(motoboy);
+            System.out.println("Entrei no mudar estado do pedido Em Andamento");
+
             return ResponseEntity.ok().build();
         }
         else{
@@ -82,6 +89,8 @@ public class PedidoController {
             historicoRepository.save(new Historico(pedido));
             pedidoRepository.deleteById(pedido.getId());
             motoboy.setDisponivel(true);
+            System.out.println("Entrei no mudar estado do pedido Finalizado");
+
             return ResponseEntity.noContent().build();
         }
 
