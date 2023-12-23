@@ -41,7 +41,7 @@ public class ListaLocalizacao {
 
     public void setListaLocalizacao(DadosLocalizacaoMotoboy lista, Long id, String nome) {
         System.out.println("Up interno");
-        if (listaLocalizacao.isEmpty()) {
+        if (Objects.isNull(listaLocalizacao)) {
             initialize();
         }
 
