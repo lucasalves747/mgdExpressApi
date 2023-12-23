@@ -44,8 +44,14 @@ public class MotoboyController {
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
     @GetMapping("/EmEntregas&Disponivel")
     public ResponseEntity ListarMotoboysLocalizacao(){
+        List<DadosCadastroListaSemColcheteNoJsom> lista = new ArrayList<>();
         System.out.println("entrou no listar Motoboy localizacao");
-        return ResponseEntity.ok(listaLocalizacao.getListaLocalizacao().stream().map(DadosCadastroListaSemColcheteNoJsom::new));
+        listaLocalizacao.getListaLocalizacao().forEach(item ->{
+            if(!Objects.isNull(item)){
+                lista.add(new DadosCadastroListaSemColcheteNoJsom(item));
+            }
+        });
+        return ResponseEntity.ok(lista);
     }
 
 
