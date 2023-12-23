@@ -80,6 +80,8 @@ public class MotoboyController {
             return ResponseEntity.ok().build();
         }
 
+        System.out.println("nao entrou no if");
+
         var dadosMotoboyList = listaLocalizacao.get(id.intValue());
         listaLocalizacao.set(id.intValue(),new DadosMotoboyList(id,nome,dados.localizacao(),dadosMotoboyList.disponivel()));
 
