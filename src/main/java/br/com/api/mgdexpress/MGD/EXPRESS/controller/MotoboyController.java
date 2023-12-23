@@ -44,6 +44,7 @@ public class MotoboyController {
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
     @GetMapping("/EmEntregas&Disponivel")
     public ResponseEntity ListarMotoboysLocalizacao(){
+        System.out.println("entrou no listar Motoboy localizacao");
         return ResponseEntity.ok(listaLocalizacao.stream().map(DadosCadastroListaSemColcheteNoJsom::new));
     }
 
@@ -67,6 +68,7 @@ public class MotoboyController {
         var id = tokenService.getId(token);
         var nome = tokenService.getNome(token);
 
+        System.out.println("entrou no Up localizacao");
 
         if(Objects.isNull(listaLocalizacao)){
             System.out.println("entrou no if do nulo");
