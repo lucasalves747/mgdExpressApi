@@ -14,6 +14,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Stream;
+
 @RestController
 @RequestMapping("/gerente-temporario")
 public class GerenteTemporarioController {
@@ -39,7 +42,7 @@ public class GerenteTemporarioController {
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
     @GetMapping
-    public ResponseEntity buscarGerentesTemporarios(){
+    public ResponseEntity<Stream<DadosGerenteTemporarioList>> buscarGerentesTemporarios(){
         var gerentesTemporarios = gerenteRepository.findAll().stream().map(DadosGerenteTemporarioList::new);
         return ResponseEntity.ok(gerentesTemporarios);
     }
