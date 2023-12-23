@@ -69,7 +69,7 @@ public class MotoboyController {
 
 
         if(Objects.isNull(listaLocalizacao)){
-
+            System.out.println("entrou no if do nulo");
             listaLocalizacao = new ArrayList<DadosMotoboyList>(Collections.nCopies(motoboyRepository.encontrarMaiorId().intValue()+1, null));
             motoboyRepository.findAllAtivos().forEach(motoboy -> {
                 var d = new DadosMotoboyList(motoboy);
