@@ -36,12 +36,11 @@ public class ListaLocalizacao {
     private void initialize() {
         System.out.println("Entrou no init com null");
         listaLocalizacao = new ArrayList<>(Collections.nCopies(motoboyRepository.encontrarMaiorId().intValue() + 1, null));
-        motoboyRepository.findAllAtivos().forEach(motoboy -> {
-            listaLocalizacao.set(motoboy.getId().intValue(),new DadosMotoboyList(motoboy));
-        });
+        motoboyRepository.findAllAtivos().forEach(motoboy -> listaLocalizacao.set(motoboy.getId().intValue(),new DadosMotoboyList(motoboy)));
     }
 
     public void setListaLocalizacao(DadosLocalizacaoMotoboy lista, Long id, String nome) {
+        System.out.println("Up interno");
         if (Objects.isNull(listaLocalizacao)) {
             initialize(); // Chame o método de inicialização se a lista for nula
         }

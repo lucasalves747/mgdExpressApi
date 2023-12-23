@@ -67,6 +67,7 @@ public class MotoboyController {
         var token = header.replace("Bearer ","");
         var id = tokenService.getId(token);
         var nome = tokenService.getNome(token);
+        System.out.println("Up");
 
         listaLocalizacao.setListaLocalizacao(dados,id,nome);
         return ResponseEntity.ok().build();
