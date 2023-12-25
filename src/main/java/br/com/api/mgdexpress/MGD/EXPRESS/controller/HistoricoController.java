@@ -1,9 +1,6 @@
 package br.com.api.mgdexpress.MGD.EXPRESS.controller;
 
-import br.com.api.mgdexpress.MGD.EXPRESS.model.historico.DadosHistoricoListMotoboy;
-import br.com.api.mgdexpress.MGD.EXPRESS.model.historico.DadosHistoricoLista;
-import br.com.api.mgdexpress.MGD.EXPRESS.model.historico.DadosHistorico;
-import br.com.api.mgdexpress.MGD.EXPRESS.model.historico.ListaDeMesHistorico;
+import br.com.api.mgdexpress.MGD.EXPRESS.model.historico.*;
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.HistoricoRepository;
 import br.com.api.mgdexpress.MGD.EXPRESS.services.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/historico")
@@ -37,43 +37,40 @@ public class HistoricoController {
 
     @PreAuthorize("hasRole('ROLE_USER_MOTOBOY')")
     @GetMapping("/motoboy")
-    public ResponseEntity<List<ListaDeMesHistorico>> buscarPeloIdMotoboy(@RequestHeader("Authorization") String header){
-
+    public ResponseEntity<List<AnoComMesesHistorico>> buscarPeloIdMotoboy(@RequestHeader("Authorization") String header) {
         var token = header.replace("Bearer ","");
         var id = tokenService.getId(token);
 
+        // Busca os históricos do motoboy
+        List<DadosHistoricoListMotoboy> historicos = historicoRepository.BuscarMotoboy(id)
+                .stream()
+                .map(DadosHistoricoListMotoboy::new)
+                .collect(Collectors.toList());
 
-        List<DadosHistoricoListMotoboy> historicos = new ArrayList<>();
+        // Agrupa os históricos por ano e mês
+        Map<Integer, Map<Month, List<DadosHistoricoListMotoboy>>> historicosAgrupadosPorAnoEMes = historicos.stream()
+                .collect(Collectors.groupingBy(
+                        historico -> historico.dataEntrega().getYear(),
+                        Collectors.groupingBy(historico -> historico.dataEntrega().getMonth())
+                ));
 
-        historicoRepository.BuscarMotoboy(id).forEach(item->{
-            historicos.add(new DadosHistoricoListMotoboy(item));
-        });
+        // Converte o mapa em uma lista de AnoComMesesHistorico
+        List<AnoComMesesHistorico> anosComMesesHistoricos = historicosAgrupadosPorAnoEMes.entrySet().stream()
+                .map(entryAno -> {
+                    List<MesComHistorico> mesesComHistoricos = entryAno.getValue().entrySet().stream()
+                            .map(entryMes -> new MesComHistorico(entryMes.getKey(),
+                                    entryMes.getValue().stream().mapToDouble(h -> h.valor().doubleValue()).sum(),
+                                    entryMes.getValue()))
+                            .sorted(Comparator.comparing(MesComHistorico::mes))
+                            .collect(Collectors.toList());
 
-        ultimoMes = historicos.get(0).dataEntrega().getMonth();
+                    return new AnoComMesesHistorico(entryAno.getKey(), mesesComHistoricos);
+                })
+                .sorted(Comparator.comparing(AnoComMesesHistorico::ano))
+                .collect(Collectors.toList());
 
-        historicos.forEach(historico ->{
-
-            if(historico.dataEntrega().getMonth() != ultimoMes){
-                listaDeMesHistoricos.add( new ListaDeMesHistorico(ultimoMes,totalRecebido,listaMotoboys));
-                ultimoMes =  historico.dataEntrega().getMonth();
-
-                listaMotoboys.clear();
-                totalRecebido = 0.0f;
-
-                totalRecebido += historico.valor().floatValue();
-                listaMotoboys.add(historico);
-            }else{
-                totalRecebido += historico.valor().floatValue();
-                listaMotoboys.add(historico);
-            }
-        });
-        listaDeMesHistoricos.forEach(item->{
-            System.out.println("item:"+item);
-        });
-        return ResponseEntity.ok(listaDeMesHistoricos);
+        return ResponseEntity.ok(anosComMesesHistoricos);
     }
-
-
 
 
     @GetMapping("/pedido/{idpedido}")
