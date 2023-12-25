@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface HistoricoRepository extends JpaRepository<Historico,Long> {
-    @Query("select h from Historico h where h.motoboy.id = :idMotoboy")
-    Page<Historico> BuscarPorIdMotoboy(Pageable page,Long idMotoboy);
+    @Query("select h from Historico h where h.motoboy.id = :idMotoboy and ORDER BY h.dataEntrega")
+    List<Historico> BuscarMotoboy(Long id);
 
     @Query("select h from Historico h where h.pedidoId = :idpedido ")
     Historico BuscarProIdPedido(Long idpedido);

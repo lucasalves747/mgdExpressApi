@@ -1,7 +1,9 @@
 package br.com.api.mgdexpress.MGD.EXPRESS.controller;
 
+import br.com.api.mgdexpress.MGD.EXPRESS.model.historico.DadosHistoricoListMotoboy;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.historico.DadosHistoricoLista;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.historico.DadosHistorico;
+import br.com.api.mgdexpress.MGD.EXPRESS.model.historico.ListaDeMesHistorico;
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.HistoricoRepository;
 import br.com.api.mgdexpress.MGD.EXPRESS.services.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +14,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.stream.Stream;
+import java.math.BigDecimal;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 @RestController
 @RequestMapping("/historico")
 public class HistoricoController {
+
+    List<ListaDeMesHistorico> listaDeMesHistoricos = new ArrayList<>();
+    List<DadosHistoricoListMotoboy> listaMotoboys = new ArrayList<>();
+    float totalRecebido =0.0f;
+    Month ultimoMes;
 
     @Autowired
     private HistoricoRepository historicoRepository;
@@ -24,12 +35,38 @@ public class HistoricoController {
     @Autowired
     private TokenService tokenService;
 
-    @PreAuthorize("hasRole('ROLE_USER_MOTOBOY') OR hasRole('ROLE_USER_MASTER')")
-    @GetMapping("/motoboy/{idMotoboy}")
-    public ResponseEntity buscarPeloIdMotoboy(@PageableDefault(size = 10) Pageable page,@PathVariable Long idMotoboy){
-        var historicos = historicoRepository.BuscarPorIdMotoboy(page,idMotoboy).map(DadosHistoricoLista::new);
-        return ResponseEntity.ok(historicos);
+    @PreAuthorize("hasRole('ROLE_USER_MOTOBOY')")
+    @GetMapping("/motoboy")
+    public ResponseEntity<List<ListaDeMesHistorico>> buscarPeloIdMotoboy(@RequestHeader("Authorization") String header){
+
+        var token = header.replace("Bearer ","");
+        var id = tokenService.getId(token);
+
+        var historicos = historicoRepository.BuscarMotoboy(id).stream().map(DadosHistoricoListMotoboy::new);
+
+        ultimoMes = historicos.findFirst().get().dataEntrega().getMonth();
+
+
+        historicos.forEach(historico ->{
+
+            if(historico.dataEntrega().getMonth() != ultimoMes){
+                listaDeMesHistoricos.add( new ListaDeMesHistorico(ultimoMes,totalRecebido,listaMotoboys));
+                ultimoMes =  historico.dataEntrega().getMonth();
+
+                listaMotoboys.clear();
+                totalRecebido = 0.0f;
+
+                totalRecebido += historico.valor().floatValue();
+                listaMotoboys.add(historico);
+            }else{
+                totalRecebido += historico.valor().floatValue();
+                listaMotoboys.add(historico);
+            }
+        });
+        return ResponseEntity.ok(listaDeMesHistoricos);
     }
+
+
 
 
     @GetMapping("/pedido/{idpedido}")
