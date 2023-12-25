@@ -67,6 +67,7 @@ public class HistoricoController {
                 listaMotoboys.add(historico);
             }
         });
+        listaDeMesHistoricos.forEach(System.out::println);
         return ResponseEntity.ok(listaDeMesHistoricos);
     }
 
