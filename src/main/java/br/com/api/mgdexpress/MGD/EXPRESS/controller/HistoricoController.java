@@ -44,8 +44,9 @@ public class HistoricoController {
 
         var historicos = historicoRepository.BuscarMotoboy(id).stream().map(DadosHistoricoListMotoboy::new);
 
-        ultimoMes = historicos.findFirst().get().dataEntrega().getMonth();
-
+        historicos.findFirst().ifPresent(firstHistorico -> {
+            ultimoMes = firstHistorico.dataEntrega().getMonth();
+        });
 
         historicos.forEach(historico ->{
 
