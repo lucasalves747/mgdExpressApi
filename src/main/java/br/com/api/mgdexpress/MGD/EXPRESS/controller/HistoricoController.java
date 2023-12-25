@@ -42,11 +42,14 @@ public class HistoricoController {
         var token = header.replace("Bearer ","");
         var id = tokenService.getId(token);
 
-        var historicos = historicoRepository.BuscarMotoboy(id).stream().map(DadosHistoricoListMotoboy::new);
 
-        historicos.findFirst().ifPresent(firstHistorico -> {
-            ultimoMes = firstHistorico.dataEntrega().getMonth();
+        List<DadosHistoricoListMotoboy> historicos = new ArrayList<>();
+
+        historicoRepository.BuscarMotoboy(id).forEach(item->{
+            historicos.add(new DadosHistoricoListMotoboy(item));
         });
+
+        ultimoMes = historicos.get(0).dataEntrega().getMonth();
 
         historicos.forEach(historico ->{
 
