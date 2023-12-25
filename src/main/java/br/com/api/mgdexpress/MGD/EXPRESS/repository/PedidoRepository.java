@@ -18,6 +18,9 @@ public interface PedidoRepository extends JpaRepository<Pedido,Long> {
     @Query("select p from Pedido p where p.status = INICIAR and p.gerente.email = :email")
     List<Pedido> findAllWhereStatusINICIARByLogin(String email);
 
+    @Query("select p from Pedido p where p.motoboy.email = :email")
+    List<Pedido> findByEmailMotoboy(String email);
+
     @Query("select p from Pedido p where p.status = ANDAMENTO and p.id not in (select h.pedidoId from Historico h)")
     Page<Pedido> findAllWhereStatusANDAMENTO(Pageable page);
     @Query("select p from Pedido p where p.id = :id and p.id not in (select h.pedidoId from Historico h)")

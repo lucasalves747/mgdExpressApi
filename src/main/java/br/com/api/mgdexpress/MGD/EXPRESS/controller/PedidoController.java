@@ -108,9 +108,16 @@ public class PedidoController {
     }
 
     @GetMapping("/pendente")
-    public ResponseEntity<List<DadosPedidoPage>> listarPedidodsByMotoboy(){
+    public ResponseEntity<List<DadosPedidoPage>> listarPedidodsByMotoboy(@RequestHeader("Authorization") String header) {
         System.out.println("Entrei no pendente");
-        return ResponseEntity.ok(pedidoRepository.findAllWhereStatusINICIAR().stream().map(DadosPedidoPage::new).toList());
+
+        var token = header.replace("Bearer ", "");
+        var subject = tokenService.getSubject(token);
+        if (motoboyRepository.findByEmail(subject).getDisponivel()) {
+            return ResponseEntity.ok(pedidoRepository.findAllWhereStatusINICIAR().stream().map(DadosPedidoPage::new).toList());
+        }
+
+        return  ResponseEntity.ok(pedidoRepository.findByEmailMotoboy(subject).stream().map(DadosPedidoPage::new).toList());
     }
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
