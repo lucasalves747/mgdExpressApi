@@ -1,6 +1,7 @@
 package br.com.api.mgdexpress.MGD.EXPRESS.controller;
 
 import br.com.api.mgdexpress.MGD.EXPRESS.model.historico.*;
+import br.com.api.mgdexpress.MGD.EXPRESS.model.historico.motoboy.DadosHistoricoMotoboy;
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.HistoricoRepository;
 import br.com.api.mgdexpress.MGD.EXPRESS.services.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,11 +76,11 @@ public class HistoricoController {
 
     @PreAuthorize("hasRole('ROLE_USER_MOTOBOY')")
     @GetMapping("/pedido/{idpedido}")
-    public ResponseEntity<DadosHistorico> buscarPeloIdPedido(@PathVariable Long idpedido,@RequestHeader("Authorization") String header){
+    public ResponseEntity<DadosHistoricoMotoboy> buscarPeloIdPedido(@PathVariable Long idpedido,@RequestHeader("Authorization") String header){
         var token = header.replace("Bearer ","");
         var id = tokenService.getId(token);
 
-        var pedido = new DadosHistorico(historicoRepository.BuscarProIdPedido(idpedido,id));
+        var pedido = new DadosHistoricoMotoboy(historicoRepository.BuscarProIdPedido(idpedido,id));
         return ResponseEntity.ok(pedido);
     }
 
