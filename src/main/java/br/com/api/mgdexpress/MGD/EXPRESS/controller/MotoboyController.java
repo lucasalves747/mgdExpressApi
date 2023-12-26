@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +35,10 @@ public class MotoboyController {
 
     @Autowired
     private ListaLocalizacao listaLocalizacao;
+
+    @Autowired
+    private SimpMessagingTemplate messagingTemplate;
+
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
     @GetMapping
@@ -78,9 +83,8 @@ public class MotoboyController {
         System.out.println("Up");
 
         listaLocalizacao.setListaLocalizacao(dados,id,nome);
+
+        messagingTemplate.convertAndSend("/topic/localizacao", listaLocalizacao);
         return ResponseEntity.ok().build();
     }
-
-
-
 }

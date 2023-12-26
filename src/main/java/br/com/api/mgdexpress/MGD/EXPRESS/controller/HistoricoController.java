@@ -76,14 +76,10 @@ public class HistoricoController {
     @PreAuthorize("hasRole('ROLE_USER_MOTOBOY')")
     @GetMapping("/pedido/{idpedido}")
     public ResponseEntity<DadosHistorico> buscarPeloIdPedido(@PathVariable Long idpedido,@RequestHeader("Authorization") String header){
-        System.out.println("entrou no historico Pedido id: "+idpedido);
         var token = header.replace("Bearer ","");
         var id = tokenService.getId(token);
 
         var pedido = new DadosHistorico(historicoRepository.BuscarProIdPedido(idpedido,id));
-        System.out.println(pedido.historico().getDataCriacao());
-        System.out.println(pedido.historico().getMotoboy().getNome());
-        System.out.println(pedido.historico().getGerente().getNome());
         return ResponseEntity.ok(pedido);
     }
 
