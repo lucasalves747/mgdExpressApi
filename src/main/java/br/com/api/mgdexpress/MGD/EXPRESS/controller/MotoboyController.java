@@ -36,8 +36,8 @@ public class MotoboyController {
     @Autowired
     private ListaLocalizacao listaLocalizacao;
 
-    @Autowired
-    private SimpMessagingTemplate messagingTemplate;
+    //@Autowired
+    //private SimpMessagingTemplate messagingTemplate;
 
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
@@ -84,7 +84,7 @@ public class MotoboyController {
 
         listaLocalizacao.setListaLocalizacao(dados,id,nome);
 
-        messagingTemplate.convertAndSend("/topic/localizacao", listaLocalizacao);
+        //messagingTemplate.convertAndSend("/topic/localizacao", listaLocalizacao);
         return ResponseEntity.ok().build();
     }
 }
