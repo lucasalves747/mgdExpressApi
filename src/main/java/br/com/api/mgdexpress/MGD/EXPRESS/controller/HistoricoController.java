@@ -81,7 +81,9 @@ public class HistoricoController {
         var id = tokenService.getId(token);
 
         var pedido = new DadosHistorico(historicoRepository.BuscarProIdPedido(idpedido,id));
-        System.out.println(pedido);
+        System.out.println(pedido.historico().getDataCriacao());
+        System.out.println(pedido.historico().getMotoboy().getNome());
+        System.out.println(pedido.historico().getGerente().getNome());
         return ResponseEntity.ok(pedido);
     }
 
