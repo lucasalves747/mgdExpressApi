@@ -92,6 +92,11 @@ public class Home {
                                 
                         // Criar o mapa
                         var map = new google.maps.Map(document.body, options);
+                        
+                        console.log(localizacoes)
+                        
+                        console.log(localizacoes.size())
+                        
                                 
                         // Iterar sobre a lista de localizações e adicionar marcadores
                         localizacoes.forEach(function (localizacao) {

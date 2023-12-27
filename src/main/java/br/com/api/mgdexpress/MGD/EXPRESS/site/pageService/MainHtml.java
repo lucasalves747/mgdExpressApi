@@ -119,8 +119,9 @@ public class MainHtml {
                                         .then(response => response.json())
                                         .then(data =>{
                                          if (data != null) {
-                                                inicializarMapa(data)
                                                 console.log("mapa vei")
+                                                inicializarMapa(data)
+                                                
                                             }
                                             else{
                                             console.log("else")
