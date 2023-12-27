@@ -71,38 +71,35 @@ public class Home {
                     </div>
                 </nav>
                                 
+                                
                 <main>
                     <div id="map"></div>
                 </main>
-                                
                 <script>
                     buscarMotoboys()
-                                
-                    setTimeout(buscarMotoboys,2000)
+                               \s
+                    setTimeout(buscarMotoboys(), 2000)
                     function inicializarMapa(localizacoes) {
                         // Coordenadas iniciais
                         var latitudeInicial = -23.550520;
                         var longitudeInicial = -46.633308;
-                                
+                               \s
                         // Opções do mapa
                         var options = {
                             center: { lat: latitudeInicial, lng: longitudeInicial },
                             zoom: 12, // Nível de zoom
                         };
-                                
+                               \s
                         // Criar o mapa
-                        var map = new google.maps.Map(document.body, options);
-                        
+                        var map = new google.maps.Map(document.getElementById('map'), options);
+                       \s
                         console.log(localizacoes)
-                        
-                        console.log(localizacoes.size())
-                        
-                                
+                               \s
                         // Iterar sobre a lista de localizações e adicionar marcadores
                         localizacoes.forEach(function (localizacao) {
                             var latitude = parseFloat(localizacao.localizacao.latitude);
                             var longitude = parseFloat(localizacao.localizacao.longitude);
-                                
+                               \s
                             // Adicionar um marcador
                             var marker = new google.maps.Marker({
                                 position: { lat: latitude, lng: longitude },
@@ -111,25 +108,25 @@ public class Home {
                             });
                         });
                     }
-                    function mapaSemMotoboy(){
-                             // Coordenadas iniciais
-                             var latitude = -23.550520;
-                            var longitude = -46.633308;
-                    
-                            // Opções do mapa
-                            var options = {
-                                center: { lat: latitude, lng: longitude },
-                                zoom: 12, // Nível de zoom
-                            };
-                    
-                            // Criar o mapa
-                            var map = new google.maps.Map(document.body, options);
-                        }
-                               
+                   \s
+                    function mapaSemMotoboy() {
+                        // Coordenadas iniciais
+                        var latitude = -23.550520;
+                        var longitude = -46.633308;
+                   \s
+                        // Opções do mapa
+                        var options = {
+                            center: { lat: latitude, lng: longitude },
+                            zoom: 12, // Nível de zoom
+                        };
+                   \s
+                        // Criar o mapa
+                        var map = new google.maps.Map(document.getElementById('map'), options);
+                    }
                 </script>
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsTWHMwA_agU_-o35U_3b606930nBrsY8&callback=initMap" async defer></script>
                                 
-                                   
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsTWHMwA_agU_-o35U_3b606930nBrsY8&callback=initMap" async defer></script>
+                        
                         """;
     }
 }
