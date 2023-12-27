@@ -181,10 +181,10 @@ public class MainHtml {
                                            cardContent.className = 'card-content';
                        
                                            const cardDetails = `
-                                   <p class="titulo"><strong>${cardData.nomePedido}</p></strong>
-                                   <p><strong>Valor:</strong> ${cardData.valor}</p>
-                                   <p><strong>Local de Destino:</strong> ${cardData.localDestino}</p>
-                                   <a onclick="carregarPagina('${url}site/gerente/detalhes/${cardData.id}"><button>Detalhes</button></a>
+                                   <p class="titulo"><strong>{cardData.nomePedido}</p></strong>
+                                   <p><strong>Valor:</strong> {cardData.valor}</p>
+                                   <p><strong>Local de Destino:</strong> {cardData.localDestino}</p>
+                                   <a onclick="carregarPagina('{url}site/gerente/detalhes/${cardData.id}"><button>Detalhes</button></a>
                                `;
                        
                                            cardContent.innerHTML = cardDetails;
