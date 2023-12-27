@@ -116,17 +116,16 @@ public class MainHtml {
                                             'Content-Type': 'application/json'
                                         }
                                     })
-                                        .then(response => {
-                                            if (response != null) {
-                                                response.json()
+                                        .then(response => response.json())
+                                        .then(data =>{
+                                         if (data != null) {
+                                                inicializarMapa(data)
                                                 console.log("mapa vei")
                                             }
                                             else{
                                             console.log("else")
                                                 mapaSemMotoboy()
-                                            }
-                                        })
-                                        .then(data => inicializarMapa(data))
+                                            }})
                                         .catch(error => console.error('Erro na requisição:', error));
                                 }
                        
