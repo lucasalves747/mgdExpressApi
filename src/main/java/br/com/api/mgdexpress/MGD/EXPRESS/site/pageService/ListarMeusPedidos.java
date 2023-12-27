@@ -93,9 +93,7 @@ public class ListarMeusPedidos {
                     <h2>Meus Pedidos</h2>
                 </nav>
                                        
-                <div id="card-container">
-                   
-                </div>
+                <div id="cards-container"></div>
 
                 """;
     }

@@ -160,45 +160,46 @@ public class MainHtml {
                                const cardContainer = document.getElementById('card-container');
                        
                        
-                               fetch(`https://mgdexpressapi-production.up.railway.app/pedidos/pendente/gerente`, {
-                                   method: 'GET',
-                                   headers: {
-                                       'Authorization': `Bearer ${token}`,
-                                       'Content-Type': 'application/json'
-                                   }
-                               })
-                                   .then(response => response.json())
-                                   .then(data => {
-                                       console.log("pedidos");
-                                       console.log(data);
-                                       data.forEach(cardData => {
-                                           console.log(cardData.nomePedido);
-                                           console.log(cardData);
-                                           const card = document.createElement('div');
-                                           card.className = 'card';
-                       
-                                           const cardContent = document.createElement('div');
-                                           cardContent.className = 'card-content';
-                       
-                                           const cardDetails = `
-                                   <p class="titulo"><strong>${cardData.nomePedido}</p></strong>
-                                   <p><strong>Valor:</strong> ${cardData.valor}</p>
-                                   <p><strong>Local de Destino:</strong> ${cardData.localDestino}</p>
-                                   <a onclick="carregarPagina('${url}site/gerente/detalhes/${cardData.id}"><button>Detalhes</button></a>
-                               `;
-                       
-                                           cardContent.innerHTML = cardDetails;
-                       
-                       
-                                           card.appendChild(cardContent);
-                                           cardContainer.appendChild(card);
-                                       });
-                                   })
-                                   .catch(error => {
-                                       // trate erros de requisição
-                                   });
-                       
-                           };
+                               document.addEventListener('DOMContentLoaded', function () {
+                                 const cardContainer = document.getElementById('cards-container');
+                                console.log('Chegou aqui 1');
+                                 fetch(`https://mgdexpressapi-production.up.railway.app/pedidos/pendente/gerente`, {
+                                     method: 'GET',
+                                     headers: {
+                                         'Authorization': `Bearer ${token}`,
+                                         'Content-Type': 'application/json'
+                                     }
+                                 })
+                                 .then(response => response.json())
+                                 .then(data => {
+                                     console.log("pedidos");
+                                     console.log(data);
+                                     data.forEach(cardData => {
+                                         console.log(cardData.nomePedido);
+                                         console.log(cardData);
+                                         const card = document.createElement('div');
+                                         card.className = 'card';
+                             
+                                         const cardContent = document.createElement('div');
+                                         cardContent.className = 'card-content';
+                             
+                                        const cardDetails = `
+                                                <p class="titulo"><strong>${cardData.nomePedido}</strong></p>
+                                                <p><strong>Valor:</strong> ${cardData.valor}</p>
+                                                <p><strong>Local de Destino:</strong> ${cardData.localDestino}</p>
+                                                <a onclick="carregarPagina('${url}site/gerente/detalhes/${cardData.id}')"><button>Detalhes</button></a>
+                                                `;
+                                         cardContent.innerHTML = cardDetails;
+                             
+                                         card.appendChild(cardContent);
+                                         cardContainer.appendChild(card);
+                                     });
+                                 })
+                                 .catch(error => {
+                                     console.error('Erro na requisição:', error);
+                                 });
+                             });
+                             
                        
                            //area destinada ou codigo do listar pedidos em andamento
                            // fim da area
