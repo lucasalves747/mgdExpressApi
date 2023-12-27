@@ -96,10 +96,7 @@ public class ListarMeusPedidos {
                 <div id="card-container">
                    
                 </div>
-                <script>
-                
-                listarPedidos()
-                </script>        
+                    
                 
                 """;
     }
