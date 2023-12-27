@@ -66,7 +66,7 @@ public class Home {
                     <div>
                         <button onclick="carregarPagina('https://mgdexpressapi-production.up.railway.app/site/gerente/criar')">Novo
                             Pedido</button>
-                        <button onclick="listarPedidos ()">Meus Pedidos</button>
+                        <button onclick="listarPedidos()">Meus Pedidos</button>
                         <button onclick="carregarPagina('')">Em Andamento</button>
                         <button onclick="listarHistorico()">Histórico</button>
                     </div>
