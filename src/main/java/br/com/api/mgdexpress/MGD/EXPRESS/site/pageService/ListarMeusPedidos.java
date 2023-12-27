@@ -93,7 +93,7 @@ public class ListarMeusPedidos {
                     <h2>Meus Pedidos</h2>
                 </nav>
                                        
-                <div id="cards-container"></div>
+                <div id="card-container"></div>
 
                 """;
     }
