@@ -99,7 +99,7 @@ public class Home {
                         console.log(localizacoes)
                         if (localizacoes.length > 0) {
                             // Se houver localizações, adicione marcadores
-                            atualizarMarker(localizacoes);
+                            atualizarMarker(localizacoes,map);
                             repetir();
                         } else {
                             // Se localizacoes estiver vazio, faça o que for necessário
@@ -108,7 +108,7 @@ public class Home {
                         }
                     }
                                 
-                    function atualizarMarker(localizacoes) {
+                    function atualizarMarker(localizacoes,map) {
                         localizacoes.forEach(function (localizacao) {
                             var latitude = parseFloat(localizacao.localizacao.latitude);
                             var longitude = parseFloat(localizacao.localizacao.longitude);
