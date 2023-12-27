@@ -108,20 +108,25 @@ public class MainHtml {
                                    .catch(error => console.error('Erro:', error));
                            }
                        
-                           function buscarMotoboys(){
-                               // Fazer uma requisição AJAX para obter a lista de localizações
-                               // Substitua a URL pela sua endpoint real
-                               fetch('https://mgdexpressapi-production.up.railway.app/motoboy/EmEntregas/gerente', {
-                                   method: 'GET',
-                                   headers: {
-                                       'Authorization': `Bearer ${token}`,
-                                       'Content-Type': 'application/json'
-                                   }
-                               })
-                                   .then(response => response.json())
-                                   .then(data => inicializarMapa(data))
-                                   .catch(error => console.error('Erro na requisição:', error));
-                           }
+                           function buscarMotoboys() {
+                                    fetch('https://mgdexpressapi-production.up.railway.app/motoboy/EmEntregas/gerente', {
+                                        method: 'GET',
+                                        headers: {
+                                            'Authorization': `Bearer ${token}`,
+                                            'Content-Type': 'application/json'
+                                        }
+                                    })
+                                        .then(response => {
+                                            if (response != null) {
+                                                response.json()
+                                            }
+                                            else{
+                                                mapaSemMotoboy()
+                                            }
+                                        })
+                                        .then(data => inicializarMapa(data))
+                                        .catch(error => console.error('Erro na requisição:', error));
+                                }
                        
                        
                        

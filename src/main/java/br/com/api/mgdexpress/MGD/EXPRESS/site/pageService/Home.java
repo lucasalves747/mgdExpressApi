@@ -106,6 +106,20 @@ public class Home {
                             });
                         });
                     }
+                    function mapaSemMotoboy(){
+                             // Coordenadas iniciais
+                             var latitude = -23.550520;
+                            var longitude = -46.633308;
+                    
+                            // Opções do mapa
+                            var options = {
+                                center: { lat: latitude, lng: longitude },
+                                zoom: 12, // Nível de zoom
+                            };
+                    
+                            // Criar o mapa
+                            var map = new google.maps.Map(document.body, options);
+                        }
                                
                 </script>
                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsTWHMwA_agU_-o35U_3b606930nBrsY8&callback=initMap" async defer></script>
