@@ -77,6 +77,7 @@ public class Home {
                     <div id="map"></div>
                 </main>
                 <script>
+                    var y = 0;
                     buscarMotoboys()
                                 
                     function repetir() {
@@ -115,12 +116,12 @@ public class Home {
                                 
                             // Adicionar um marcador
                             var marker = new google.maps.Marker({
-                                position: { lat: latitude, lng: longitude },
+                                position: { lat: latitude+y, lng: longitude+y },
                                 map: map,
                                 title: localizacao.nome
                             });
                         });
-                                
+                        y++
                         repetir();
                     }
                                 
