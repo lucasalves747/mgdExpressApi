@@ -68,7 +68,7 @@ public class MotoboyController {
 
         var token = header.replace("Bearer ","");
         var subject = tokenService.getSubject(token);
-
+        System.out.println(subject);
         List<DadosCadastroListaSemColcheteNoJsom> lista = new ArrayList<>();
         System.out.println("entrou no listar Motoboy localizacao");
         listaLocalizacao.getListaLocalizacao().forEach(item ->{
