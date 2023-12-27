@@ -169,6 +169,7 @@ public class MainHtml {
                                })
                                    .then(response => response.json())
                                    .then(data => {
+                                       console.log("pedidos");
                                        console.log(data);
                                        data.forEach(cardData => {
                                            console.log(cardData.nomePedido);

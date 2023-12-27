@@ -106,7 +106,7 @@ public class Home {
                             // Se houver localizações, adicione marcadores
                             atualizarMarker(localizacoes,map);
                             repetir();
-                            console.log(localizacoes)
+                            
                         } else {
                             // Se localizacoes estiver vazio, faça o que for necessário
                             console.log("A lista de localizações está vazia.");
