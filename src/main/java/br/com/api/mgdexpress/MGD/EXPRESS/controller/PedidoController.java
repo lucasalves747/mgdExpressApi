@@ -76,7 +76,7 @@ public class PedidoController {
             motoboy.setDisponivel(false);
             pedidoRepository.save(pedido);
             motoboyRepository.save(motoboy);
-            listaLocalizacao.setStatus(id);
+            listaLocalizacao.setStatus(id,pedido.getGerente().getEmail());
 
             pedidoRepository.save(pedido);
             motoboyRepository.save(motoboy);
@@ -85,7 +85,7 @@ public class PedidoController {
             return ResponseEntity.ok().build();
         }
         else{
-            listaLocalizacao.setStatus(id);
+            listaLocalizacao.setStatus(id,null);
             historicoRepository.save(new Historico(pedido));
             pedidoRepository.deleteById(pedido.getId());
             motoboy.setDisponivel(true);

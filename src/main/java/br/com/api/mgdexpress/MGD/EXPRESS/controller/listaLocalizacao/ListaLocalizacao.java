@@ -45,18 +45,18 @@ public class ListaLocalizacao {
         }
 
         var dadosMotoboyList = listaLocalizacao.get(id.intValue());
-        listaLocalizacao.set(id.intValue(), new DadosMotoboyList(id, nome, lista.localizacao(), dadosMotoboyList.disponivel()));
+        listaLocalizacao.set(id.intValue(), new DadosMotoboyList(id, nome, lista.localizacao(), dadosMotoboyList.disponivel(), dadosMotoboyList.emailGerente()));
 
         System.out.println(listaLocalizacao.get(id.intValue()).localizacao().getLatitude());
         System.out.println(listaLocalizacao.get(id.intValue()).localizacao().getLongitude());
     }
 
-    public void setStatus(Long id) {
+    public void setStatus(Long id,String email) {
         var dados = listaLocalizacao.get(id.intValue());
         if (dados.disponivel()) {
-            listaLocalizacao.set(id.intValue(), new DadosMotoboyList(id, dados.nome(), dados.localizacao(), false));
+            listaLocalizacao.set(id.intValue(), new DadosMotoboyList(id, dados.nome(), dados.localizacao(), false,email));
         } else {
-            listaLocalizacao.set(id.intValue(), new DadosMotoboyList(id, dados.nome(), dados.localizacao(), true));
+            listaLocalizacao.set(id.intValue(), new DadosMotoboyList(id, dados.nome(), dados.localizacao(), true,email));
         }
     }
 }

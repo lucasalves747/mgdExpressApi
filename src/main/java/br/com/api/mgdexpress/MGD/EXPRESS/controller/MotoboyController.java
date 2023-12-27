@@ -64,12 +64,20 @@ public class MotoboyController {
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
     @GetMapping("/EmEntregas/gerente")
-    public ResponseEntity ListarMotoboysEmEntregasByGerente(@PageableDefault(size = 10) Pageable page,@RequestHeader("Authorization") String header){
+    public ResponseEntity<List<DadosCadastroListaSemColcheteNoJsom>> ListarMotoboysEmEntregasByGerente(@PageableDefault(size = 10) Pageable page,@RequestHeader("Authorization") String header){
 
         var token = header.replace("Bearer ","");
         var subject = tokenService.getSubject(token);
 
-        return ResponseEntity.ok(motoboyRepository.findAllAtivosEmEntregaByGerente(page,subject).map(DadosMotoboyList::new));
+        List<DadosCadastroListaSemColcheteNoJsom> lista = new ArrayList<>();
+        System.out.println("entrou no listar Motoboy localizacao");
+        listaLocalizacao.getListaLocalizacao().forEach(item ->{
+            if(!Objects.isNull(item) && !item.disponivel() && item.emailGerente().equals(subject)){
+                lista.add(new DadosCadastroListaSemColcheteNoJsom(item));
+            }
+        });
+        return ResponseEntity.ok(lista);
+
     }
 
 
