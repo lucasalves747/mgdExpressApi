@@ -72,8 +72,10 @@ public class MotoboyController {
         List<DadosCadastroListaSemColcheteNoJsom> lista = new ArrayList<>();
         System.out.println("entrou no listar Motoboy localizacao");
         listaLocalizacao.getListaLocalizacao().forEach(item ->{
-            if(!Objects.isNull(item) && !item.disponivel() && item.emailGerente().equals(subject)){
-                lista.add(new DadosCadastroListaSemColcheteNoJsom(item));
+            if(!Objects.isNull(item)){
+                if(!item.disponivel() && item.emailGerente().equals(subject)) {
+                    lista.add(new DadosCadastroListaSemColcheteNoJsom(item));
+                }
             }
         });
         return ResponseEntity.ok(lista);
