@@ -4,7 +4,6 @@ public class Home {
 
     public static String home(String url){
         return """
-                         
                 <head>
                     <title>MGD EXPRESS</title>
                     <style>
@@ -40,23 +39,24 @@ public class Home {
                                 
                         #map {
                             width: 100%;
-                            height: 600px ; /* Ajuste a altura conforme necessário */
+                            height: 600px;
+                            /* Ajuste a altura conforme necessário */
                         }
                                 
                         nav button {
-                                        background-color: #4CAF50;
-                                        color: white;
-                                        padding: 10px 20px;
-                                        border: none;
-                                        border-radius: 5px;
-                                        cursor: pointer;
-                                        font-size: 16px;
-                                        margin-left: 15px;
-                                        }
+                            background-color: #4CAF50;
+                            color: white;
+                            padding: 10px 20px;
+                            border: none;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            font-size: 16px;
+                            margin-left: 15px;
+                        }
                                 
-                                        nav button:hover {
-                                        background-color: #45a049;
-                                        }
+                        nav button:hover {
+                            background-color: #45a049;
+                        }
                     </style>
                 </head>
                                 
@@ -64,7 +64,8 @@ public class Home {
                 <nav>
                     <h2>MGD EXPRESS</h2>
                     <div>
-                        <button onclick="carregarPagina('https://mgdexpressapi-production.up.railway.app/site/gerente/criar')" >Novo Pedido</button>
+                        <button onclick="carregarPagina('https://mgdexpressapi-production.up.railway.app/site/gerente/criar')">Novo
+                            Pedido</button>
                         <button onclick="listarPedidos ()">Meus Pedidos</button>
                         <button onclick="carregarPagina('')">Em Andamento</button>
                         <button onclick="listarHistorico()">Histórico</button>
@@ -77,31 +78,41 @@ public class Home {
                 </main>
                 <script>
                     buscarMotoboys()
-                               \s
-                    function repetir(){
-                    setTimeout(buscarMotoboys(), 2000)
+                                
+                    function repetir() {
+                        setTimeout(buscarMotoboys2, 5000)
                     }
                     function inicializarMapa(localizacoes) {
                         // Coordenadas iniciais
                         var latitudeInicial = -23.550520;
                         var longitudeInicial = -46.633308;
-                               \s
+                                
                         // Opções do mapa
                         var options = {
                             center: { lat: latitudeInicial, lng: longitudeInicial },
                             zoom: 12, // Nível de zoom
                         };
-                               \s
+                                
                         // Criar o mapa
                         var map = new google.maps.Map(document.getElementById('map'), options);
-                       \s
+                                
                         console.log(localizacoes)
-                               \s
-                        // Iterar sobre a lista de localizações e adicionar marcadores
+                        if (localizacoes.length > 0) {
+                            // Se houver localizações, adicione marcadores
+                            atualizarMarker(localizacoes);
+                            repetir();
+                        } else {
+                            // Se localizacoes estiver vazio, faça o que for necessário
+                            console.log("A lista de localizações está vazia.");
+                            // Outras ações ou mensagens apropriadas para o seu caso
+                        }
+                    }
+                                
+                    function atualizarMarker(localizacoes) {
                         localizacoes.forEach(function (localizacao) {
                             var latitude = parseFloat(localizacao.localizacao.latitude);
                             var longitude = parseFloat(localizacao.localizacao.longitude);
-                               \s
+                                
                             // Adicionar um marcador
                             var marker = new google.maps.Marker({
                                 position: { lat: latitude, lng: longitude },
@@ -109,16 +120,16 @@ public class Home {
                                 title: localizacao.nome
                             });
                         });
-                        
+                                
                         repetir();
                     }
-                   \s
-                   
+                                
+                                
+                                
                 </script>
                                 
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsTWHMwA_agU_-o35U_3b606930nBrsY8&callback=initMap" async defer></script>
-                        
-                        """;
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsTWHMwA_agU_-o35U_3b606930nBrsY8&callback=initMap" async
+                    defer></script> """;
     }
 }
 

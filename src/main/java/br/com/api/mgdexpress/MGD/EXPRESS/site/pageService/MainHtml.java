@@ -129,6 +129,28 @@ public class MainHtml {
                                             }})
                                         .catch(error => console.error('Erro na requisição:', error));
                                 }
+                                
+                           function buscarMotoboys2() {
+                                    fetch('https://mgdexpressapi-production.up.railway.app/motoboy/EmEntregas/gerente', {
+                                        method: 'GET',
+                                        headers: {
+                                            'Authorization': `Bearer ${token}`,
+                                            'Content-Type': 'application/json'
+                                        }
+                                    })
+                                        .then(response => response.json())
+                                        .then(data =>{
+                                         if (data != null) {
+                                                console.log("mapa vei")
+                                                atualizarMarker(data)
+                                                
+                                            }
+                                            else{
+                                            console.log("else")
+                                                mapaSemMotoboy()
+                                            }})
+                                        .catch(error => console.error('Erro na requisição:', error));
+                                }
                        
                        
                        
