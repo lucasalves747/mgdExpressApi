@@ -119,8 +119,10 @@ public class MainHtml {
                                         .then(response => {
                                             if (response != null) {
                                                 response.json()
+                                                console.log("mapa vei")
                                             }
                                             else{
+                                            console.log("else")
                                                 mapaSemMotoboy()
                                             }
                                         })
