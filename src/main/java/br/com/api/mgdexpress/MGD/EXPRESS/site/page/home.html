@@ -69,15 +69,45 @@
 </main>
 
 <script>
-    // Substitua 'SUA_CHAVE_DO_MAPA_AQUI' pela sua chave de API do mapa
-    function initMap() {
-        var mapOptions = {
-            center: { lat: -23.5505, lng: -46.6333 }, // Coordenadas de São Paulo, por exemplo
-            zoom: 12
+    buscarMotoboys()
+
+    setTimeout(buscarMotoboys,2000)
+    function inicializarMapa(localizacoes) {
+        // Coordenadas iniciais
+        var latitudeInicial = -23.550520;
+        var longitudeInicial = -46.633308;
+
+        // Opções do mapa
+        var options = {
+            center: { lat: latitudeInicial, lng: longitudeInicial },
+            zoom: 12, // Nível de zoom
         };
-        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+        // Criar o mapa
+        var map = new google.maps.Map(document.body, options);
+
+        // Iterar sobre a lista de localizações e adicionar marcadores
+        localizacoes.forEach(function (localizacao) {
+            var latitude = parseFloat(localizacao.localizacao.latitude);
+            var longitude = parseFloat(localizacao.localizacao.longitude);
+
+            // Adicionar um marcador
+            var marker = new google.maps.Marker({
+                position: { lat: latitude, lng: longitude },
+                map: map,
+                title: localizacao.nome
+            });
+        });
+    }
+
+    function buscarMotoboys(){
+        // Fazer uma requisição AJAX para obter a lista de localizações
+        // Substitua a URL pela sua endpoint real
+        fetch('https://mgdexpressapi-production.up.railway.app/motoboy/EmEntregas/gerente')
+            .then(response => response.json())
+            .then(data => inicializarMapa(data))
+            .catch(error => console.error('Erro na requisição:', error));
     }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsTWHMwA_agU_-o35U_3b606930nBrsY8&callback=initMap" async defer></script>
-                                       
-                     
+

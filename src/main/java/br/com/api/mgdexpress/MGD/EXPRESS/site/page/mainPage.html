@@ -59,6 +59,7 @@
                 token = response
                 console.log(response);
                 carregarPagina(`${url}home`)
+
                 // Lógica adicional para lidar com a resposta do servidor
             },
             error: function (error) {
@@ -87,7 +88,7 @@
 
     function enviarPedido() {
         var formData = new FormData(document.getElementById('pedidoForm'));
-        var urlpedido = `${url}/pedidos`;
+        var urlpedido = `https://mgdexpressapi-production.up.railway.app/pedidos`;
 
         fetch(urlpedido, {
             method: 'POST',
@@ -97,23 +98,35 @@
             },
             body: JSON.stringify(Object.fromEntries(formData))
         })
-            .then(response => response.json())
-            .then(data => {
-                // Manipular a resposta aqui
-                carregarPagina(`${url}sucesso`)
-                console.log(data);
-            })
+            .then(response => carregarPagina(`${url}sucesso`))
+
             .catch(error => console.error('Erro:', error));
     }
 
+    function buscarMotoboys(){
+        // Fazer uma requisição AJAX para obter a lista de localizações
+        // Substitua a URL pela sua endpoint real
+        fetch('https://mgdexpressapi-production.up.railway.app/motoboy/EmEntregas/gerente', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => inicializarMapa(data))
+            .catch(error => console.error('Erro na requisição:', error));
+    }
+
+
 
     function listarPedidos() {
-        carregarPagina(`${url}/site/gerente/meusPedidos`)
+        carregarPagina(`${url}meusPedidos`)
 
         const cardContainer = document.getElementById('card-container');
 
 
-        fetch(`${url}/pedidos/pendente/`, {
+        fetch(`https://mgdexpressapi-production.up.railway.app/pedidos/pendente/gerente`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -122,9 +135,10 @@
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data.content);
-                data.content.forEach(cardData => {
-
+                console.log(data);
+                data.forEach(cardData => {
+                    console.log(cardData.nomePedido);
+                    console.log(cardData);
                     const card = document.createElement('div');
                     card.className = 'card';
 
@@ -156,9 +170,9 @@
 
     function listarHistorico() {
 
-        carregarPagina(`${url}site/gerente/historico`)
+        carregarPagina(`${url}historico`)
 
-        fetch(`${url}/historico/gerente`,{
+        fetch(`https://mgdexpressapi-production.up.railway.app/historico/gerente`,{
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
