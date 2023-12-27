@@ -85,7 +85,7 @@ public class PedidoController {
             return ResponseEntity.ok().build();
         }
         else{
-            listaLocalizacao.setStatus(id,null);
+            listaLocalizacao.setStatus(id,"");
             historicoRepository.save(new Historico(pedido));
             pedidoRepository.deleteById(pedido.getId());
             motoboy.setDisponivel(true);
