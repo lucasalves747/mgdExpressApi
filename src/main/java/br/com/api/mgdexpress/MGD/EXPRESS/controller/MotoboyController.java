@@ -73,7 +73,7 @@ public class MotoboyController {
         System.out.println("entrou no listar Motoboy localizacao");
         listaLocalizacao.getListaLocalizacao().forEach(item ->{
             if(!Objects.isNull(item)){
-                System.out.println(item.nome());
+                System.out.println(item.emailGerente());
                 if(!item.disponivel() && item.emailGerente().equals(subject)) {
                     lista.add(new DadosCadastroListaSemColcheteNoJsom(item));
                 }
