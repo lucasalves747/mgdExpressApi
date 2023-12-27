@@ -94,6 +94,23 @@ public class ListarMeusPedidos {
                 </nav>
                                        
                 <div id="card-container"></div>
+                
+                <script>
+                 const cardContainer = document.getElementById('card-container');
+                 
+                 const card = document.createElement('div');
+                 card.className = 'card';
+                 
+                 const cardContent = document.createElement('div');
+                 cardContent.className = 'card-content';
+                 
+                 const cardDetails = `
+                     <p class="titulo"><strong>Nome do Pedido</strong></p>
+                     <p><strong>Valor:</strong> 100</p>
+                     <p><strong>Local de Destino:</strong> Algum lugar</p>
+                     <a onclick="carregarPagina('${url}site/gerente/detalhes/1')"><button>Detalhes</button></a>
+                 `;
+                </script>
 
                 """;
     }
