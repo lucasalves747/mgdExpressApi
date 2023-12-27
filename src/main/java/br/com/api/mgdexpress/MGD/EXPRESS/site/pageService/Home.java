@@ -95,7 +95,7 @@ public class Home {
                         // Opções do mapa
                         var options = {
                             center: { lat: latitudeInicial, lng: longitudeInicial },
-                            zoom: 12, // Nível de zoom
+                            zoom: 13, // Nível de zoom
                         };
                                 
                         // Criar o mapa
@@ -106,6 +106,7 @@ public class Home {
                             // Se houver localizações, adicione marcadores
                             atualizarMarker(localizacoes,map);
                             repetir();
+                            console.log(localizacoes)
                         } else {
                             // Se localizacoes estiver vazio, faça o que for necessário
                             console.log("A lista de localizações está vazia.");
@@ -115,6 +116,7 @@ public class Home {
                     }
                                 
                     function atualizarMarker(localizacoes,map) {
+                        console.log(localizacoes)
                         localizacoes.forEach(function (localizacao) {
                             var latitude = parseFloat(localizacao.localizacao.latitude);
                             var longitude = parseFloat(localizacao.localizacao.longitude);
