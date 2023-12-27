@@ -99,15 +99,6 @@
             });
         });
     }
-
-    function buscarMotoboys(){
-        // Fazer uma requisição AJAX para obter a lista de localizações
-        // Substitua a URL pela sua endpoint real
-        fetch('https://mgdexpressapi-production.up.railway.app/motoboy/EmEntregas/gerente')
-            .then(response => response.json())
-            .then(data => inicializarMapa(data))
-            .catch(error => console.error('Erro na requisição:', error));
-    }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsTWHMwA_agU_-o35U_3b606930nBrsY8&callback=initMap" async defer></script>
 
