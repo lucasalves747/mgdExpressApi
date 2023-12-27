@@ -64,7 +64,7 @@ public class MotoboyController {
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
     @GetMapping("/EmEntregas/gerente")
-    public ResponseEntity<List<DadosCadastroListaSemColcheteNoJsom>> ListarMotoboysEmEntregasByGerente(@PageableDefault(size = 10) Pageable page,@RequestHeader("Authorization") String header){
+    public ResponseEntity<List<DadosCadastroListaSemColcheteNoJsom>> ListarMotoboysEmEntregasByGerente(@RequestHeader("Authorization") String header){
 
         var token = header.replace("Bearer ","");
         var subject = tokenService.getSubject(token);
