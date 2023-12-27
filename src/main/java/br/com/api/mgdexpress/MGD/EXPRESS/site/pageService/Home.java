@@ -83,6 +83,10 @@ public class Home {
                     function repetir() {
                         setTimeout(buscarMotoboys2, 5000)
                     }
+                    
+                    function repetirEnquentoNaoTemMotoboys() {
+                        setTimeout(buscarMotoboys, 10000)
+                    }
                     function inicializarMapa(localizacoes) {
                         // Coordenadas iniciais
                         var latitudeInicial = -23.550520;
@@ -106,6 +110,7 @@ public class Home {
                             // Se localizacoes estiver vazio, faça o que for necessário
                             console.log("A lista de localizações está vazia.");
                             // Outras ações ou mensagens apropriadas para o seu caso
+                            repetirEnquentoNaoTemMotoboys()
                         }
                     }
                                 

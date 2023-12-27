@@ -71,6 +71,9 @@ public class ListarHistorico {
                        </nav>
                        
                        <ul id="historico-list"></ul>
+                       <script>
+                       listarHistorico()
+                       </script>
                        
                 """;
     }

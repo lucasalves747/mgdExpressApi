@@ -87,8 +87,8 @@ public class ListarMeusPedidos {
                 <nav>
                                        
                     <div>
-                        <a class="backLink" href="#" onclick="history.back()">←</a>
-                                       
+                        <a class="backLink" onclick="carregarPagina("https://mgdexpressapi-production.up.railway.app/site/gerente/home")">←</a>
+                                     
                     </div>
                     <h2>Meus Pedidos</h2>
                 </nav>
@@ -96,7 +96,9 @@ public class ListarMeusPedidos {
                 <div id="card-container">
                     <!-- Cards serão adicionados dinamicamente com JavaScript -->
                 </div>
-                                       
+                <script>
+                listarPedidos()
+                </script>
                 """;
     }
 }
