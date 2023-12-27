@@ -94,8 +94,9 @@ public class ListarMeusPedidos {
                 </nav>
                                        
                 <div id="card-container">
-                    <!-- Cards serão adicionados dinamicamente com JavaScript -->
+                   
                 </div>
+                          
                 
                 """;
     }
