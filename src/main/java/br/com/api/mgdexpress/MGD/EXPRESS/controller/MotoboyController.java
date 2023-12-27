@@ -74,6 +74,7 @@ public class MotoboyController {
         listaLocalizacao.getListaLocalizacao().forEach(item ->{
             if(!Objects.isNull(item)){
                 System.out.println(item.emailGerente());
+                System.out.println(item.nome());
                 if(!item.disponivel() && item.emailGerente().equals(subject)) {
                     lista.add(new DadosCadastroListaSemColcheteNoJsom(item));
                 }
