@@ -78,7 +78,7 @@ public class HistoricoController {
     public ResponseEntity<DadosHistoricoMotoboy> buscarPeloIdPedido(@PathVariable Long idpedido,@RequestHeader("Authorization") String header){
         var token = header.replace("Bearer ","");
         var id = tokenService.getId(token);
-
+        System.out.println(idpedido);
         var pedido = new DadosHistoricoMotoboy(historicoRepository.BuscarProIdPedido(idpedido,id));
         return ResponseEntity.ok(pedido);
     }
