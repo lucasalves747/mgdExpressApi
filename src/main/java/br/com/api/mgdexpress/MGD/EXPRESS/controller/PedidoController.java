@@ -74,6 +74,7 @@ public class PedidoController {
             pedido.setStatus(Status.ANDAMENTO);
             pedido.setMotoboy(motoboy);
             motoboy.setDisponivel(false);
+            motoboy.setEmailGerente(pedido.getGerente().getEmail());
             pedidoRepository.save(pedido);
             motoboyRepository.save(motoboy);
             listaLocalizacao.setStatus(id,pedido.getGerente().getEmail());
@@ -89,6 +90,8 @@ public class PedidoController {
             historicoRepository.save(new Historico(pedido));
             pedidoRepository.deleteById(pedido.getId());
             motoboy.setDisponivel(true);
+            motoboy.setEmailGerente("");
+
             System.out.println("Entrei no mudar estado do pedido Finalizado");
 
             return ResponseEntity.noContent().build();

@@ -31,6 +31,7 @@ public class Motoboy {
     private Historico histico;
     private Boolean disponivel;
     private Boolean ativo;
+    private String emailGerente;
 
     public Motoboy(DadosMotoboyCadastro dadosMotoboy) {
         this.nome = dadosMotoboy.nome();
@@ -42,5 +43,6 @@ public class Motoboy {
         this.nomeParente = dadosMotoboy.nomeParente();
         this.telefoneEmergencia = dadosMotoboy.telefoneEmergencia();
         this.chavePix = dadosMotoboy.chavepix();
+        this.emailGerente = "";
     }
 }

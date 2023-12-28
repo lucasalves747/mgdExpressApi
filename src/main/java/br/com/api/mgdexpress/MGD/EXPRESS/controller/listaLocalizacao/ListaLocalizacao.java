@@ -33,10 +33,12 @@ public class ListaLocalizacao {
     private List<DadosMotoboyList> listaLocalizacao;
 
     @PostConstruct
-    private void initialize() {
+    public void initialize() {
         listaLocalizacao = new ArrayList<>(Collections.nCopies(motoboyRepository.encontrarMaiorId().intValue() + 1, null));
         motoboyRepository.findAllAtivos().forEach(motoboy -> listaLocalizacao.set(motoboy.getId().intValue(),new DadosMotoboyList(motoboy)));
     }
+
+
 
     public void setListaLocalizacao(DadosLocalizacaoMotoboy lista, Long id, String nome) {
         System.out.println("Up interno");

@@ -1,5 +1,6 @@
 package br.com.api.mgdexpress.MGD.EXPRESS.controller;
 
+import br.com.api.mgdexpress.MGD.EXPRESS.controller.listaLocalizacao.ListaLocalizacao;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.DadosMotoboyCadastro;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.Motoboy;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.users.User;
@@ -22,6 +23,8 @@ public class CreateMotoboyContrller {
 
     @Autowired
     private MotoboyRepository motoboyRepository;
+    @Autowired
+    private ListaLocalizacao listaLocalizacao;
 
     @PostMapping
     private ResponseEntity cadastrar(@RequestBody DadosMotoboyCadastro dadosMotoboy){
@@ -37,7 +40,7 @@ public class CreateMotoboyContrller {
         var senha = bcrypt.encode(dadosMotoboy.senha());
         var motoboy = motoboyRepository.save(new Motoboy(dadosMotoboy));
         useRepository.save(new User(null,motoboy.getId(), dadosMotoboy.nome(), dadosMotoboy.email(), senha,"ROLE_USER_MOTOBOY"));
-
+        listaLocalizacao.initialize();
         return ResponseEntity.ok().build();
     }
 }
