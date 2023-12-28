@@ -39,7 +39,10 @@ public class ListaLocalizacao {
         System.out.println("esto nendo inicializada");
         System.out.println("esto nendo inicializada");
         listaLocalizacao = new ArrayList<>(Collections.nCopies(motoboyRepository.encontrarMaiorId().intValue() + 1, null));
-        motoboyRepository.findAllAtivos().forEach(motoboy -> listaLocalizacao.set(motoboy.getId().intValue(),new DadosMotoboyList(motoboy)));
+        motoboyRepository.findAllAtivos().forEach(motoboy ->{
+            listaLocalizacao.set(motoboy.getId().intValue(),new DadosMotoboyList(motoboy));
+            System.out.println(listaLocalizacao.get(motoboy.getId().intValue()));
+        });
     }
 
     public void inicializar(){
