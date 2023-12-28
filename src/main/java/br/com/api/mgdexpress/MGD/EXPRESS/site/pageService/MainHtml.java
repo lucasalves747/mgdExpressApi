@@ -156,8 +156,8 @@ public class MainHtml {
                        
                            function listarPedidos() {
                                carregarPagina(`${url}meusPedidos`)
-                               document.addEventListener('DOMContentLoaded', function () {
-                                  const cardContainer = document.getElementById('card-container');
+                       
+                               const cardContainer = document.getElementById('card-container');
                                
                                fetch(`https://mgdexpressapi-production.up.railway.app/pedidos/pendente/gerente`, {
                                    method: 'GET',
@@ -197,10 +197,6 @@ public class MainHtml {
                                    .catch(error => {
                                        console.error('Erro na requisição:', error);
                                    });
-                               });
-                               
-                       
-                               
                                
                            };
                        
