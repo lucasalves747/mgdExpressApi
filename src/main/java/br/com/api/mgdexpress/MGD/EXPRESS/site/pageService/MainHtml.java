@@ -118,8 +118,15 @@ public class MainHtml {
                                     })
                                         .then(response => response.json())
                                         .then(data =>{
-                                                console.log(data)
-                                                initMap(data) })
+                                         if (data != null) {
+                                                console.log("mapa vei")
+                                                inicializarMapa(data)
+                                                
+                                            }
+                                            else{
+                                            console.log("else")
+                                                mapaSemMotoboy()
+                                            }})
                                         .catch(error => console.error('Erro na requisição:', error));
                                 }
                                 
@@ -133,8 +140,15 @@ public class MainHtml {
                                     })
                                         .then(response => response.json())
                                         .then(data =>{
+                                         if (data != null) {
                                                 console.log(data)
-                                                updateMarkersPosition(data)})
+                                                atualizarMarker(data)
+                                                
+                                            }
+                                            else{
+                                            console.log("else")
+                                                mapaSemMotoboy()
+                                            }})
                                         .catch(error => console.error('Erro na requisição:', error));
                                 }
                        
