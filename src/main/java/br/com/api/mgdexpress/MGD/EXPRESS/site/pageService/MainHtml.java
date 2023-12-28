@@ -141,7 +141,7 @@ public class MainHtml {
                                         .then(response => response.json())
                                         .then(data =>{
                                          if (data != null) {
-                                                console.log(data)
+                                                console.log("mapa vei")
                                                 atualizarMarker(data)
                                                 
                                             }
@@ -156,8 +156,8 @@ public class MainHtml {
                        
                            function listarPedidos() {
                                carregarPagina(`${url}meusPedidos`)
-                       
-                               const cardContainer = document.getElementById('card-container');
+                               document.addEventListener('DOMContentLoaded', function () {
+                                  const cardContainer = document.getElementById('card-container');
                                
                                fetch(`https://mgdexpressapi-production.up.railway.app/pedidos/pendente/gerente`, {
                                    method: 'GET',
@@ -197,6 +197,10 @@ public class MainHtml {
                                    .catch(error => {
                                        console.error('Erro na requisição:', error);
                                    });
+                               });
+                               
+                       
+                               
                                
                            };
                        
