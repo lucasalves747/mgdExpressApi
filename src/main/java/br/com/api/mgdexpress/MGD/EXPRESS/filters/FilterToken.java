@@ -1,7 +1,7 @@
 package br.com.api.mgdexpress.MGD.EXPRESS.filters;
 
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.UserRepository;
-import br.com.api.mgdexpress.MGD.EXPRESS.services.TokenService;
+import br.com.api.mgdexpress.MGD.EXPRESS.service.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

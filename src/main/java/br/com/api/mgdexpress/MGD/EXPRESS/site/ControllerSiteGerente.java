@@ -2,7 +2,7 @@ package br.com.api.mgdexpress.MGD.EXPRESS.site;
 
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.HistoricoRepository;
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.PedidoRepository;
-import br.com.api.mgdexpress.MGD.EXPRESS.services.TokenService;
+import br.com.api.mgdexpress.MGD.EXPRESS.service.TokenService;
 import br.com.api.mgdexpress.MGD.EXPRESS.site.pageService.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

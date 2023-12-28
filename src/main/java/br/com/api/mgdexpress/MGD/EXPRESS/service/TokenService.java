@@ -1,4 +1,4 @@
-package br.com.api.mgdexpress.MGD.EXPRESS.services;
+package br.com.api.mgdexpress.MGD.EXPRESS.service;
 
 import br.com.api.mgdexpress.MGD.EXPRESS.model.users.User;
 import com.auth0.jwt.JWT;

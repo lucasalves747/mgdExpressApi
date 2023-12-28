@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface HistoricoRepository extends JpaRepository<Historico,Long> {
-    @Query("SELECT h FROM Historico h WHERE h.motoboy.id = :id ORDER BY h.dataEntrega")
+    @Query("SELECT h FROM Historico h WHERE h.motoboy.id = :id ORDER BY h.dataEntrega DESC")
     List<Historico> BuscarMotoboy(Long id);
 
     @Query("select h from Historico h where h.pedidoId = :idpedido and h.motoboy.id = :id ")

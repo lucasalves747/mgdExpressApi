@@ -1,4 +1,4 @@
-package br.com.api.mgdexpress.MGD.EXPRESS.services;
+package br.com.api.mgdexpress.MGD.EXPRESS.service;
 
 import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.Motoboy;
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.GerenteRepository;

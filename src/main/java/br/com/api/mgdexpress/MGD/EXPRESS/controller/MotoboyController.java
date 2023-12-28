@@ -7,7 +7,7 @@ import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.DadosMotoboyEmEntregaToGe
 import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.DadosMotoboyList;
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.MotoboyRepository;
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.UserRepository;
-import br.com.api.mgdexpress.MGD.EXPRESS.services.TokenService;
+import br.com.api.mgdexpress.MGD.EXPRESS.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -17,10 +17,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("motoboy")
