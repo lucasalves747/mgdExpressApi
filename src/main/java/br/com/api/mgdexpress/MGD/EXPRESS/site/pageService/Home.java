@@ -84,7 +84,7 @@ public class Home {
                         // Configurações iniciais do mapa
                         var mapOptions = {
                             center: { lat: -23.550520, lng: -46.633308 }, // Coordenadas iniciais
-                            zoom: 15
+                            zoom: 19
                         };
                    \s
                         // Criação do mapa
