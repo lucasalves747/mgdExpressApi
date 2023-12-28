@@ -14,6 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.*;
 
@@ -32,7 +33,7 @@ public class HistoricoController {
     @PreAuthorize("hasRole('ROLE_USER_MOTOBOY')")
     @GetMapping("/motoboy")
     public ResponseEntity<List<AnoComMesesHistorico>> buscarPeloIdMotoboy(@RequestHeader("Authorization") String header) {
-        var token = header.replace("Bearer ","");
+        var token = header.replace("Bearer ", "");
         var id = tokenService.getId(token);
 
         // Busca os históricos do motoboy
@@ -52,7 +53,7 @@ public class HistoricoController {
         List<AnoComMesesHistorico> anosComMesesHistoricos = historicosAgrupadosPorAnoEMes.entrySet().stream()
                 .map(entryAno -> {
                     List<MesComHistorico> mesesComHistoricos = entryAno.getValue().entrySet().stream()
-                            .map(entryMes ->{
+                            .map(entryMes -> {
                                 Month mes = entryMes.getKey();
                                 String nomeMes = MesUtil.obterNomeMes(mes);
                                 double somaValores = entryMes.getValue().stream().mapToDouble(h -> h.valor().doubleValue()).sum();
@@ -66,7 +67,9 @@ public class HistoricoController {
                 .sorted(Comparator.comparing(AnoComMesesHistorico::ano))
                 .collect(Collectors.toList());
 
+
         return ResponseEntity.ok(anosComMesesHistoricos);
+
     }
 
 
