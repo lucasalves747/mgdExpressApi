@@ -3,6 +3,7 @@ package br.com.api.mgdexpress.MGD.EXPRESS.controller;
 import br.com.api.mgdexpress.MGD.EXPRESS.controller.listaLocalizacao.ListaLocalizacao;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.DadosCadastroListaSemColcheteNoJsom;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.DadosLocalizacaoMotoboy;
+import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.DadosMotoboyEmEntregaToGerente;
 import br.com.api.mgdexpress.MGD.EXPRESS.model.motoboy.DadosMotoboyList;
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.MotoboyRepository;
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.UserRepository;
@@ -64,19 +65,19 @@ public class MotoboyController {
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
     @GetMapping("/EmEntregas/gerente")
-    public ResponseEntity<List<DadosCadastroListaSemColcheteNoJsom>> ListarMotoboysEmEntregasByGerente(@RequestHeader("Authorization") String header){
+    public ResponseEntity<List<DadosMotoboyEmEntregaToGerente>> ListarMotoboysEmEntregasByGerente(@RequestHeader("Authorization") String header){
 
         var token = header.replace("Bearer ","");
         var subject = tokenService.getSubject(token);
         System.out.println(subject);
-        List<DadosCadastroListaSemColcheteNoJsom> lista = new ArrayList<>();
+        List<DadosMotoboyEmEntregaToGerente> lista = new ArrayList<>();
         System.out.println("entrou no listar Motoboy localizacao");
         listaLocalizacao.getListaLocalizacao().forEach(item ->{
             if(!Objects.isNull(item)){
                 System.out.println(item.emailGerente());
                 System.out.println(item.nome());
                 if(!item.disponivel() && item.emailGerente().equals(subject)) {
-                    lista.add(new DadosCadastroListaSemColcheteNoJsom(item));
+                    lista.add(new DadosMotoboyEmEntregaToGerente(item));
                 }
             }
         });
