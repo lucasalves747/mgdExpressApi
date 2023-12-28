@@ -76,66 +76,54 @@ public class Home {
                 <main>
                     <div id="map"></div>
                 </main>
+                
                 <script>
-                    var y = 0;
-                    buscarMotoboys()
-                                
-                    function repetir() {
-                        setTimeout(buscarMotoboys2, 5000)
-                    }
+                    buscarMotoboys();
                     
-                    function repetirEnquentoNaoTemMotoboys() {
-                        setTimeout(buscarMotoboys, 10000)
-                    }
-                    function inicializarMapa(localizacoes) {
-                        // Coordenadas iniciais
-                        var latitudeInicial = -23.550520;
-                        var longitudeInicial = -46.633308;
-                                
-                        // Opções do mapa
-                        var options = {
-                            center: { lat: latitudeInicial, lng: longitudeInicial },
-                            zoom: 13, // Nível de zoom
+                    function initMap(localizacoes) {
+                        // Configurações iniciais do mapa
+                        var mapOptions = {
+                            center: { lat: -23.550520, lng: -46.633308 }, // Coordenadas iniciais
+                            zoom: 15
                         };
-                                
-                        // Criar o mapa
-                        var map = new google.maps.Map(document.getElementById('map'), options);
-                                
-                        console.log(localizacoes)
-                        if (localizacoes.length > 0) {
-                            // Se houver localizações, adicione marcadores
-                            atualizarMarker(localizacoes,map);
-                            repetir();
-                            
-                        } else {
-                            // Se localizacoes estiver vazio, faça o que for necessário
-                            console.log("A lista de localizações está vazia.");
-                            // Outras ações ou mensagens apropriadas para o seu caso
-                            repetirEnquentoNaoTemMotoboys()
-                        }
-                    }
-                                
-                    function atualizarMarker(localizacoes,map) {
-                        console.log(localizacoes)
-                        localizacoes.forEach(function (localizacao) {
-                            var latitude = parseFloat(localizacao.localizacao.latitude);
-                            var longitude = parseFloat(localizacao.localizacao.longitude);
-                                
-                            // Adicionar um marcador
+                   \s
+                        // Criação do mapa
+                        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+                   \s
+                        // Lista de marcadores
+                        var markers = localizacoes;
+                   \s
+                        // Criação dos marcadores iniciais
+                        markers.forEach(function(markerInfo) {
                             var marker = new google.maps.Marker({
-                                position: { lat: latitude+y, lng: longitude+y },
+                                position: markerInfo.position,
                                 map: map,
-                                title: localizacao.nome
+                                title: markerInfo.title
                             });
+                   \s
+                            // Adiciona o marcador ao array para referência futura
+                            markerInfo.marker = marker;
                         });
-                        y++
-                        repetir();
+                   \s
+                        // Função para atualizar as posições dos marcadores
+                        function updateMarkersPosition(localizacoes) {
+                            // Itera sobre a lista de marcadores e atualiza suas posições
+                            markers.forEach(function(markerInfo) {
+                               \s
+                                var newPosition = {
+                                    lat:parseFloat(localizacao.localizacao.latitude),// Adiciona um pequeno valor aleatório para simular movimento
+                                    lng: parseFloat(localizacao.localizacao.longitude)
+                                };
+                   \s
+                                // Atualiza a posição do marcador
+                                markerInfo.marker.setPosition(newPosition);
+                            });
+                        }
+                        // Define o intervalo para atualizar as posições dos marcadores a cada 5 segundos (5000 milissegundos)
+                        setInterval(buscarMotoboys2, 5000);
                     }
-                                
-                                
-                                
-                </script>
-                                
+                    </script>
+                    
                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsTWHMwA_agU_-o35U_3b606930nBrsY8&callback=initMap" async
                     defer></script> """;
     }
