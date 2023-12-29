@@ -88,13 +88,13 @@ public class Home {
                             center: { lat: -23.550520, lng: -46.633308 }, // Coordenadas iniciais
                             zoom: 10
                         };
-                   \s
+                   
                         // Criação do mapa
                         var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-                   \s
+                   
                         // Lista de marcadores
                          markers = localizacoes;
-                   \s
+                   
                         // Criação dos marcadores iniciais
                         markers.forEach(function(markerInfo) {
                             var marker = new google.maps.Marker({
@@ -102,11 +102,11 @@ public class Home {
                                 map: map,
                                 title: markerInfo.title
                             });
-                   \s
+                   
                             // Adiciona o marcador ao array para referência futura
                             markerInfo.marker = marker;
                         });
-                   \s
+                   
                         // Função para atualizar as posições dos marcadores
                         
                         // Define o intervalo para atualizar as posições dos marcadores a cada 5 segundos (5000 milissegundos)
@@ -114,11 +114,12 @@ public class Home {
                     }
                     
                     function updateMarkersPosition(localizacoes) {
+                            console.log(localizacoes)
                             // Itera sobre a lista de marcadores e atualiza suas posições
                             markers.forEach(function(markerInfo) {
-                               \s
                                
-                   \s
+                               
+                   
                                 // Atualiza a posição do marcador
                                 markerInfo.marker.setPosition(markerInfo.position);
                             });

@@ -141,7 +141,7 @@ public class MainHtml {
                                         .then(response => response.json())
                                         .then(data =>{
                                          if (data != null) {
-                                                console.log(data)
+                                                
                                                 updateMarkersPosition(data)
                                                 
                                             }
