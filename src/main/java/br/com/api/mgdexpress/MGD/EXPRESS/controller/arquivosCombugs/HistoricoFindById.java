@@ -9,7 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/historico/pedido/")
+@RequestMapping("")
 public class HistoricoFindById {
 
     @Autowired
@@ -17,14 +17,5 @@ public class HistoricoFindById {
     @Autowired
     HistoricoRepository historicoRepository;
 
-    @PreAuthorize("hasRole('ROLE_USER_MOTOBOY')")
-    @GetMapping("{idpedido}")
-    public ResponseEntity<DadosHistoricoMotoboy> buscarPeloIdPedido(@PathVariable Long idpedido, @RequestHeader("Authorization") String header){
-        var token = header.replace("Bearer ","");
-        var email = tokenService.getSubject(token);
-        System.out.println(idpedido);
-        System.out.println(email);
 
-        return ResponseEntity.ok(new DadosHistoricoMotoboy(historicoRepository.getReferenceById(idpedido)));
-    }
 }

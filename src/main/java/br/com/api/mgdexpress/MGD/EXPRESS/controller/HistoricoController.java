@@ -86,6 +86,12 @@ public class HistoricoController {
 
     }
 
+    @PreAuthorize("hasRole('ROLE_USER_MOTOBOY')")
+    @GetMapping("/pedido/{idpedido}")
+    public ResponseEntity<DadosHistoricoMotoboy> buscarPeloIdPedido(@PathVariable Long idpedido){
+        return ResponseEntity.ok(new DadosHistoricoMotoboy(historicoRepository.getReferenceById(idpedido)));
+    }
+
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
     @GetMapping
     public ResponseEntity<Page<DadosHistoricoLista>> Listar(@PageableDefault(size = 10)Pageable pageable){
