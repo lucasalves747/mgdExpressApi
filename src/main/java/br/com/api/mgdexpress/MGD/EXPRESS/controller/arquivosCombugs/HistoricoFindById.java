@@ -21,10 +21,10 @@ public class HistoricoFindById {
     @GetMapping("{idpedido}")
     public ResponseEntity<DadosHistoricoMotoboy> buscarPeloIdPedido(@PathVariable Long idpedido, @RequestHeader("Authorization") String header){
         var token = header.replace("Bearer ","");
-        var id = tokenService.getId(token);
+        var email = tokenService.getSubject(token);
         System.out.println(idpedido);
-        System.out.println(id);
-        var pedido = new DadosHistoricoMotoboy(historicoRepository.BuscarProIdPedido(idpedido,id));
+        System.out.println(email);
+        var pedido = new DadosHistoricoMotoboy(historicoRepository.BuscarProIdPedido(idpedido,email));
         return ResponseEntity.ok(pedido);
     }
 }
