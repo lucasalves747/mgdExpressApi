@@ -120,7 +120,7 @@ public class MainHtml {
                                         .then(data =>{
                                          if (data != null) {
                                                 console.log("mapa vei")
-                                                inicializarMapa(data)
+                                                initMap(data)
                                                 
                                             }
                                             else{
@@ -142,7 +142,7 @@ public class MainHtml {
                                         .then(data =>{
                                          if (data != null) {
                                                 console.log("mapa vei")
-                                                atualizarMarker(data)
+                                                updateMarkersPosition(data)
                                                 
                                             }
                                             else{
