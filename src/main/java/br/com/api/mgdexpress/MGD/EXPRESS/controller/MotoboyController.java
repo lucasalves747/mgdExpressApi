@@ -71,6 +71,8 @@ public class MotoboyController {
         List<DadosMotoboyEmEntregaToGerente> lista = new ArrayList<>();
         System.out.println("entrou no listar Motoboy localizacao");
         listaLocalizacao.getListaLocalizacao().forEach(item ->{
+            System.out.println(item);
+            System.out.println("entrou no listar Motoboy localizacao ");
             if(!Objects.isNull(item.emailGerente())){
                 System.out.println(item.emailGerente());
                 System.out.println(item.nome());

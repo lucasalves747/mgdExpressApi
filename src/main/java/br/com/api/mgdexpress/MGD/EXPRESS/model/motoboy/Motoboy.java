@@ -43,6 +43,6 @@ public class Motoboy {
         this.nomeParente = dadosMotoboy.nomeParente();
         this.telefoneEmergencia = dadosMotoboy.telefoneEmergencia();
         this.chavePix = dadosMotoboy.chavepix();
-        this.emailGerente = "";
+        this.emailGerente = " ";
     }
 }
