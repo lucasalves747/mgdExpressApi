@@ -73,15 +73,18 @@ public class MotoboyController {
         listaLocalizacao.getListaLocalizacao().forEach(item ->{
             System.out.println(item);
             System.out.println("entrou no listar Motoboy localizacao ");
-            if(!Objects.isNull(item.emailGerente())){
+            if(!(item == null)){
                 System.out.println(item.emailGerente());
                 System.out.println(item.nome());
                 if(!item.disponivel() && item.emailGerente().equals(subject)) {
                     lista.add(new DadosMotoboyEmEntregaToGerente(item));
                 }
             }
+
         });
-        return ResponseEntity.ok(lista);
+
+        return !lista.isEmpty() ? ResponseEntity.ok(lista) :ResponseEntity.noContent().build();
+
 
     }
 
