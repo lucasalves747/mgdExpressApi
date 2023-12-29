@@ -152,12 +152,11 @@ public class MainHtml {
                                    .then(data => {
                                        console.log("Dados recebidos:");
                                        console.log(data);
-                                       
-                                       const cardContainer = document.getElementById('card-container');
-                              
                                
                                        data.forEach(interData => {
                                             interData.forEach(cardData =>{
+                                            const cardContainer = document.getElementById('card-container');
+                               
                                        
                                            console.log("Dados do card:");
                                            console.log(cardData.localDestino);
@@ -169,10 +168,11 @@ public class MainHtml {
                                            cardContent.className = 'card-content';
                                
                                            const cardDetails = `
-                                               <p class="titulo"><strong>cardData.nomePedido</strong></p>
-                                               <p><strong>Valor:</strong>cardData.valor</p>
-                                               <p><strong>Local de Destino:</strong>cardData.localDestino</p>
-                                               <a onclick="carregarPagina('urlsite/gerente/detalhes/cardData.id')"><button>Detalhes</button></a>
+                                          
+                                               <p class="titulo"><strong>${cardData.nomePedido}</strong></p>
+                                               <p><strong>Valor:</strong> ${cardData.valor}</p>
+                                               <p><strong>Local de Destino:</strong> ${cardData.localDestino}</p>
+                                               <a onclick="carregarPagina('${url}site/gerente/detalhes/${cardData.id}')"><button>Detalhes</button></a>
                                            `;
                                
                                            cardContent.innerHTML = cardDetails;
