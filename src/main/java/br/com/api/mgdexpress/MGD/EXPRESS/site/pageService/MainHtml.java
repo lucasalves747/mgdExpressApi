@@ -154,7 +154,9 @@ public class MainHtml {
                                        console.log("Dados recebidos:");
                                        console.log(data);
                                
-                                       data.forEach(cardData => {
+                                       data.forEach(interData => {
+                                            interData.forEach(cardData =>{
+                                       
                                            console.log("Dados do card:");
                                            console.log(cardData.localDestino);
                                
@@ -176,7 +178,7 @@ public class MainHtml {
                                
                                            card.appendChild(cardContent);
                                            cardContainer.appendChild(card);
-                                       });
+                                      }); });
                                    })
                                    .catch(error => {
                                        console.error('Erro na requisição:', error);
