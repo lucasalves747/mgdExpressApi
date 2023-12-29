@@ -85,7 +85,7 @@ public class MainHtml {
                                })
                                    .then(response => response.json())
                                    .then(data => {
-                                       clearInterval(intervalId);
+                                
                                        $('#content-container').html(data.page);
                                    })
                                    .catch(error => console.error('Erro:', error));
