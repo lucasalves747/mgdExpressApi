@@ -19,13 +19,12 @@ public class HistoricoFindById {
 
     @PreAuthorize("hasRole('ROLE_USER_MOTOBOY')")
     @GetMapping("{idpedido}")
-    public ResponseEntity buscarPeloIdPedido(@PathVariable Long idpedido, @RequestHeader("Authorization") String header){
+    public ResponseEntity<DadosHistoricoMotoboy> buscarPeloIdPedido(@PathVariable Long idpedido, @RequestHeader("Authorization") String header){
         var token = header.replace("Bearer ","");
         var email = tokenService.getSubject(token);
         System.out.println(idpedido);
         System.out.println(email);
-        System.out.println("dado |/");
-        System.out.println(historicoRepository.findById(idpedido));
-        return ResponseEntity.ok().build();
+
+        return ResponseEntity.ok(new DadosHistoricoMotoboy(historicoRepository.getReferenceById(idpedido)));
     }
 }
