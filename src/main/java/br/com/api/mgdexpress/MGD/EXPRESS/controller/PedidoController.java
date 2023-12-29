@@ -103,7 +103,8 @@ public class PedidoController {
         var token = header.replace("Bearer ","");
         var subject = tokenService.getSubject(token);
 
-        return ResponseEntity.ok(pedidoRepository.findAllWhereStatusINICIARByLogin(subject).stream().map(DadosPedidoPage::new).toList());
+        List<DadosPedidoPage> lista = pedidoRepository.findAllWhereStatusINICIARByLogin(subject).stream().map(DadosPedidoPage::new).toList();
+        return ResponseEntity.ok(lista);
 
     }
 
@@ -116,9 +117,9 @@ public class PedidoController {
         if (motoboyRepository.findByEmail(subject).getDisponivel()) {
             return ResponseEntity.ok(pedidoRepository.findAllWhereStatusINICIAR().stream().map(DadosPedidoPage::new).toList());
         }
-
         return  ResponseEntity.ok(pedidoRepository.findByEmailMotoboy(subject).stream().map(DadosPedidoPage::new).toList());
     }
+
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
     @GetMapping("/EmAndamento")
