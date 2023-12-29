@@ -23,6 +23,7 @@ public class HistoricoFindById {
         var token = header.replace("Bearer ","");
         var id = tokenService.getId(token);
         System.out.println(idpedido);
+        System.out.println(id);
         var pedido = new DadosHistoricoMotoboy(historicoRepository.BuscarProIdPedido(idpedido,id));
         return ResponseEntity.ok(pedido);
     }

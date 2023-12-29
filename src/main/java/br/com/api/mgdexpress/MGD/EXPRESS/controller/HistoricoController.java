@@ -82,9 +82,8 @@ public class HistoricoController {
 
         var subject = tokenService.getSubject(token);
 
+        return ResponseEntity.ok(historicoRepository.BuscarPorEmailGerente(subject).stream().map(DadosHistoricoLista::new));
 
-        var historico = historicoRepository.BuscarPorEmailGerente(subject).stream().map(DadosHistoricoLista::new);
-        return ResponseEntity.ok(historico);
     }
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
