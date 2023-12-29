@@ -25,7 +25,7 @@ public class HistoricoFindById {
         System.out.println(idpedido);
         System.out.println(email);
         System.out.println("dado |/");
-        System.out.println(historicoRepository.BuscarProIdPedido(idpedido,email));
+        System.out.println(historicoRepository.findById(idpedido));
         return ResponseEntity.ok().build();
     }
 }
