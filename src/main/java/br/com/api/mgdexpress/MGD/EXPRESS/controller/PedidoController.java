@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -102,8 +103,10 @@ public class PedidoController {
 //        System.out.println("Entrei no pedido pendente gerente");
         var token = header.replace("Bearer ","");
         var subject = tokenService.getSubject(token);
+        var pedidos = pedidoRepository.findAllWhereStatusINICIARByLogin(subject).stream().map(DadosPedidoPage::new).toList();
+        List<DadosPedidoPage> lista = new ArrayList<>();
 
-        List<DadosPedidoPage> lista = pedidoRepository.findAllWhereStatusINICIARByLogin(subject).stream().map(DadosPedidoPage::new).toList();
+        pedidos.forEach(pedido ->lista.add(pedido));
         return ResponseEntity.ok(lista);
 
     }
