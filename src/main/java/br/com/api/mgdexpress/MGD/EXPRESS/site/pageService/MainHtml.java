@@ -156,7 +156,7 @@ public class MainHtml {
                                
                                        data.forEach(cardData => {
                                            console.log("Dados do card:");
-                                           console.log(cardData);
+                                           console.log(cardData.localDestino);
                                
                                            const card = document.createElement('div');
                                            card.className = 'card';
@@ -165,6 +165,7 @@ public class MainHtml {
                                            cardContent.className = 'card-content';
                                
                                            const cardDetails = `
+                                          
                                                <p class="titulo"><strong>${cardData.nomePedido}</strong></p>
                                                <p><strong>Valor:</strong> ${cardData.valor}</p>
                                                <p><strong>Local de Destino:</strong> ${cardData.localDestino}</p>
