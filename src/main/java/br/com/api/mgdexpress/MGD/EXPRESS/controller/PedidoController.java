@@ -99,15 +99,13 @@ public class PedidoController {
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER') OR hasRole('ROLE_USER_GERENTE')")
     @GetMapping("/pendente/gerente")
-    public ResponseEntity<List<DadosPedidoPage>> listar(@RequestHeader("Authorization") String header){
+    public ResponseEntity<List<List<DadosPedidoPage>>> listar(@RequestHeader("Authorization") String header){
 //        System.out.println("Entrei no pedido pendente gerente");
         var token = header.replace("Bearer ","");
         var subject = tokenService.getSubject(token);
-        var pedidos = pedidoRepository.findAllWhereStatusINICIARByLogin(subject).stream().map(DadosPedidoPage::new).toList();
-        List<DadosPedidoPage> lista = new ArrayList<>();
+        var lista= pedidoRepository.findAllWhereStatusINICIARByLogin(subject).stream().map(DadosPedidoPage::new).toList();
 
-        pedidos.forEach(pedido ->lista.add(pedido));
-        return ResponseEntity.ok(lista);
+        return ResponseEntity.ok(List.of(lista));
 
     }
 
