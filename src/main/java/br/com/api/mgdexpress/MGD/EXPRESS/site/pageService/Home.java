@@ -124,7 +124,7 @@ public class Home {
                             });
                         }
                         
-                        setInterval(buscarMotoboys2, 5000);
+                        setInterval(buscarMotoboys2, 10000);
                     </script>
                     
                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsTWHMwA_agU_-o35U_3b606930nBrsY8&callback=initMap" async
