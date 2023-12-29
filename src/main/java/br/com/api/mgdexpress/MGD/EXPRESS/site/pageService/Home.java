@@ -117,15 +117,11 @@ public class Home {
                             console.log(localizacoes)
                             // Itera sobre a lista de marcadores e atualiza suas posições
                             markers.forEach(function(markerInfo) {
-                              var newPosition = {
-                                          lat: -23.550520 + Math.random() / 100, // Adiciona um pequeno valor aleatório para simular movimento
-                                          lng: -46.633308 + Math.random() / 100
-                                      };
-                              
-                                    
+                               
+                               
                    
                                 // Atualiza a posição do marcador
-                                markerInfo.marker.setPosition(newPosition);
+                                markerInfo.marker.setPosition(markerInfo.position);
                             });
                         }
                         
