@@ -114,7 +114,7 @@ public class Home {
                     }
                     
                     function updateMarkersPosition(localizacoes) {
-                            console.log("ola");
+                       
                             // Itera sobre a lista de marcadores e atualiza suas posições
                             markers.forEach(function(markerInfo) {
                                

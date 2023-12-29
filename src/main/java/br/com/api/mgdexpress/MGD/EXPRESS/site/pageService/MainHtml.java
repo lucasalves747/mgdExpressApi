@@ -152,7 +152,7 @@ public class MainHtml {
                                    .then(response => response.json())
                                    .then(data => {
                                        console.log("Dados recebidos:");
-                                       console.log(data);
+                                       console.log(data.localDestino);
                                
                                        data.forEach(cardData => {
                                            console.log("Dados do card:");
