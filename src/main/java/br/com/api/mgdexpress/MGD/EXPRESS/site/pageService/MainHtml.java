@@ -140,7 +140,6 @@ public class MainHtml {
                            function listarPedidos() {
                                carregarPagina(`${url}meusPedidos`)
                        
-                               const cardContainer = document.getElementById('card-container');
                                
                                fetch(`https://mgdexpressapi-production.up.railway.app/pedidos/pendente/gerente`, {
                                    method: 'GET',
@@ -153,6 +152,9 @@ public class MainHtml {
                                    .then(data => {
                                        console.log("Dados recebidos:");
                                        console.log(data);
+                                       
+                                       const cardContainer = document.getElementById('card-container');
+                              
                                
                                        data.forEach(interData => {
                                             interData.forEach(cardData =>{
