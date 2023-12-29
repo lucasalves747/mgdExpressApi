@@ -24,7 +24,8 @@ public class HistoricoFindById {
         var email = tokenService.getSubject(token);
         System.out.println(idpedido);
         System.out.println(email);
-
-        return ResponseEntity.ok(historicoRepository.BuscarProIdPedido(idpedido,email));
+        System.out.println("dado |/");
+        System.out.println(historicoRepository.BuscarProIdPedido(idpedido,email));
+        return ResponseEntity.ok().build();
     }
 }
