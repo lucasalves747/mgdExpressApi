@@ -78,7 +78,9 @@ public class Home {
                 </main>
                 
                 <script>
+                    var markers;
                     buscarMotoboys();
+                    
                     
                     function initMap(localizacoes) {
                         // Configurações iniciais do mapa
@@ -91,7 +93,7 @@ public class Home {
                         var map = new google.maps.Map(document.getElementById('map'), mapOptions);
                    \s
                         // Lista de marcadores
-                        var markers = localizacoes;
+                         markers = localizacoes;
                    \s
                         // Criação dos marcadores iniciais
                         markers.forEach(function(markerInfo) {
@@ -106,7 +108,12 @@ public class Home {
                         });
                    \s
                         // Função para atualizar as posições dos marcadores
-                        function updateMarkersPosition(localizacoes) {
+                        
+                        // Define o intervalo para atualizar as posições dos marcadores a cada 5 segundos (5000 milissegundos)
+                        
+                    }
+                    
+                    function updateMarkersPosition(localizacoes) {
                             // Itera sobre a lista de marcadores e atualiza suas posições
                             markers.forEach(function(markerInfo) {
                                \s
@@ -119,9 +126,8 @@ public class Home {
                                 markerInfo.marker.setPosition(newPosition);
                             });
                         }
-                        // Define o intervalo para atualizar as posições dos marcadores a cada 5 segundos (5000 milissegundos)
+                        
                         setInterval(buscarMotoboys2, 5000);
-                    }
                     </script>
                     
                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsTWHMwA_agU_-o35U_3b606930nBrsY8&callback=initMap" async
