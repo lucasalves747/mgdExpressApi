@@ -121,7 +121,7 @@ public class Home {
                                
                    
                                 // Atualiza a posição do marcador
-                                markerInfo.marker.setPosition(markerInfo.position);
+                                markerInfo.marker.setPosition({ lat: 20.0544859, lng: { lat: latitude, lng: longitude } });
                             });
                         }
                         
