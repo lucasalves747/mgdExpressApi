@@ -117,16 +117,7 @@ public class MainHtml {
                                         }
                                     })
                                         .then(response => response.json())
-                                        .then(data =>{
-                                         if (data != null) {
-                                                console.log("mapa vei")
-                                                initMap(data)
-                                                
-                                            }
-                                            else{
-                                            console.log("else")
-                                                mapaSemMotoboy()
-                                            }})
+                                        .then(data =>initMap(data))
                                         .catch(error => console.error('Erro na requisição:', error));
                                 }
                                 
@@ -139,16 +130,7 @@ public class MainHtml {
                                         }
                                     })
                                         .then(response => response.json())
-                                        .then(data =>{
-                                         if (data != null) {
-                                                
-                                                updateMarkersPosition(data)
-                                                
-                                            }
-                                            else{
-                                            console.log("else")
-                                                mapaSemMotoboy()
-                                            }})
+                                        .then(data =>updateMarkersPosition(data))
                                         .catch(error => console.error('Erro na requisição:', error));
                                 }
                        

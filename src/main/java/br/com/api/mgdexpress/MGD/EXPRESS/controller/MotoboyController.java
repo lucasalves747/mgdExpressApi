@@ -35,9 +35,6 @@ public class MotoboyController {
     @Autowired
     private ListaLocalizacao listaLocalizacao;
 
-    //@Autowired
-    //private SimpMessagingTemplate messagingTemplate;
-
 
     @PreAuthorize("hasRole('ROLE_USER_MASTER')")
     @GetMapping
@@ -49,14 +46,12 @@ public class MotoboyController {
     @GetMapping("/EmEntregas&Disponivel")
     public ResponseEntity ListarMotoboysLocalizacao(){
         List<DadosCadastroListaSemColcheteNoJsom> lista = new ArrayList<>();
-        System.out.println("entrou no listar Motoboy localizacao");
+
         listaLocalizacao.getListaLocalizacao().forEach(item ->{
             if(!Objects.isNull(item)){
                 lista.add(new DadosCadastroListaSemColcheteNoJsom(item));
             }
         });
-        lista.forEach(item-> System.out.println(item.localizacao().getLongitude()));
-        lista.forEach(item-> System.out.println(item.localizacao().getLatitude()));
         return ResponseEntity.ok(lista);
     }
 
@@ -69,13 +64,11 @@ public class MotoboyController {
         var subject = tokenService.getSubject(token);
 
         List<DadosMotoboyEmEntregaToGerente> lista = new ArrayList<>();
-        System.out.println("entrou no listar Motoboy localizacao");
+
         listaLocalizacao.getListaLocalizacao().forEach(item ->{
-            System.out.println(item);
-            System.out.println("entrou no listar Motoboy localizacao ");
+
             if(!(item == null)){
-                System.out.println(item.emailGerente());
-                System.out.println(item.nome());
+
                 if(!item.disponivel() && item.emailGerente().equals(subject)) {
                     lista.add(new DadosMotoboyEmEntregaToGerente(item));
                 }

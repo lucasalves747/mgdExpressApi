@@ -7,6 +7,7 @@ import br.com.api.mgdexpress.MGD.EXPRESS.model.users.User;
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.MotoboyRepository;
 import br.com.api.mgdexpress.MGD.EXPRESS.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +33,7 @@ public class CreateMotoboyContrller {
         var user = useRepository.findByUsername(dadosMotoboy.email());
 
         if(user != null){
-            throw new Error("usuario ja existe");
+            return  ResponseEntity.status(HttpStatusCode.valueOf(245)).build();
         }
 
         var bcrypt = new BCryptPasswordEncoder();
