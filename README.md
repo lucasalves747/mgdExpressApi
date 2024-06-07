@@ -6,12 +6,13 @@
   <h2>Imagens do app do motoboy</h2>
   <div style="display:inline;">
       <img src="src/main/java/br/com/api/mgdexpress/MGD/EXPRESS/site/page/Imagem do WhatsApp de 2024-06-06 à(s) 23.23.11_4a9b8b67.jpg" style="heigth:20%;width:20%">
-      <img src="src/main/java/br/com/api/mgdexpress/MGD/EXPRESS/site/page/Imagem do WhatsApp de 2024-06-06 à(s) 23.23.11_4a9b8b67.jpg" style="heigth:20%;width:20%">
+      <img src="src/main/java/br/com/api/mgdexpress/MGD/EXPRESS/site/page/Imagem do WhatsApp de 2024-06-06 à(s) 23.23.11_c580dd71.jpg" style="heigth:20%;width:20%">
    </div>
    <h2>Imagens do app do gerente</h2>
    <div style="display:inline;">
-     <img src="src/main/java/br/com/api/mgdexpress/MGD/EXPRESS/site/page/Imagem do WhatsApp de 2024-06-06 à(s) 23.23.11_d524947f.jpg" style="heigth:20%;whidth:20%">
-     <img src"src/main/java/br/com/api/mgdexpress/MGD/EXPRESS/site/page/Imagem do WhatsApp de 2024-06-06 à(s) 23.23.10_088e7a39.jpg" style="heigth:20%;width:20%">
+     <img src="src/main/java/br/com/api/mgdexpress/MGD/EXPRESS/site/page/Imagem do WhatsApp de 2024-06-06 à(s) 23.23.11_d524947f.jpg" style="heigth:20%;width:20%">
+     <img src="src/main/java/br/com/api/mgdexpress/MGD/EXPRESS/site/page/Imagem do WhatsApp de 2024-06-06 à(s) 23.23.10_088e7a39.jpg" style="heigth:20%;width:20%">
+     <img src="src/main/java/br/com/api/mgdexpress/MGD/EXPRESS/site/page/Imagem do WhatsApp de 2024-06-06 à(s) 23.23.10_8f0b5269.jpg" style="heigth:20%;width:20%>
      
    </div>
   <h2>Funcionalidades Principais</h2>
