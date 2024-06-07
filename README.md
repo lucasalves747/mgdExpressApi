@@ -4,7 +4,7 @@
   <p>A API de Gerenciamento de Entregas para Motoboys é uma aplicação desenvolvida em Spring Boot para facilitar o gerenciamento de entregas em estabelecimentos comerciais. Ela permite que lojistas visualizem a localização dos motoboys em tempo real, atribuam pedidos a eles e acompanhem o histórico de entregas. A API faz uso de tecnologias como Spring Security, Spring Data JPA, MySQL, Docker, Tokens JWT e integração com a API do iFood para obtenção de pedidos.</p>
 
   <h2>Imagens do app do motoboy</h2>
-  <img src="src/main/java/br/com/api/mgdexpress/MGD/EXPRESS/site/page/Imagem do WhatsApp de 2024-06-06 à(s) 23.23.11_4a9b8b67.jpg" style="heigth:100px;width:100px">
+  <img src="src/main/java/br/com/api/mgdexpress/MGD/EXPRESS/site/page/Imagem do WhatsApp de 2024-06-06 à(s) 23.23.11_4a9b8b67.jpg" style="heigth:40%;width:40%">
 
   <h2>Funcionalidades Principais</h2>
   <ul>
