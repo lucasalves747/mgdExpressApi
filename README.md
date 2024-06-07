@@ -5,8 +5,8 @@
 
   <h2>Imagens do app do motoboy</h2>
   <div style="display:inline;">
-      <img src="src/main/java/br/com/api/mgdexpress/MGD/EXPRESS/site/page/Imagem do WhatsApp de 2024-06-06 à(s) 23.23.11_4a9b8b67.jpg" style="heigth:20%;width:20%">
-      <img src="src/main/java/br/com/api/mgdexpress/MGD/EXPRESS/site/page/Imagem do WhatsApp de 2024-06-06 à(s) 23.23.11_4a9b8b67.jpg" style="heigth:20%;width:20%">
+      <img src="src/main/java/br/com/api/mgdexpress/MGD/EXPRESS/site/page/Imagem do WhatsApp de 2024-06-06 à(s) 23.23.11_4a9b8b67.jpg" style="heigth:20%;width:20%;">
+      <img src="src/main/java/br/com/api/mgdexpress/MGD/EXPRESS/site/page/Imagem do WhatsApp de 2024-06-06 à(s) 23.23.11_4a9b8b67.jpg" style="heigth:20%;width:20%;margin-left:10px">
    </div>
   <h2>Funcionalidades Principais</h2>
   <ul>
